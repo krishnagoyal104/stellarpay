@@ -1,39 +1,16 @@
 import React from 'react';
+import {Navigation} from 'react-native-navigation';
 import {View, Text, StyleSheet} from 'react-native';
-import {Network, Server} from 'stellar-sdk';
-import {Keypair} from '@pigzbe/react-native-stellar-sdk';
+import HomeScreen from './screens/home';
 
-class App extends React.Component {
+Navigation.registerComponent('stellarPay.HomeScreen', () => HomeScreen);
 
-  constructor(props){
-    super(props);
-  }
-
-  componentWillMount(){
-  } 
-
-  render() {
-
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to StellarPay</Text>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  }
+Navigation.events().registerAppLaunchedListener(() => {
+  Navigation.setRoot({
+    root: {
+      component: {
+        name: 'stellarPay.HomeScreen'
+      }
+    }
+  });
 });
-
-export default App;
