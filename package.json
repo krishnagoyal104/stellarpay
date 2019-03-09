@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "android": "cd ./android && ./gradlew app:assembleDebug && ./gradlew installDebug",
     "test": "jest"
   },
   "dependencies": {
@@ -12,6 +13,8 @@
     "node-libs-react-native": "^1.0.3",
     "react": "16.6.3",
     "react-native": "0.58.6",
+    "react-native-keychain": "^3.1.1",
+    "react-native-navigation": "^2.13.1",
     "react-native-randombytes": "^3.5.2",
     "stellar-sdk": "^0.14.0",
     "vm-browserify": "^1.1.0"
