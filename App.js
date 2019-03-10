@@ -1,19 +1,23 @@
 import React from 'react';
 import {Navigation} from 'react-native-navigation';
 import {View, Text, StyleSheet} from 'react-native';
+import {Provider} from 'react-redux';
 import HomeScreen from './screens/home';
 import PaymentScreen from './screens/payment';
 import WalletScreen from './screens/wallet';
 import PassbookScreen from './screens/passbook';
+import configureStore from './store/configureStore';
 
 import Icon from 'react-native-vector-icons/Entypo';
 import Font from 'react-native-vector-icons/FontAwesome';
 import Font5 from 'react-native-vector-icons/FontAwesome5';
 
-Navigation.registerComponent('stellarPay.HomeScreen', () => HomeScreen);
-Navigation.registerComponent('stellarPay.PaymentScreen', () => PaymentScreen);
-Navigation.registerComponent('stellarPay.WalletScreen', () => WalletScreen);
-Navigation.registerComponent('stellarPay.PassbookScreen', () => PassbookScreen);
+const store = configureStore();
+
+Navigation.registerComponent('stellarPay.HomeScreen', () => HomeScreen, Provider, store);
+Navigation.registerComponentWithRedux('stellarPay.PaymentScreen', () => PaymentScreen, Provider, store);
+Navigation.registerComponentWithRedux('stellarPay.WalletScreen', () => WalletScreen, Provider, store);
+Navigation.registerComponentWithRedux('stellarPay.PassbookScreen', () => PassbookScreen, Provider, store);
 
 Navigation.events().registerAppLaunchedListener(() => {
   Promise.all([
