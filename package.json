@@ -16,6 +16,7 @@
     "react-native-keychain": "^3.1.1",
     "react-native-navigation": "^2.13.1",
     "react-native-randombytes": "^3.5.2",
+    "react-native-vector-icons": "^6.3.0",
     "stellar-sdk": "^0.14.0",
     "vm-browserify": "^1.1.0"
   },
