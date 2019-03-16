@@ -8,10 +8,11 @@ export const createAccount = async (_dispatch, _function) => {
     const publicKey = keypair.publicKey();
     const secretKey = keypair.secret();
     _dispatch(_function(publicKey, secretKey));
-    await Keychain.setGenericPassword(publicKey, secretKey);
+    Keychain.setGenericPassword(publicKey, secretKey);
     try{
-      const url = `https://horizon-testnet.stellar.org/accounts/${publicKey}`;
+      const url = `https://horizon-testnet.stellar.org/friendbot?addr=${publicKey}`;
       await axios(url);
+      console.log('Successfully funded account!!');
     }
     catch(error){
         console.log(error);

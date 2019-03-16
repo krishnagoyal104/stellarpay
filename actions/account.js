@@ -10,6 +10,6 @@ export const setKeypair = (publicKey, secretKey) => {
 
 export const fetchKeypair = () => {
   return (dispatch, getState) => {
-    fetchAccount(dispatch, setKeypair);
+    return fetchAccount(dispatch, setKeypair);
   };
 };

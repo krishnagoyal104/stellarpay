@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet, Dimensions} from 'react-native';
+import {View, Text, Image, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const HomeView = (props) => {
@@ -7,10 +7,14 @@ const HomeView = (props) => {
  	<View style={styles.mainContainer}>
  		<View style={styles.container1}>
  		<View style={styles.innerContainers}>
- 			<Text style={styles.text}>Send</Text>
+	 		<TouchableOpacity onPress={() => props.navigateToPayment()}>
+ 				<Text style={styles.text}>Send</Text>
+	 		</TouchableOpacity>
  		</View>
- 		<View style={styles.innerContainers}> 		
+ 		<View style={styles.innerContainers}>
+ 		<TouchableOpacity onPress={() => props.navigateToReceive()}> 		
  			<Text style={styles.text}>Receive</Text>
+ 		</TouchableOpacity>	
  		</View>	
  		</View>	
 	 	<View style={styles.container2}></View>

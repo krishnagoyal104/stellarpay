@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {View, StyleSheet} from 'react-native';
 import {Navigation} from 'react-native-navigation';   
 import PaymentView from '../components/payment';
-import {fetchKeypair} from '../actions/account';
 import {createTransaction} from '../actions/transaction';
 
 class PaymentScreen extends React.Component {
@@ -25,10 +24,6 @@ class PaymentScreen extends React.Component {
 
   constructor(props){
     super(props);
-  }
-
-  componentDidMount(){
-  	this.props.dispatch(fetchKeypair());
   }
 
   render() {

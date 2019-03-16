@@ -3,6 +3,7 @@ import {View, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import {Navigation} from 'react-native-navigation';   
 import HomePage from '../components/home';
+import {fetchKeypair} from '../actions/account';
 import {getBalance} from '../actions/balance';
 
 class HomeScreen extends React.Component {
@@ -11,9 +12,11 @@ class HomeScreen extends React.Component {
     super(props);
   }
 
-  componentWillMount(){
+  async componentWillMount(){
+    await this.props.dispatch(fetchKeypair());
     this.props.dispatch(getBalance());
   }
+
 
   goToReceiveScreen = () => {
     Navigation.push(this.props.componentId, {

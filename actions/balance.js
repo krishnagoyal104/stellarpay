@@ -1,27 +1,20 @@
 import axios from 'axios';
 
-export const setBalance = (balance) => {
+export const setBalance = (balances) => {
   return {
-    type: 'SET_BALANCE',
-    balance
+    type: 'SET_BALANCES',
+    balances
   };
-};
+}; 
 
 export const getBalance = () => {
   return (dispatch, getState) => {
-    return axios(`https://horizon-testnet.stellar.org/accounts/GDRSAOHSV6DZSTJPUZIKAB3B57EBTANEG2W4C47WODTQ5W4SW3H657TV`)
+    const publicKey = getState().account.publicKey;
+    return axios(`https://horizon-testnet.stellar.org/accounts/${publicKey}`)
     .then((res) => {
-    	console.log(res);
-    	const parsedRes = res.data.balances;
-      console.log(parsedRes);
-    	const balances = [];
-        for(i=0; i<parsedRes.length;i++){ 
-          balances.push({
-          	balance: parsedRes[i].balance,
-          	key: parsedRes[i].asset_type
-          }); 
-        }
+    	const balances = res.data.balances;
     	dispatch(setBalance(balances));
+      console.log('dnfhdsbfdsf', res);
     })
     .catch((e) => {
     	console.log(e);

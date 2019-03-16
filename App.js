@@ -25,8 +25,8 @@ Navigation.registerComponent('stellarPay.ReceiveScreen', () => ReceiveScreen);
 Navigation.events().registerAppLaunchedListener(() => {
   Promise.all([
     Icon.getImageSource('home', 25, '#007ee5'),
-    Font.getImageSource('rupee', 25, '#007ee5'),
-    Icon.getImageSource('wallet', 25, '#007ee5')
+    Icon.getImageSource('wallet', 25, '#007ee5'),
+    Icon.getImageSource('list', 25, '#007ee5')
   ]).then((sources) => {
     Navigation.setRoot({
       root: {
@@ -73,14 +73,14 @@ Navigation.events().registerAppLaunchedListener(() => {
                 children: [
                   {
                     component: {
-                      name: 'stellarPay.PaymentScreen',
+                      name: 'stellarPay.WalletScreen',
                       options: {
                         topBar: {
                           background: {
                               color: '#007ee5'
                           },
                           title: {
-                            text: 'Pay',
+                            text: 'Wallet',
                             alignment: 'center',
                             color: 'white'
                           }
@@ -92,7 +92,7 @@ Navigation.events().registerAppLaunchedListener(() => {
                 options: {
                   bottomTab: {
                     fontSize: 12,
-                    text: 'Pay',
+                    text: 'Wallet',
                     icon: sources[1]
                   }
                 }
@@ -103,14 +103,14 @@ Navigation.events().registerAppLaunchedListener(() => {
                   children: [
                     {
                       component: {
-                        name: 'stellarPay.WalletScreen',
+                        name: 'stellarPay.PassbookScreen',
                         options: {
                           topBar: {
                             background: {
                                 color: '#007ee5'
                             },
                             title: {
-                              text: 'Wallet',
+                              text: 'Ledger',
                               alignment: 'center',
                               color: 'white'
                             }
@@ -122,7 +122,7 @@ Navigation.events().registerAppLaunchedListener(() => {
                   options: {
                     bottomTab: {
                       fontSize: 12,
-                      text: 'Wallet',
+                      text: 'Ledger',
                       icon: sources[2]
                     }
                   }
