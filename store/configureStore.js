@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import balanceReducer from '../reducers/balance';
 import accountReducer from '../reducers/account';
 import transactionReducer from '../reducers/transaction';
+import ledgerReducer from '../reducers/ledger';
 /*let composeEnhancers = compose;
 
 if(__DEV__){
@@ -15,7 +16,8 @@ export default () => {
   const store = createStore(combineReducers({
 	balances: balanceReducer,
 	account: accountReducer,
-	ui: transactionReducer
+	ui: transactionReducer,
+	ledger: ledgerReducer
   }),
   composeEnhancers(applyMiddleware(thunk))
 		  
