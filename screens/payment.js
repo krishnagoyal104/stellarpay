@@ -4,8 +4,24 @@ import {View, StyleSheet} from 'react-native';
 import {Navigation} from 'react-native-navigation';   
 import PaymentView from '../components/payment';
 import {fetchKeypair} from '../actions/account';
+import {createTransaction} from '../actions/transaction';
 
 class PaymentScreen extends React.Component {
+
+  static options(passProps){
+    return{
+      topBar: {
+        background: {
+          color: '#007ee5'
+        },
+        title: {
+          text: 'Pay',
+          alignment: 'center',
+          color: 'white'
+        }
+      }
+    }
+  }
 
   constructor(props){
     super(props);
@@ -18,7 +34,7 @@ class PaymentScreen extends React.Component {
   render() {
 
     return (
-      <PaymentView />
+      <PaymentView pay={(_receiver, _amount) => this.props.dispatch(createTransaction(_receiver, _amount))} />
     );  
   }
 

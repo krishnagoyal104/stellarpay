@@ -15,10 +15,30 @@ class HomeScreen extends React.Component {
     this.props.dispatch(getBalance());
   }
 
+  goToReceiveScreen = () => {
+    Navigation.push(this.props.componentId, {
+      component: {
+        name: 'stellarPay.ReceiveScreen',       
+        passProps:{
+          publicKey: this.props.account
+        }
+      },                                                         
+    });
+  }
+
+  goToPaymentScreen = () => {
+    Navigation.push(this.props.componentId, {
+      component: {
+        name: 'stellarPay.PaymentScreen'
+      },                                                         
+    });
+  }  
+
   render() {
 
     return (
-      <HomePage />
+      <HomePage navigateToReceive={() => this.goToReceiveScreen()}
+      navigateToPayment={() => this.goToPaymentScreen()} />
     );  
   }
 
@@ -26,7 +46,8 @@ class HomeScreen extends React.Component {
   
 const mapStateToProps = (state) => {
 	return{
-		balances: state.balances
+		balances: state.balances,
+    account: state.account.publicKey
 	}
 };  
 
