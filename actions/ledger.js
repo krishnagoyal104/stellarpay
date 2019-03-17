@@ -16,7 +16,6 @@ export const getLedger = () => {
         res.data._embedded.records.map((transaction) => {
           transactions.push({
             timestamp: transaction.created_at,
-            from: transaction.from,
             to: transaction.to,
             amount: transaction.amount
           });

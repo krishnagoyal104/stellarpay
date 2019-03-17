@@ -19,11 +19,17 @@ class PassbookScreen extends React.Component {
   render() {
 
     return (
-      <PassbookView />
+      <PassbookView ledger={this.props.ledger} />
     );  
   }
 
-}  
+}
+
+const mapStateToProps = (state) => {
+  return{
+    ledger: state.ledger
+  };
+};  
   
-export default connect()(PassbookScreen);
+export default connect(mapStateToProps)(PassbookScreen);
 
