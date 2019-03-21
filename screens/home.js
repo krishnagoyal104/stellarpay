@@ -25,7 +25,7 @@ class HomeScreen extends React.Component {
         passProps:{
           publicKey: this.props.account
         }
-      },                                                         
+      }                                                    
     });
   }
 
@@ -33,7 +33,7 @@ class HomeScreen extends React.Component {
     Navigation.push(this.props.componentId, {
       component: {
         name: 'stellarPay.PaymentScreen'
-      },                                                         
+      }                                                  
     });
   }  
 

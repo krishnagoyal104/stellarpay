@@ -15,8 +15,16 @@ export const uiStopLoading = () => {
 
 export const createTransaction = (_receiverPublicKey, _amount) => {
   return (dispatch, getState) => {
+    dispatch(uiStartLoading());
   	const publicKey = getState().account.publicKey;
   	const secretKey = getState().account.secretKey;
-    transact(publicKey, secretKey, _receiverPublicKey, _amount);
+    transact(publicKey, secretKey, _receiverPublicKey, _amount)
+    .then((res) => {
+      dispatch(uiStopLoading());
+    })
+    .catch((e) => {
+      console.log(e)
+      dispatch(uiStopLoading());
+    });
   };
 };

@@ -29,10 +29,18 @@ class PaymentScreen extends React.Component {
   render() {
 
     return (
-      <PaymentView pay={(_receiver, _amount) => this.props.dispatch(createTransaction(_receiver, _amount))} />
+      <PaymentView loading={this.props.ui}
+      pay={(_receiver, _amount) => this.props.dispatch(createTransaction(_receiver, _amount))}
+      />
     );  
   }
 
-}  
+}
+
+const mapStateToProps = (state) => {
+  return{
+    ui: state.ui
+  }
+};
   
-export default connect()(PaymentScreen);
+export default connect(mapStateToProps)(PaymentScreen);

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet, Dimensions, TextInput, TouchableOpacity} from 'react-native';
+import {View, Text, Image, StyleSheet, Dimensions, TextInput, TouchableOpacity, ActivityIndicator} from 'react-native';
 
 import Icon from 'react-native-vector-icons/AntDesign';
 import Font from 'react-native-vector-icons/FontAwesome';
@@ -51,16 +51,17 @@ class PaymentPage extends React.Component{
 		  	<View style={styles.inputIcons}>
 			  	<Font name={'send'} size={20} color={'#007ee5'} style={{paddingTop: 16}} /> 
 		  		<TextInput style={styles.textInput} placeholder={'Amount'} selectionColor={'#007ee5'} 
-			  	onChangeText={val => this.onAmountChange(val)}
-		  		autoFocus={true} 
+			  	onChangeText={val => this.onAmountChange(val)} 
 					underlineColorAndroid={this.state.color2}  
 					onFocus={() => this.setState({color2: '#007ee5'})}
 					onBlur={() => this.setState({color2: '#C7C7CD'})}
 	  		/>
-	  	  </View>	
-	  		<TouchableOpacity style={styles.loginContainer} onPress={() => this.makePayment()} >
-			<Text style={styles.login}>Pay</Text>
-			</TouchableOpacity>
+	  	  </View>
+	  	  {this.props.loading ? <ActivityIndicator size="small" color="#007ee5" /> : 
+	  		(<TouchableOpacity style={styles.loginContainer} onPress={() => this.makePayment()} >
+					<Text style={styles.login}>Pay</Text>
+				 </TouchableOpacity>)	
+				}
 	  	  </View>
 	  	<View style={styles.containerBottom}></View>
 	  </View>  

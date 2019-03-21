@@ -5,7 +5,7 @@ export default(state = initialState, action) => {
     case 'UI_START_LOADING':
       return true;
     case 'UI_STOP_LOADING':
-    	return false;
+      return false;
     default:
       return state;  
   };
