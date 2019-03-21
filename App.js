@@ -8,6 +8,7 @@ import WalletScreen from './screens/wallet';
 import PassbookScreen from './screens/passbook';
 import SideDrawerScreen from './screens/sideDrawer';
 import ReceiveScreen from './screens/receive';
+import ConfirmPaymentScreen from './screens/confirmPayment';
 import configureStore from './store/configureStore';
 
 import Icon from 'react-native-vector-icons/Entypo'; 
@@ -19,6 +20,7 @@ Navigation.registerComponentWithRedux('stellarPay.HomeScreen', () => HomeScreen,
 Navigation.registerComponentWithRedux('stellarPay.PaymentScreen', () => PaymentScreen, Provider, store);
 Navigation.registerComponentWithRedux('stellarPay.WalletScreen', () => WalletScreen, Provider, store);
 Navigation.registerComponentWithRedux('stellarPay.PassbookScreen', () => PassbookScreen, Provider, store);
+Navigation.registerComponentWithRedux('stellarPay.ConfirmPaymentScreen', () => ConfirmPaymentScreen, Provider, store);
 Navigation.registerComponent('stellarPay.SideDrawerScreen', () => SideDrawerScreen);
 Navigation.registerComponent('stellarPay.ReceiveScreen', () => ReceiveScreen);
 

@@ -58,8 +58,11 @@ class PaymentPage extends React.Component{
 	  		/>
 	  	  </View>
 	  	  {this.props.loading ? <ActivityIndicator size="small" color="#007ee5" /> : 
-	  		(<TouchableOpacity style={styles.loginContainer} onPress={() => this.makePayment()} >
-					<Text style={styles.login}>Pay</Text>
+	  		(<TouchableOpacity style={styles.loginContainer} onPress={this.props.navigate} >
+		  			<View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
+							<Text style={styles.login}>Proceed</Text>
+							<Icon name={'arrowright'} size={20} color={'white'} style={{paddingTop: 4, paddingLeft: 6}} />
+						</View>
 				 </TouchableOpacity>)	
 				}
 	  	  </View>

@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {View, StyleSheet} from 'react-native';
-import {Navigation} from 'react-native-navigation';   
+import {Navigation} from 'react-native-navigation';  
 import PaymentView from '../components/payment';
 import {createTransaction} from '../actions/transaction';
 
@@ -26,11 +26,20 @@ class PaymentScreen extends React.Component {
     super(props);
   }
 
+  goToConfirmPaymentScreen = () => {
+    Navigation.push(this.props.componentId, {
+      component: {
+        name: 'stellarPay.ConfirmPaymentScreen'
+      }                                                  
+    });
+  }
+
   render() {
 
     return (
       <PaymentView loading={this.props.ui}
       pay={(_receiver, _amount) => this.props.dispatch(createTransaction(_receiver, _amount))}
+      navigate={() => this.goToConfirmPaymentScreen()}
       />
     );  
   }
