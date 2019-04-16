@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Navigation} from 'react-native-navigation';   
 import HomePage from '../components/home';
 import {fetchKeypair} from '../actions/account';
-import {getBalance} from '../actions/balance';
+import {getBalance, getStreamForAccount} from '../actions/balance';
 
 class HomeScreen extends React.Component {
 
@@ -14,9 +14,9 @@ class HomeScreen extends React.Component {
 
   async componentWillMount(){
     await this.props.dispatch(fetchKeypair());
-    this.props.dispatch(getBalance());
+    await this.props.dispatch(getBalance());
+    this.props.dispatch(getStreamForAccount());
   }
-
 
   goToReceiveScreen = () => {
     Navigation.push(this.props.componentId, {

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {getStream} from '../utils/account';
 
 export const setBalance = (balances) => {
   return {
@@ -14,10 +15,17 @@ export const getBalance = () => {
     .then((res) => {
     	const balances = res.data.balances;
     	dispatch(setBalance(balances));
-      console.log('dnfhdsbfdsf', res);
     })
     .catch((e) => {
     	console.log(e);
     });
   };
 };
+
+export const getStreamForAccount = () => {
+  return(dispatch, getState) => {
+    const publicKey = getState().account.publicKey;
+    console.log('streaming...................', publicKey);
+    getStream(publicKey, dispatch, getBalance);
+  }
+}

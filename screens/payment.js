@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {View, StyleSheet} from 'react-native';
 import {Navigation} from 'react-native-navigation';  
 import PaymentView from '../components/payment';
-import {createTransaction} from '../actions/transaction';
+import {resolveReceiver} from '../actions/resolve';
 
 class PaymentScreen extends React.Component {
 
@@ -38,8 +38,7 @@ class PaymentScreen extends React.Component {
 
     return (
       <PaymentView loading={this.props.ui}
-      pay={(_receiver, _amount) => this.props.dispatch(createTransaction(_receiver, _amount))}
-      navigate={() => this.goToConfirmPaymentScreen()}
+      navigate={(_number) => this.props.dispatch(resolveReceiver(_number, this.goToConfirmPaymentScreen))}
       />
     );  
   }

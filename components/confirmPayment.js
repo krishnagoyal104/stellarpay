@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, TextInput, TouchableOpacity, ActivityIndicator} from 'react-native';
 
 import Font from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/Entypo';
@@ -22,11 +22,15 @@ class ConfirmPaymentView extends React.Component{
 		}));
 	}
 
+	makePayment = () => {
+		this.props.pay(this.props.publicKey, this.state.amount);
+	}
+
   render(){
 		return(
 			<View style={styles.mainContainer}>
 				<View style={styles.containerTop}>
-					<Text style={styles.text}>Name</Text>
+					<Text style={styles.text}>{this.props.name}</Text>
 				</View>
 				<View style={styles.containerBottom}>
 					<View style={styles.inputIcons}>
@@ -40,12 +44,14 @@ class ConfirmPaymentView extends React.Component{
 						/>
 				  </View>
 				  <Text style={{fontSize: 16}}>Money will be sent to Name.</Text>
-					<TouchableOpacity style={styles.loginContainer} >
+				  {this.props.loading ? <ActivityIndicator size="small" color="#007ee5" /> :
+					(<TouchableOpacity style={styles.loginContainer} onPress={this.props.makePayment} >
 		  			<View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
 							<Text style={styles.login}>Pay</Text>
 							<Font name={'send'} size={20} color={'white'} style={{paddingTop: 4, paddingLeft: 6}} />
 						</View>
-					</TouchableOpacity>
+					</TouchableOpacity>)
+				}
 				</View> 
 	    </View>   
 		);

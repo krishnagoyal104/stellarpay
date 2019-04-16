@@ -4,6 +4,7 @@ import balanceReducer from '../reducers/balance';
 import accountReducer from '../reducers/account';
 import transactionReducer from '../reducers/transaction';
 import ledgerReducer from '../reducers/ledger';
+import receiverReducer from '../reducers/resolve';
 /*let composeEnhancers = compose;
 
 if(__DEV__){
@@ -17,7 +18,8 @@ export default () => {
 	balances: balanceReducer,
 	account: accountReducer,
 	ui: transactionReducer,
-	ledger: ledgerReducer
+	ledger: ledgerReducer,
+	recipient: receiverReducer
   }),
   composeEnhancers(applyMiddleware(thunk))
 		  

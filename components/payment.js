@@ -11,27 +11,16 @@ class PaymentPage extends React.Component{
 		super(props);
 
 		this.state = {
-			color1: '#C7C7CD',
-			color2: '#C7C7CD',
-			receiver: '',
-			amount: ''
+			color: '#C7C7CD',
+			receiver: ''
 		}
+
 	}
 
 	onContactChange = (val) => {
-		this.setState(() => ({
+		this.setState(({
 			receiver: val
 		}));
-	}
-
-	onAmountChange = (val) => {
-		this.setState(() => ({
-			amount: val 
-		}));
-	}
-	makePayment = () => {
-		const {receiver, amount} = this.state;
-		this.props.pay(receiver, amount);
 	}
 
   render(){  
@@ -39,32 +28,23 @@ class PaymentPage extends React.Component{
 		<View style={styles.mainConatiner}>
 		  <View style={styles.containerTop}>
 			  <View style={styles.inputIcons}>
-			  <Icon name={'contacts'} size={22} color={'#007ee5'} style={{paddingTop: 16}} /> 
+			  <Icon name={'contacts'} size={26} color={'#007ee5'} style={{paddingTop: 14}} /> 
 		  		<TextInput style={styles.textInput} placeholder={'Enter mobile number'} selectionColor={'#007ee5'}
 		  		onChangeText={val => this.onContactChange(val)}	
 		  		autoFocus={true} 
-					underlineColorAndroid={this.state.color1}  
-					onFocus={() => this.setState({color1: '#007ee5'})}
-					onBlur={() => this.setState({color1: '#C7C7CD'})}
-		  		 />
-		  	</View> 
-		  	<View style={styles.inputIcons}>
-			  	<Font name={'send'} size={20} color={'#007ee5'} style={{paddingTop: 16}} /> 
-		  		<TextInput style={styles.textInput} placeholder={'Amount'} selectionColor={'#007ee5'} 
-			  	onChangeText={val => this.onAmountChange(val)} 
-					underlineColorAndroid={this.state.color2}  
-					onFocus={() => this.setState({color2: '#007ee5'})}
-					onBlur={() => this.setState({color2: '#C7C7CD'})}
-	  		/>
-	  	  </View>
-	  	  {this.props.loading ? <ActivityIndicator size="small" color="#007ee5" /> : 
-	  		(<TouchableOpacity style={styles.loginContainer} onPress={this.props.navigate} >
+					underlineColorAndroid={this.state.color}  
+					onFocus={() => this.setState({color: '#007ee5'})}
+					onBlur={() => this.setState({color: '#C7C7CD'})}
+		  		/>
+		  	</View>
+		  	{this.props.loading ? <ActivityIndicator size="small" color="#007ee5" /> :
+	  		(<TouchableOpacity style={styles.loginContainer} onPress={() => this.props.navigate(this.state.receiver)} >
 		  			<View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
 							<Text style={styles.login}>Proceed</Text>
 							<Icon name={'arrowright'} size={20} color={'white'} style={{paddingTop: 4, paddingLeft: 6}} />
 						</View>
-				 </TouchableOpacity>)	
-				}
+				 </TouchableOpacity>)
+	  		}
 	  	  </View>
 	  	<View style={styles.containerBottom}></View>
 	  </View>  
@@ -78,7 +58,7 @@ const styles = StyleSheet.create({
 	},
 	containerTop:{
 		flex: 1,
-		justifyContent: 'space-between',
+		justifyContent: 'space-around',
 		alignItems: 'center'
 	},
 	containerBottom:{
@@ -89,7 +69,7 @@ const styles = StyleSheet.create({
 	textInput: {
 		height: 50,
 		width: '80%',
-		fontSize: 18
+		fontSize: 22
 	},
 	inputIcons: {
 		width: '95%',

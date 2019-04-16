@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {View, StyleSheet} from 'react-native';
 import {Navigation} from 'react-native-navigation';
 import ConfirmPaymentView from '../components/confirmPayment';
+import {createTransaction} from '../actions/transaction';
 
 class ConfirmPaymentScreen extends React.Component {
 
@@ -25,13 +26,33 @@ class ConfirmPaymentScreen extends React.Component {
     super(props);
   }
 
+  goToReceiptScreen = (receiver, amount) => {
+    Navigation.push(this.props.componentId, {
+      component: {
+        name: 'stellarPay.ReceiptScreen'
+      },
+      passProps: {
+        name: receiver,
+        amount: amount
+      }                                                
+    });
+  }
+
   render() {
 
     return (
-      <ConfirmPaymentView />
+      <ConfirmPaymentView {...this.props.recipient}
+      pay={(receiver, amount) => this.props.dispatch(createTransaction(receiver, amount, this.goToReceiptScreen(receiver, amount)))}
+      />
     );  
   }
 
-}  
+}
+
+const mapStateToProps = (state) => {
+  return{
+    recipient: state.recipient
+  };
+};
   
-export default connect()(ConfirmPaymentScreen);
+export default connect(mapStateToProps)(ConfirmPaymentScreen);
