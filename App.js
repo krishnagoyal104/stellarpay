@@ -10,6 +10,7 @@ import SideDrawerScreen from './screens/sideDrawer';
 import ReceiveScreen from './screens/receive';
 import ConfirmPaymentScreen from './screens/confirmPayment';
 import ReceiptScreen from './screens/receipt';
+import InitializeScreen from './screens/initialize';
 import configureStore from './store/configureStore';
 
 import Icon from 'react-native-vector-icons/Entypo'; 
@@ -25,8 +26,19 @@ Navigation.registerComponentWithRedux('stellarPay.ConfirmPaymentScreen', () => C
 Navigation.registerComponent('stellarPay.SideDrawerScreen', () => SideDrawerScreen);
 Navigation.registerComponent('stellarPay.ReceiveScreen', () => ReceiveScreen);
 Navigation.registerComponent('stellarPay.ReceiptScreen', () => ReceiptScreen);
+Navigation.registerComponent('stellarPay.InitializeScreen', () => InitializeScreen);
 
 Navigation.events().registerAppLaunchedListener(() => {
+  Navigation.setRoot({
+    root: {
+      component: {
+        name: 'stellarPay.InitializeScreen'
+      }
+    }
+  });
+});
+
+/*Navigation.events().registerAppLaunchedListener(() => {
   Promise.all([
     Icon.getImageSource('home', 25, '#007ee5'),
     Icon.getImageSource('wallet', 25, '#007ee5'),
@@ -140,6 +152,4 @@ Navigation.events().registerAppLaunchedListener(() => {
     });
   });  
 });
-
-
-
+*/
