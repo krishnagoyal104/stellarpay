@@ -12,12 +12,13 @@ export const resolveReceiver = (number, _function) => {
   return async(dispatch) => {
   	dispatch(uiStartLoading());
     try{
-	 	const result = await axios(`http://localhost:3000/${number}`);
-	 	dispatch(setReceiver(result));
-	 	dispatch(uiStopLoading());
-    _function();
+  	 	const result = await axios(`http://192.168.1.8:3000/${number}`);
+      console.log('sfdf', result);
+  	 	dispatch(setReceiver(result.data[0]));
+  	 	dispatch(uiStopLoading());
+      _function();
      } catch(e){
-     	console.log('Error while resolving...');
+     	console.log('Error while resolving...', e);
      	dispatch(uiStopLoading());
      }    	
   };

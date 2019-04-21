@@ -43,9 +43,9 @@ class ConfirmPaymentView extends React.Component{
 						onBlur={() => this.setState({color: '#C7C7CD'})}
 						/>
 				  </View>
-				  <Text style={{fontSize: 16}}>Money will be sent to Name.</Text>
+				  <Text style={{fontSize: 16}}>Money will be sent to {this.props.name}.</Text>
 				  {this.props.loading ? <ActivityIndicator size="small" color="#007ee5" /> :
-					(<TouchableOpacity style={styles.loginContainer} onPress={this.props.makePayment} >
+					(<TouchableOpacity style={styles.loginContainer} onPress={this.makePayment} >
 		  			<View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
 							<Text style={styles.login}>Pay</Text>
 							<Font name={'send'} size={20} color={'white'} style={{paddingTop: 4, paddingLeft: 6}} />
