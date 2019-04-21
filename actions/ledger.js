@@ -13,7 +13,9 @@ export const getLedger = () => {
     	axios.get(`https://horizon-testnet.stellar.org/accounts/${publicKey}/operations`)
       .then((res) => {
         const transactions = [];
-        res.data._embedded.records.map((transaction) => {
+        const array = res.data._embedded.records;
+        array.splice(0, 1);
+        array.map((transaction) => {
           transactions.push({
             timestamp: transaction.created_at,
             to: transaction.to,

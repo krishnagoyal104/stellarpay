@@ -1,9 +1,10 @@
 import stellarSdk from 'stellar-sdk';
+const server = new stellarSdk.Server('https://horizon-testnet.stellar.org');
+stellarSdk.Network.useTestNetwork();
 
-export const transact = async (_publicKey, _secretKey, _receiverPublicKey, _amount) => {
-    try {
-      const server = new stellarSdk.Server('https://horizon-testnet.stellar.org');
-			stellarSdk.Network.useTestNetwork();
+export const transact = (_publicKey, _secretKey, _receiverPublicKey, _amount) => {
+    const promise = new Promise(async(resolve, reject) => {
+    	try {
 			const sourceKeypair = stellarSdk.Keypair.fromSecret(_secretKey);
 			const account = await server.loadAccount(_publicKey);
 			const fee = await server.fetchBaseFee();
@@ -22,10 +23,13 @@ export const transact = async (_publicKey, _secretKey, _receiverPublicKey, _amou
 		  console.log(JSON.stringify(transactionResult, null, 2));
 		  console.log('\nSuccess! View the transaction at: ');
 		  console.log(transactionResult._links.transaction.href);
-		  return true;
+		  resolve(true);
 	  } catch(error) {
-	  console.log('An error has occured:');
-	  throw new Error(error);
-	}
+	  	console.log('An error has occured:');
+	  	//throw new Error(error);
+	  	reject(error);
+		}
+	});
+    return promise
 }
 

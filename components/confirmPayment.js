@@ -23,7 +23,7 @@ class ConfirmPaymentView extends React.Component{
 	}
 
 	makePayment = () => {
-		this.props.pay(this.props.publicKey, this.state.amount);
+		this.props.pay(this.state.amount);
 	}
 
   render(){
@@ -72,8 +72,9 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between'
 	},
 	text: {
-		fontSize: 18,
-		fontWeight: 'bold'
+		fontSize: 22,
+		fontWeight: 'bold',
+		color: 'green'
 	},
 	textInput: {
 		height: 50,

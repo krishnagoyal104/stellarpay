@@ -6,11 +6,11 @@ import Icon from 'react-native-vector-icons/Entypo';
 const ReceiptView = (props) => {
   return(	
   	<View style={styles.container}>
-  		<Text style={styles.amount}>500 Lumens</Text>
+  		<Text style={styles.amount}>{props.amount} Lumens</Text>
   		<Image source={require('../static/stellar.png')} style={styles.image} />
   		<View style={styles.bottomContainer}>
 	  		<Text style={{fontSize: 16}}>Sent successfully to</Text>
-	  		<Text style={{fontSize: 18, fontWeight: 'bold'}}>Name</Text>
+	  		<Text style={{fontSize: 18, fontWeight: 'bold'}}>{props.name}</Text>
   		</View>
   		<TouchableOpacity style={styles.loginContainer} onPress={props.navigate} >
   			<View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>

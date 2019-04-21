@@ -29,20 +29,29 @@ class ConfirmPaymentScreen extends React.Component {
   goToReceiptScreen = (receiver, amount) => {
     Navigation.push(this.props.componentId, {
       component: {
-        name: 'stellarPay.ReceiptScreen'
-      },
-      passProps: {
-        name: receiver,
-        amount: amount
-      }                                                
+        name: 'stellarPay.ReceiptScreen',
+        passProps: {
+          name: receiver,
+          amount: amount
+        },
+        options: {
+          bottomTabs: {
+            visible: false,
+            drawBehind: true
+          }
+        }
+      },                                                
     });
   }
 
   render() {
 
     return (
-      <ConfirmPaymentView {...this.props.recipient}
-      pay={(receiver, amount) => this.props.dispatch(createTransaction(receiver, amount, this.goToReceiptScreen(receiver, amount)))}
+      <ConfirmPaymentView {...this.props.recipient} loading={this.props.loading}
+      pay={(_amount) => this.props.dispatch(
+          createTransaction(this.props.recipient.publicKey, _amount,
+          () => this.goToReceiptScreen(this.props.recipient.name, _amount))
+        )}
       />
     );  
   }
@@ -51,7 +60,8 @@ class ConfirmPaymentScreen extends React.Component {
 
 const mapStateToProps = (state) => {
   return{
-    recipient: state.recipient
+    recipient: state.recipient,
+    loading: state.ui
   };
 };
   

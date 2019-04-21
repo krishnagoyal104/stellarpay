@@ -18,15 +18,14 @@ export const createTransaction = (_receiverPublicKey, _amount, _function) => {
     dispatch(uiStartLoading());
   	const publicKey = getState().account.publicKey;
   	const secretKey = getState().account.secretKey;
-    transact(publicKey, secretKey, _receiverPublicKey, _amount)
-    .then((res) => {
+    const promise = transact(publicKey, secretKey, _receiverPublicKey, _amount);
+    promise.then((res) => {
       dispatch(uiStopLoading());
       _function();
     })
     .catch((e) => {
       console.log(e)
       dispatch(uiStopLoading());
-      _function();
     });
   };
 };

@@ -16,7 +16,7 @@ class ReceiptScreen extends React.Component {
   render() {
 
     return (
-      <ReceiptView navigate={() => this.goToRoot()} />
+      <ReceiptView {...this.props} navigate={() => this.goToRoot()} />
     );  
   }
 

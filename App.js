@@ -28,7 +28,7 @@ Navigation.registerComponent('stellarPay.ReceiveScreen', () => ReceiveScreen);
 Navigation.registerComponent('stellarPay.ReceiptScreen', () => ReceiptScreen);
 Navigation.registerComponent('stellarPay.InitializeScreen', () => InitializeScreen);
 
-Navigation.events().registerAppLaunchedListener(() => {
+/*Navigation.events().registerAppLaunchedListener(() => {
   Navigation.setRoot({
     root: {
       component: {
@@ -36,9 +36,9 @@ Navigation.events().registerAppLaunchedListener(() => {
       }
     }
   });
-});
+});*/
 
-/*Navigation.events().registerAppLaunchedListener(() => {
+Navigation.events().registerAppLaunchedListener(() => {
   Promise.all([
     Icon.getImageSource('home', 25, '#007ee5'),
     Icon.getImageSource('wallet', 25, '#007ee5'),
@@ -53,103 +53,102 @@ Navigation.events().registerAppLaunchedListener(() => {
             }
           },
           center: {
-          bottomTabs: {
-            children: [
-              {
-                stack: {
-                  children: [
-                    {
-                      component: {
-                        name: 'stellarPay.HomeScreen',
-                        options: {
-                          topBar: {
-                            background: {
-                                color: '#007ee5'
-                            },
-                            title: {
-                              text: 'StellarPay',
-                              color: 'white'
+            bottomTabs: {
+              children: [
+                {
+                  stack: {
+                    children: [
+                      {
+                        component: {
+                          name: 'stellarPay.HomeScreen',
+                          options: {
+                            topBar: {
+                              background: {
+                                  color: '#007ee5'
+                              },
+                              title: {
+                                text: 'StellarPay',
+                                color: 'white'
+                              }
                             }
                           }
                         }
-                      }
-                    }  
-                  ],
-                options: {
-                  bottomTab: {
-                    fontSize: 12,
-                    text: 'Home',
-                    icon: sources[0]
-                  }
-                }
-              }
-            },
-            {
-              stack: {
-                children: [
-                  {
-                    component: {
-                      name: 'stellarPay.WalletScreen',
-                      options: {
-                        topBar: {
-                          background: {
-                              color: '#007ee5'
-                          },
-                          title: {
-                            text: 'Wallet',
-                            alignment: 'center',
-                            color: 'white'
-                          }
-                        }
+                      }  
+                    ],
+                    options: {
+                      bottomTab: {
+                        fontSize: 12,
+                        text: 'Home',
+                        icon: sources[0]
                       }
                     }
-                  }  
-                ],
-                options: {
-                  bottomTab: {
-                    fontSize: 12,
-                    text: 'Wallet',
-                    icon: sources[1]
                   }
-                }
-              }
-            },
-              {
-                stack: {
-                  children: [
-                    {
-                      component: {
-                        name: 'stellarPay.PassbookScreen',
-                        options: {
-                          topBar: {
-                            background: {
+                },
+                {
+                  stack: {
+                    children: [
+                      {
+                        component: {
+                          name: 'stellarPay.WalletScreen',
+                          options: {
+                            topBar: {
+                              background: {
                                 color: '#007ee5'
-                            },
-                            title: {
-                              text: 'Ledger',
-                              alignment: 'center',
-                              color: 'white'
+                              },
+                              title: {
+                                text: 'Wallet',
+                                alignment: 'center',
+                                color: 'white'
+                              }
                             }
                           }
                         }
+                      }  
+                    ],
+                    options: {
+                      bottomTab: {
+                        fontSize: 12,
+                        text: 'Wallet',
+                        icon: sources[1]
                       }
-                    }  
-                  ],
-                  options: {
-                    bottomTab: {
-                      fontSize: 12,
-                      text: 'Ledger',
-                      icon: sources[2]
+                    }
+                  }
+                },
+                {
+                  stack: {
+                    children: [
+                      {
+                        component: {
+                          name: 'stellarPay.PassbookScreen',
+                          options: {
+                            topBar: {
+                              background: {
+                                color: '#007ee5'
+                              },
+                              title: {
+                                text: 'Ledger',
+                                alignment: 'center',
+                                color: 'white'
+                              }
+                            }
+                          }
+                        }
+                      }  
+                    ],
+                    options: {
+                      bottomTab: {
+                        fontSize: 12,
+                        text: 'Ledger',
+                        icon: sources[2]
+                      }
                     }
                   }
                 }
-              }
-            ],
+              ],
+            }
           }
-      }
-    }
+        }
       }
     });
   });  
 });
-*/

@@ -29,8 +29,14 @@ class PaymentScreen extends React.Component {
   goToConfirmPaymentScreen = () => {
     Navigation.push(this.props.componentId, {
       component: {
-        name: 'stellarPay.ConfirmPaymentScreen'
-      }                                                  
+        name: 'stellarPay.ConfirmPaymentScreen',
+        options: {
+          bottomTabs: {
+            visible: false,
+            drawBehind: true
+          }
+        }
+      }                                           
     });
   }
 
