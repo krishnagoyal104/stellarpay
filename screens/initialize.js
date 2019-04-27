@@ -1,91 +1,37 @@
 import React from 'react';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import { View, Text, StyleSheet, Image } from 'react-native';
-import AppIntroSlider from 'react-native-app-intro-slider';
+import {View, StyleSheet, AsyncStorage} from 'react-native';
+import InitializeView from '../components/initialize';
+import {goToSignUp, goToHome} from '../App';
 
-const styles = StyleSheet.create({
-  buttonCircle: {
-    width: 40,
-    height: 40,
-    backgroundColor: 'rgba(0, 0, 0, .2)',
-    borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  image: {
-    width: '100%'
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#007ee5'
-  }
-});
+class InitializeScreen extends React.Component {
 
-const slides = [
-  {
-    key: 'somethun',
-    title: 'Title 1',
-    text: 'Description.\nSay something cool',
-    image: require('../static/pic1.jpg'),
-    backgroundColor: '#59b2ab',
-  },
-  {
-    key: 'somethun-dos',
-    title: 'Title 2',
-    text: 'Other cool stuff',
-    image: require('../static/download.png'),
-    backgroundColor: '#febe29',
-  },
-  {
-    key: 'somethun1',
-    title: 'Rocket guy',
-    text: 'I\'m already out of descriptions\n\nLorem ipsum bla bla bla',
-    image: require('../static/download.png'),
-    backgroundColor: '#22bcb5',
-  }
-];
-
-export default class App extends React.Component {
-  _renderNextButton = () => {
-    return (
-      <View style={styles.buttonCircle}>
-        <Ionicons
-          name="md-arrow-round-forward"
-          color="rgba(255, 255, 255, .9)"
-          size={24}
-          style={{ backgroundColor: 'transparent' }}
-        />
-      </View>
-    );
-  }
-  _renderDoneButton = () => {
-    return (
-      <View style={styles.buttonCircle}>
-        <Ionicons
-          name="md-checkmark"
-          color="rgba(255, 255, 255, .9)"
-          size={24}
-          style={{ backgroundColor: 'transparent' }}
-        />
-      </View>
-    );  
+  constructor(props){
+    super(props);
   }
 
-  _renderItem = () => {
-    return(
-      <View style={styles.container}>
-        <Image style={styles.image} resizeMode={'contain'} source={require('../static/pic1.jpg')} />
-      </View>
-    );
+  async componentDidMount(){
+    try{
+      const token = await AsyncStorage.getItem('token');
+      if(token){
+        goToHome()
+      }
+      else{
+        goToSignUp();
+      }
+    }
+    catch(e){
+      console.log(e);
+    }
   }
 
   render() {
+
     return (
-      <AppIntroSlider
-        slides={slides}
-        renderDoneButton={this._renderDoneButton}
-        renderNextButton={this._renderNextButton}      
-      />
-    );
+      <InitializeView />
+    );  
   }
-}
+
+}  
+  
+export default InitializeScreen;
+

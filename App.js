@@ -10,6 +10,8 @@ import SideDrawerScreen from './screens/sideDrawer';
 import ReceiveScreen from './screens/receive';
 import ConfirmPaymentScreen from './screens/confirmPayment';
 import ReceiptScreen from './screens/receipt';
+import SliderScreen from './screens/slider';
+import SignupScreen from './screens/signup';
 import InitializeScreen from './screens/initialize';
 import configureStore from './store/configureStore';
 
@@ -23,12 +25,14 @@ Navigation.registerComponentWithRedux('stellarPay.PaymentScreen', () => PaymentS
 Navigation.registerComponentWithRedux('stellarPay.WalletScreen', () => WalletScreen, Provider, store);
 Navigation.registerComponentWithRedux('stellarPay.PassbookScreen', () => PassbookScreen, Provider, store);
 Navigation.registerComponentWithRedux('stellarPay.ConfirmPaymentScreen', () => ConfirmPaymentScreen, Provider, store);
+Navigation.registerComponentWithRedux('stellarPay.SignupScreen', () => SignupScreen, Provider, store);
 Navigation.registerComponent('stellarPay.SideDrawerScreen', () => SideDrawerScreen);
 Navigation.registerComponent('stellarPay.ReceiveScreen', () => ReceiveScreen);
 Navigation.registerComponent('stellarPay.ReceiptScreen', () => ReceiptScreen);
+Navigation.registerComponent('stellarPay.SliderScreen', () => SliderScreen);
 Navigation.registerComponent('stellarPay.InitializeScreen', () => InitializeScreen);
 
-/*Navigation.events().registerAppLaunchedListener(() => {
+Navigation.events().registerAppLaunchedListener(() => {
   Navigation.setRoot({
     root: {
       component: {
@@ -36,9 +40,19 @@ Navigation.registerComponent('stellarPay.InitializeScreen', () => InitializeScre
       }
     }
   });
-});*/
+});
 
-Navigation.events().registerAppLaunchedListener(() => {
+export const goToSignUp = () => {
+  Navigation.setRoot({
+    root: {
+      component: {
+        name: 'stellarPay.SignupScreen'
+      }
+    }
+  });
+}
+
+export const goToHome = () => {
   Promise.all([
     Icon.getImageSource('home', 25, '#007ee5'),
     Icon.getImageSource('wallet', 25, '#007ee5'),
@@ -151,4 +165,4 @@ Navigation.events().registerAppLaunchedListener(() => {
       }
     });
   });  
-});
+};
