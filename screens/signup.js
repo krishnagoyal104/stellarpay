@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import SignupView from '../components/signup';
 import {fetchKeypair} from '../actions/account';
 import {signUp} from '../actions/signup';
+import firebase from 'react-native-firebase';
 
 class SignupScreen extends React.Component {
 

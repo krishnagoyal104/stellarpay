@@ -3,6 +3,7 @@ package com.stellarpay;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.invertase.firebase.RNFirebasePackage;
 import com.oblador.keychain.KeychainPackage;
 import com.bitgo.randombytes.RandomBytesPackage;
 import com.facebook.react.ReactNativeHost;
@@ -19,6 +20,8 @@ import com.oblador.vectoricons.VectorIconsPackage;
 
 import java.util.Arrays;
 import java.util.List;
+
+import io.invertase.firebase.auth.RNFirebaseAuthPackage;
 
 public class MainApplication extends NavigationApplication {
     
@@ -44,7 +47,9 @@ public class MainApplication extends NavigationApplication {
         return Arrays.<ReactPackage>asList(
             new VectorIconsPackage(),
             new RandomBytesPackage(),
-            new KeychainPackage()
+            new KeychainPackage(),
+            new RNFirebasePackage(),
+            new RNFirebaseAuthPackage()
         );
     }
   

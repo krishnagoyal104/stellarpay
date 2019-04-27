@@ -5,6 +5,7 @@ import {Navigation} from 'react-native-navigation';
 import HomePage from '../components/home';
 import {fetchKeypair} from '../actions/account';
 import {getBalance, getStreamForAccount} from '../actions/balance';
+import firebase from 'react-native-firebase';
 
 class HomeScreen extends React.Component {
 
@@ -16,6 +17,9 @@ class HomeScreen extends React.Component {
     await this.props.dispatch(fetchKeypair());
     await this.props.dispatch(getBalance());
     this.props.dispatch(getStreamForAccount());
+    firebase.auth().signInWithPhoneNumber('+91 9932581150')
+    .then(confirmResult => console.log(confirmResult))
+    .catch(error => console.log(error));
   }
 
   goToReceiveScreen = () => {

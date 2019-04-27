@@ -17,6 +17,7 @@
     "react-native": "0.58.6",
     "react-native-app-intro": "https://github.com/merryjs/react-native-app-intro",
     "react-native-app-intro-slider": "^2.0.1",
+    "react-native-firebase": "^5.3.1",
     "react-native-keychain": "^3.1.1",
     "react-native-navigation": "^2.13.1",
     "react-native-qrcode": "^0.2.7",
