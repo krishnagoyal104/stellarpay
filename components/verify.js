@@ -1,67 +1,47 @@
 import React from 'react';
-import {View, Text, Image, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {View, Text, Image, TextInput, StyleSheet, TouchableOpacity, ActivityIndicator} from 'react-native';
+import OtpInputs from 'react-native-otp-inputs'
+import Font from 'react-native-vector-icons/FontAwesome';
 
 class VerificationView extends React.Component{
 
 	constructor(props){
 		super(props);
-    this.inputs = {};
     this.state = {
-    	otp: []
+    	otp: ''
     }
 	}
 
-	focusNextField = (key, val) => {
-		var otp = this.state.otp;
-		otp.splice(key-1, 0, val);
+	onEnter = (text) => {
 		this.setState(({
-			otp: otp
+			otp: text
 		}));
-		if(key>5) return;
-    this.inputs[key+1].focus();
-  }
+	}
 
-  focusPreviousField = (key, val) => {
-  	var otp = this.state.otp;
-  	delete otp[key-1];
-  	this.setState(({
-  		otp: otp
-  	}));
-  	if(key<2) return;
-  	this.inputs[key-1].focus();
+  onSubmit = () => {
+  	this.props.onSubmit(this.state.otp);
   }
 
 	render(){
-		const renderInputs = () => {
-			const inputs = [];
-			for(let i=1; i<=6; i++){
-				inputs.push(
-					<TextInput
-					ref={(input) => this.inputs[i] = input}
-					blurOnSubmit={ false }
-					maxLength={1}
-					style={styles.input}
-					onChangeText={(val) => {
-						if(val.length===0){
-							this.focusPreviousField(i, val);
-						}
-						else{
-							this.focusNextField(i, val);
-						}
-          }} />
-				)
-			}
-			return inputs;
-		}
+
 		return(	
 		 	<View style={styles.mainContainer}>
-		 		<View style={styles.container}>
-		 			{renderInputs()}
+		 		<View style={styles.topContainer}>
+		 			<Text style={styles.text}>Enter the verification code</Text>
 		 		</View>
+		 			<OtpInputs handleChange={(code) => this.onEnter(code)} numberOfInputs={6}	
+		 			focusedBorderColor="green" unfocusedBorderColor="#007ee5"
+		 			containerStyles={styles.otpContainer}
+		 			inputContainerStyles={styles.otpInputContainer}
+		 			inputStyles={styles.otpInputs} />
 		 		<View style={styles.bottomContainer}>
-		 			<Text>{this.state.otp}</Text>
-		 		</View>
+			 		<TouchableOpacity style={styles.loginContainer} onPress={() => this.onSubmit()} >
+			  			<View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
+								<Text style={styles.bottomText}>Verify</Text>
+								{this.props.loading ? <ActivityIndicator size="small" color="#007ee5" /> : <Font name={'send'} size={20} color={'white'} style={{paddingTop: 4, paddingLeft: 6}} />}
+							</View>
+					 </TouchableOpacity>
+			 	</View>
 		 	</View>
 	  );
 	}
@@ -72,21 +52,41 @@ const styles = StyleSheet.create({
 	mainContainer: {
 		flex: 1
 	},
-	container: {
-		flex: 1,
-		flexDirection: 'row',
-		justifyContent: 'space-around',
-		alignItems: 'flex-end'
+	topContainer: {
+		flex: 2,
+		justifyContent: 'center',
+		alignItems: 'center'
 	},
-	input: {
-		width: '10%',
-		height: 55,
-		fontSize: 30,
-		borderBottomWidth: 2,
-		borderBottomColor: '#007ee5'
+	text: {
+		fontSize: 24
+	},
+	otpContainer: {
+		flex: 2,
+		justifyContent: 'center',
+		alignSelf: 'center'
+	},
+	otpInputContainer: {
+		backgroundColor: 'white'
+	},
+	otpInputs: {
+		color: '#007ee5'
 	},
 	bottomContainer: {
-		flex: 2
+		flex: 2,
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	loginContainer: {
+		width: '40%',
+		height: 50,
+		borderRadius: 25,
+		backgroundColor: '#007ee5',
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	bottomText: {
+		color: 'white',
+		fontSize: 20
 	}
 });
 
