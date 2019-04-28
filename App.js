@@ -13,6 +13,7 @@ import ReceiptScreen from './screens/receipt';
 import SliderScreen from './screens/slider';
 import SignupScreen from './screens/signup';
 import InitializeScreen from './screens/initialize';
+import VerificationScreen from './screens/verify';
 import configureStore from './store/configureStore';
 
 import Icon from 'react-native-vector-icons/Entypo'; 
@@ -25,6 +26,7 @@ Navigation.registerComponentWithRedux('stellarPay.PaymentScreen', () => PaymentS
 Navigation.registerComponentWithRedux('stellarPay.WalletScreen', () => WalletScreen, Provider, store);
 Navigation.registerComponentWithRedux('stellarPay.PassbookScreen', () => PassbookScreen, Provider, store);
 Navigation.registerComponentWithRedux('stellarPay.ConfirmPaymentScreen', () => ConfirmPaymentScreen, Provider, store);
+Navigation.registerComponentWithRedux('stellarPay.VerificationScreen', () => VerificationScreen, Provider, store);
 Navigation.registerComponentWithRedux('stellarPay.SignupScreen', () => SignupScreen, Provider, store);
 Navigation.registerComponent('stellarPay.SideDrawerScreen', () => SideDrawerScreen);
 Navigation.registerComponent('stellarPay.ReceiveScreen', () => ReceiveScreen);
@@ -36,7 +38,7 @@ Navigation.events().registerAppLaunchedListener(() => {
   Navigation.setRoot({
     root: {
       component: {
-        name: 'stellarPay.InitializeScreen'
+        name: 'stellarPay.VerificationScreen'
       }
     }
   });

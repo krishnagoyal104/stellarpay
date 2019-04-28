@@ -57,7 +57,7 @@ class SignupView extends React.Component{
 const styles = StyleSheet.create({
 	mainContainer: {
 		flex: 1,
-		backgroundColor: '#121787'
+		backgroundColor: '#007ee5'
 	},
 	titleContainer: {
 		flex: 4,
