@@ -13,7 +13,7 @@ class InitializeScreen extends React.Component {
     try{
       const token = await AsyncStorage.getItem('token');
       if(token){
-        goToHome()
+        goToHome();
       }
       else{
         goToSignUp();

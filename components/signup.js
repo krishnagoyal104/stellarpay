@@ -25,7 +25,7 @@ class SignupView extends React.Component{
 		}))
 	}
 
-	onSignup = () => {
+	onSignUp = () => {
 		this.props.onSubmit(this.state);
 	}
 
@@ -41,7 +41,7 @@ class SignupView extends React.Component{
 			 		keyboardType="numeric"/>
 			 	</View>
 			 	<View style={styles.bottomContainer}>
-			 		<TouchableOpacity style={styles.loginContainer} onPress={() => this.onSignup()} >
+			 		<TouchableOpacity style={styles.loginContainer} onPress={() => this.onSignUp()} >
 			  			<View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
 								<Text style={styles.bottomText}>Sign Up</Text>
 								{this.props.loading ? <ActivityIndicator size="small" color="#007ee5" /> : <Font name={'send'} size={20} color={'#007ee5'} style={{paddingTop: 4, paddingLeft: 6}} />}

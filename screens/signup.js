@@ -1,10 +1,9 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import {connect} from 'react-redux';  
+import {connect} from 'react-redux';
+import {Navigation} from 'react-native-navigation'; 
 import SignupView from '../components/signup';
-import {fetchKeypair} from '../actions/account';
-import {signUp} from '../actions/signup';
-import firebase from 'react-native-firebase';
+import {requestOtp} from '../actions/firebase';
 
 class SignupScreen extends React.Component {
 
@@ -13,8 +12,19 @@ class SignupScreen extends React.Component {
   }
 
   onSubmit = async(data) => {
-    await this.props.dispatch(fetchKeypair());
-  	this.props.dispatch(signUp(data));
+    this.props.dispatch(requestOtp(data, this.goToVerificationScreen));
+  }
+
+  goToVerificationScreen = (data, firebase) => {
+    Navigation.push(this.props.componentId, {
+      component: {
+        name: 'stellarPay.VerificationScreen',
+        passProps: {
+          data,
+          firebase
+        }
+      }                                               
+    });
   }
 
   render() {

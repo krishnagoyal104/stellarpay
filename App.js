@@ -38,7 +38,7 @@ Navigation.events().registerAppLaunchedListener(() => {
   Navigation.setRoot({
     root: {
       component: {
-        name: 'stellarPay.VerificationScreen'
+        name: 'stellarPay.InitializeScreen'
       }
     }
   });
@@ -47,8 +47,14 @@ Navigation.events().registerAppLaunchedListener(() => {
 export const goToSignUp = () => {
   Navigation.setRoot({
     root: {
-      component: {
-        name: 'stellarPay.SignupScreen'
+      stack: {
+        children: [
+          {
+            component: {
+              name: 'stellarPay.SignupScreen'
+            }
+          }
+        ]
       }
     }
   });
