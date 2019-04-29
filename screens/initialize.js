@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, AsyncStorage} from 'react-native';
 import InitializeView from '../components/initialize';
-import {goToSignUp, goToHome} from '../App';
+import {goToWelcome, goToHome} from '../App';
 
 class InitializeScreen extends React.Component {
 
@@ -16,7 +16,7 @@ class InitializeScreen extends React.Component {
         goToHome();
       }
       else{
-        goToSignUp();
+        goToWelcome();
       }
     }
     catch(e){
