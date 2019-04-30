@@ -17,9 +17,6 @@ class HomeScreen extends React.Component {
     await this.props.dispatch(fetchKeypair());
     await this.props.dispatch(getBalance());
     this.props.dispatch(getStreamForAccount());
-    firebase.auth().signInWithPhoneNumber('+91 9932581150')
-    .then(confirmResult => console.log(confirmResult))
-    .catch(error => console.log(error));
   }
 
   goToReceiveScreen = () => {

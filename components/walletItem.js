@@ -30,8 +30,7 @@ const styles = StyleSheet.create({
 	},
 	imageContainer: {
 		borderRadius: 25,
-		backgroundColor: 'white',
-		backgroundColor: '#99D3EC'
+		backgroundColor: 'white'
 	},
 	text: {
 		color: 'white',
