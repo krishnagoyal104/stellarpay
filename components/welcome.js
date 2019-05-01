@@ -1,11 +1,14 @@
 import React from 'react';
 import {View, Text, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
+import LottieView from 'lottie-react-native';
 import Font from 'react-native-vector-icons/FontAwesome';
 
 const WelcomeView = (props) => {
 	return(
 		<View style={styles.mainContainer}>
-			<View style={styles.topContainer}></View>
+			<View style={styles.topContainer}>
+				<LottieView style={styles.animation} source={require('../static/animation.json')} autoPlay loop />
+			</View>
 			<View style={styles.bottomContainer}>
 				<Text style={styles.text}>Welcome To StellarPay</Text>
 				<View style={styles.buttonContainer}>
@@ -61,6 +64,9 @@ const styles = StyleSheet.create({
 	},
 	topContainer: {
 		flex: 1
+	},
+	animation: {
+		backgroundColor: '#007ee5'
 	},
 	bottomContainer: {
 		flex: 1,

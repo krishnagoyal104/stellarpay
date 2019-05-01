@@ -3,6 +3,7 @@ package com.stellarpay;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.airbnb.android.react.lottie.LottiePackage;
 import io.invertase.firebase.RNFirebasePackage;
 import com.oblador.keychain.KeychainPackage;
 import com.bitgo.randombytes.RandomBytesPackage;
@@ -49,7 +50,8 @@ public class MainApplication extends NavigationApplication {
             new RandomBytesPackage(),
             new KeychainPackage(),
             new RNFirebasePackage(),
-            new RNFirebaseAuthPackage()
+            new RNFirebaseAuthPackage(),
+            new LottiePackage()
         );
     }
   
