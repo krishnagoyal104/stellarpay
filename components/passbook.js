@@ -4,11 +4,16 @@ import PassbookItemView from './passbookItem';
 
 const PassbookView = (props) => {
   return(
-  	<View>
-  		{props.loading ? <ActivityIndicator style={styles.loading} size="small" color="#007ee5" /> :
+  	<View style={styles.container}>
+  		{props.loading ? 
+  			<View style={styles.loadingContainer}>
+  				<ActivityIndicator size="large" color="#007ee5" />
+  			</View> :
 		  	<FlatList
 				data={props.ledger}
-				style={styles.container}
+				onRefresh={() => props.refresh()}
+				refreshing={props.loading}
+				keyExtractor={item => item.id}
 				renderItem={({item}) => <PassbookItemView {...item} />}
 				/>}
 		</View>	
@@ -17,11 +22,13 @@ const PassbookView = (props) => {
 
 const styles = StyleSheet.create({
 	container: {
-		alignSelf: 'center',
-		width: '80%'
+		flex: 1,
+		backgroundColor: '#E3E9ED'
 	},
-	loading: {
-		alignSelf: 'center'
+	loadingContainer: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center'
 	}
 });
 

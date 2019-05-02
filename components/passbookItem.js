@@ -4,9 +4,18 @@ import {View, Text, Image, StyleSheet} from 'react-native';
 const PassbookItemView = (props) => {
   return(	
     <View style={styles.mainContainer}>
+  		<Image source={require('../static/bill.png')} style={styles.image} />
 			<View style={styles.container}>
-				<Text style={styles.text1} numberOfLines={1}>{props.name}</Text>
-				<Text style={styles.text2}>{props.amount}</Text>
+				<View>
+					<Text style={styles.name}>{props.name}</Text>
+					<Text>{props.asset}</Text>
+				</View>
+				<View style={styles.rightContainer}>
+					<Text
+					style={{color: props.type === 'payment' ? 'green' : 'red', fontSize: 16}}>
+						{props.amount.slice(0, -5)}</Text>
+					<Text>{props.timestamp}</Text>
+				</View>
 			</View>
     </View>
   );		
@@ -14,17 +23,29 @@ const PassbookItemView = (props) => {
 
 const styles = StyleSheet.create({
 	mainContainer: {
+		flexDirection: 'row'
+	},
+	container: {
+		width: '90%',
+		alignSelf: 'center',
 		borderRadius: 3,
 		borderWidth: 0.3,
 		padding: 8,
-		marginBottom: 11
+		marginTop: 11,
+		backgroundColor: 'white',
+		flexDirection: 'row',
+		justifyContent: 'space-between'
 	},
-	text1: {
-		fontSize: 16
+	rightContainer: {
+		alignItems: 'flex-end'
 	},
-	text2: {
-		color: 'green',
-		fontSize: 12
+	name: {
+		fontSize: 18,
+		color: 'black'
+	},
+	image: {
+		height: 35,
+		width: '10%'
 	}
 });
 

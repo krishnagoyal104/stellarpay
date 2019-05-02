@@ -13,13 +13,17 @@ class PassbookScreen extends React.Component {
   }
 
   componentDidAppear(){
-  	this.props.dispatch(getLedger());
+  	!this.props.ledger.length && this.fetchTransactions();
+  }
+
+  fetchTransactions = () => {
+    this.props.dispatch(getLedger());
   }
 
   render() {
 
     return (
-      <PassbookView ledger={this.props.ledger} loading={this.props.loading} />
+      <PassbookView ledger={this.props.ledger} loading={this.props.loading} refresh={this.fetchTransactions} />
     );  
   }
 
