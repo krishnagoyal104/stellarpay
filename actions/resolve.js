@@ -13,7 +13,7 @@ export const resolveReceiver = (number, _function) => {
   	dispatch(uiStartLoading());
     try{
   	 	const result = await axios(`http://192.168.1.8:3000/${number}`);
-  	 	dispatch(setReceiver(result.data[0]));
+  	 	dispatch(setReceiver(result.data));
   	 	dispatch(uiStopLoading());
       _function();
      } catch(e){

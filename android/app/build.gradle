@@ -107,7 +107,9 @@ android {
         applicationId "com.stellarpay"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+        missingDimensionStrategy 'react-native-camera', 'general'
         missingDimensionStrategy "RNN.reactNativeVersion", "reactNative57_5"
+        multiDexEnabled true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -143,6 +145,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-camera')
     implementation project(':lottie-react-native')
     implementation project(':react-native-firebase')
     implementation project(':react-native-keychain')

@@ -2487,7 +2487,7 @@ fbjs-scripts@^1.0.0:
     semver "^5.1.0"
     through2 "^2.0.0"
 
-fbjs@^0.8.9:
+fbjs@^0.8.16, fbjs@^0.8.9:
   version "0.8.17"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.17.tgz#c4d598ead6949112653d6588b01a5cdcd9f90fdd"
   integrity sha1-xNWY6taUkRJlPWWIsBpc3Nn5D90=
@@ -2674,6 +2674,11 @@ function-bind@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
   integrity sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==
+
+fuse.js@2.6.2:
+  version "2.6.2"
+  resolved "https://registry.yarnpkg.com/fuse.js/-/fuse.js-2.6.2.tgz#d5d994fda96f543b5a51df38b72cec9cc60d9dea"
+  integrity sha1-1dmU/alvVDtaUd84tyzsnMYNneo=
 
 gauge@~1.2.5:
   version "1.2.7"
@@ -2894,6 +2899,11 @@ hoist-non-react-statics@3.x.x, hoist-non-react-statics@^3.3.0:
   integrity sha512-0XsbTXxgiaCDYDIWFcwkmerZPSwywfUqYmwT4jzewKTQSWoE6FCMoUVOeBJWK3E/CrWbxRG3m5GzY4lnIwGRBA==
   dependencies:
     react-is "^16.7.0"
+
+hoist-non-react-statics@^2.3.1:
+  version "2.5.5"
+  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
+  integrity sha512-rqcy4pJo55FTTLWt+bU8ukscqHeE/e9KWvsOW2b/a3afxQZhwkQdT1rPPCJ0rYXdj4vNcasY8zHTH+jF/qStxw==
 
 home-or-tmp@^3.0.0:
   version "3.0.0"
@@ -3992,6 +4002,16 @@ lodash.throttle@^4.1.1:
   resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
   integrity sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ=
 
+lodash.toarray@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/lodash.toarray/-/lodash.toarray-4.4.0.tgz#24c4bfcd6b2fba38bfd0594db1179d8e9b656561"
+  integrity sha1-JMS/zWsvuji/0FlNsRedjptlZWE=
+
+lodash@4.12.0:
+  version "4.12.0"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.12.0.tgz#2bd6dc46a040f59e686c972ed21d93dc59053258"
+  integrity sha1-K9bcRqBA9Z5obJcu0h2T3FkFMlg=
+
 lodash@4.17.x, lodash@^4.0.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.5, lodash@^4.3.0, lodash@^4.6.1:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
@@ -4559,6 +4579,13 @@ nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
   integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
+
+node-emoji@1.8.1:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/node-emoji/-/node-emoji-1.8.1.tgz#6eec6bfb07421e2148c75c6bba72421f8530a826"
+  integrity sha512-+ktMAh1Jwas+TnGodfCfjUbJKoANqPaJFN0z0iqh41eqD8dvguNzcitVSBSVK1pidz0AqGbLKcoVuVLRVZ/aVg==
+  dependencies:
+    lodash.toarray "^4.4.0"
 
 node-fetch@^1.0.1:
   version "1.7.3"
@@ -5204,6 +5231,15 @@ prompts@^2.0.1:
     kleur "^3.0.2"
     sisteransi "^1.0.0"
 
+prop-types@15.6.0:
+  version "15.6.0"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
+  integrity sha1-zq8IMCL8RrSjX2nhPvda7Q1jmFY=
+  dependencies:
+    fbjs "^0.8.16"
+    loose-envify "^1.3.1"
+    object-assign "^4.1.1"
+
 prop-types@15.x.x, prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
@@ -5355,6 +5391,25 @@ react-native-app-intro-slider@^2.0.1:
     prop-types "^15.6.0"
     react-native-swiper "https://github.com/merryjs/react-native-swiper.git"
 
+react-native-camera@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-2.6.0.tgz#bf97b0fc68aa8732d815e9bbd92e63529f51d598"
+  integrity sha512-g0Hi4yhUg1yBsYbW9aLxVaX+rgl9sKrrDAGF6difiRTvwCUEqlID2DosLCQQPkLSniJHVa8gc+SwCegahU23aA==
+  dependencies:
+    prop-types "^15.6.2"
+
+react-native-country-picker-modal@^0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/react-native-country-picker-modal/-/react-native-country-picker-modal-0.7.1.tgz#bde8f9c1c50b67efed880bf3a1c455b96eced389"
+  integrity sha512-0Mtw62QpVbJRO9GXt0lEFccoVjGfmDrb/4hpRBsuoepkyAeilXE4dboNqnql/ALny6/y6uza+Hz/WjEVU2Uw0Q==
+  dependencies:
+    fuse.js "2.6.2"
+    lodash "4.12.0"
+    node-emoji "1.8.1"
+    prop-types "15.6.0"
+    react-native-safe-area-view "^0.7.0"
+    world-countries "1.8.0"
+
 react-native-crypto@^2.0.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/react-native-crypto/-/react-native-crypto-2.1.2.tgz#cfe68cad51cd1f73a4202b7ac164f96c1144cb2a"
@@ -5401,6 +5456,19 @@ react-native-otp-inputs@^2.0.1:
   dependencies:
     lodash.flatten "4.4.0"
 
+react-native-permissions@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-permissions/-/react-native-permissions-1.1.1.tgz#4876004681ff8556454613d85249b01baff9b35b"
+  integrity sha512-t0Ujm177bagjUOSzhpmkSz+LqFW04HnY9TeZFavDCmV521fQvFz82aD+POXqWsAdsJVOK3umJYBNNqCjC3g0hQ==
+
+react-native-qrcode-scanner@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-qrcode-scanner/-/react-native-qrcode-scanner-1.1.2.tgz#5b6dfb4efd267a810bedb1f09b7c9ccb6d321e20"
+  integrity sha512-ID/s6za6N1m+V5dgzGZYr+rf9txuTYEnqqkowR8hujm9ddPRJEkXXGkoR6Y18WnpDGS7eDEt2BNPLXFkLLYhvQ==
+  dependencies:
+    prop-types "^15.5.10"
+    react-native-permissions "^1.1.1"
+
 react-native-qrcode@^0.2.7:
   version "0.2.7"
   resolved "https://registry.yarnpkg.com/react-native-qrcode/-/react-native-qrcode-0.2.7.tgz#d103166fb1a5b53643e8bf7b88c0672e689ac4f8"
@@ -5425,6 +5493,13 @@ react-native-randombytes@^3.5.1, react-native-randombytes@^3.5.2:
   dependencies:
     buffer "^4.9.1"
     sjcl "^1.0.3"
+
+react-native-safe-area-view@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.7.0.tgz#38f5ab9368d6ef9e5d18ab64212938af3ec39421"
+  integrity sha512-SjLdW/Th0WVMhyngH4O6yC21S+O4U4AAG3QxBr7fZ2ftgjXSpKbDHAhEpxBdFwei6HsnsC2h9oYMtPpaW9nfGg==
+  dependencies:
+    hoist-non-react-statics "^2.3.1"
 
 react-native-safe-module@^1.1.0:
   version "1.2.0"
@@ -6818,6 +6893,11 @@ wordwrap@~0.0.2:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-0.0.3.tgz#a3d5da6cd5c0bc0008d37234bbaf1bed63059107"
   integrity sha1-o9XabNXAvAAI03I0u68b7WMFkQc=
+
+world-countries@1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/world-countries/-/world-countries-1.8.0.tgz#17f48e7e8470ac5a2136ad6938dfc656fc2bcb95"
+  integrity sha1-F/SOfoRwrFohNq1pON/GVvwry5U=
 
 wrap-ansi@^2.0.0:
   version "2.1.0"

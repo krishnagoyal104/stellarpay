@@ -44,6 +44,8 @@
 		C9F87E486641475480B4BE69 /* libRNKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAEC3391B8E4E398E5FC1BC /* libRNKeychain.a */; };
 		4F469ED8F6884835ADF77017 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8B43958A8B44D0FB6271562 /* libRNFirebase.a */; };
 		067C70E9593541B9AF5C19AE /* libLottieReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 726BAE5E2367416DB792DCA3 /* libLottieReactNative.a */; };
+		5EA24733647542229C93FD61 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19CDDFF77AB34ACC941A262E /* libReactNativePermissions.a */; };
+		82B4A83E99F24192A0394386 /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B993F34991CF4475A63B3A6C /* libRNCamera.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -360,6 +362,10 @@
 		D8B43958A8B44D0FB6271562 /* libRNFirebase.a */ = {isa = PBXFileReference; name = "libRNFirebase.a"; path = "libRNFirebase.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		939DC8F86FCA4FEDA5753417 /* LottieReactNative.xcodeproj */ = {isa = PBXFileReference; name = "LottieReactNative.xcodeproj"; path = "../node_modules/lottie-react-native/src/ios/LottieReactNative.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		726BAE5E2367416DB792DCA3 /* libLottieReactNative.a */ = {isa = PBXFileReference; name = "libLottieReactNative.a"; path = "libLottieReactNative.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		D261A1C717AA47F7A018A3F9 /* ReactNativePermissions.xcodeproj */ = {isa = PBXFileReference; name = "ReactNativePermissions.xcodeproj"; path = "../node_modules/react-native-permissions/ios/ReactNativePermissions.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		19CDDFF77AB34ACC941A262E /* libReactNativePermissions.a */ = {isa = PBXFileReference; name = "libReactNativePermissions.a"; path = "libReactNativePermissions.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		A35909E4866043BEB880E16E /* RNCamera.xcodeproj */ = {isa = PBXFileReference; name = "RNCamera.xcodeproj"; path = "../node_modules/react-native-camera/ios/RNCamera.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		B993F34991CF4475A63B3A6C /* libRNCamera.a */ = {isa = PBXFileReference; name = "libRNCamera.a"; path = "libRNCamera.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -392,6 +398,8 @@
 				C9F87E486641475480B4BE69 /* libRNKeychain.a in Frameworks */,
 				4F469ED8F6884835ADF77017 /* libRNFirebase.a in Frameworks */,
 				067C70E9593541B9AF5C19AE /* libLottieReactNative.a in Frameworks */,
+				5EA24733647542229C93FD61 /* libReactNativePermissions.a in Frameworks */,
+				82B4A83E99F24192A0394386 /* libRNCamera.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,6 +594,8 @@
 				7A4E936CCDFD43E192F1DA90 /* RNKeychain.xcodeproj */,
 				950D1DF4C74D4B67A46025EA /* RNFirebase.xcodeproj */,
 				939DC8F86FCA4FEDA5753417 /* LottieReactNative.xcodeproj */,
+				D261A1C717AA47F7A018A3F9 /* ReactNativePermissions.xcodeproj */,
+				A35909E4866043BEB880E16E /* RNCamera.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1218,6 +1228,8 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1225,6 +1237,8 @@
 					"$(SRCROOT)/../node_modules/react-native-keychain/RNKeychainManager",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/LottieReactNative",
+					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 				);
 			};
 			name = Debug;
@@ -1251,6 +1265,8 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1258,6 +1274,8 @@
 					"$(SRCROOT)/../node_modules/react-native-keychain/RNKeychainManager",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/LottieReactNative",
+					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 				);
 			};
 			name = Release;
@@ -1284,6 +1302,8 @@
 					"$(SRCROOT)/../node_modules/react-native-keychain/RNKeychainManager",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/LottieReactNative",
+					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 				);
 			};
 			name = Debug;
@@ -1309,6 +1329,8 @@
 					"$(SRCROOT)/../node_modules/react-native-keychain/RNKeychainManager",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/LottieReactNative",
+					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 				);
 			};
 			name = Release;
@@ -1343,6 +1365,8 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1350,6 +1374,8 @@
 					"$(SRCROOT)/../node_modules/react-native-keychain/RNKeychainManager",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/LottieReactNative",
+					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 				);
 			};
 			name = Debug;
@@ -1384,6 +1410,8 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1391,6 +1419,8 @@
 					"$(SRCROOT)/../node_modules/react-native-keychain/RNKeychainManager",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/LottieReactNative",
+					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 				);
 			};
 			name = Release;
@@ -1424,6 +1454,8 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1431,6 +1463,8 @@
 					"$(SRCROOT)/../node_modules/react-native-keychain/RNKeychainManager",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/LottieReactNative",
+					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 				);
 			};
 			name = Debug;
@@ -1464,6 +1498,8 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1471,6 +1507,8 @@
 					"$(SRCROOT)/../node_modules/react-native-keychain/RNKeychainManager",
 					"$(SRCROOT)/../node_modules/react-native-firebase/ios/RNFirebase/**",
 					"$(SRCROOT)/../node_modules/lottie-react-native/src/ios/LottieReactNative",
+					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 				);
 			};
 			name = Release;

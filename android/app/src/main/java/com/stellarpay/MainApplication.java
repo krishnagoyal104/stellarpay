@@ -3,6 +3,7 @@ package com.stellarpay;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import org.reactnative.camera.RNCameraPackage;
 import com.airbnb.android.react.lottie.LottiePackage;
 import io.invertase.firebase.RNFirebasePackage;
 import com.oblador.keychain.KeychainPackage;
@@ -51,7 +52,8 @@ public class MainApplication extends NavigationApplication {
             new KeychainPackage(),
             new RNFirebasePackage(),
             new RNFirebaseAuthPackage(),
-            new LottiePackage()
+            new LottiePackage(),
+            new RNCameraPackage()
         );
     }
   

@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, Dimensions, TextInput, TouchableOpacity, ActivityIndicator} from 'react-native';
-
+import ScannerView from './scanner';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Font from 'react-native-vector-icons/FontAwesome';
 
@@ -12,7 +12,8 @@ class PaymentPage extends React.Component{
 
 		this.state = {
 			color: '#C7C7CD',
-			receiver: ''
+			receiver: '',
+			scanner: false
 		}
 
 	}
@@ -20,6 +21,12 @@ class PaymentPage extends React.Component{
 	onContactChange = (val) => {
 		this.setState(({
 			receiver: val
+		}));
+	}
+
+	onScanner = () => {
+		this.setState((prevState) => ({
+			scanner: !prevState.scanner
 		}));
 	}
 
@@ -45,8 +52,13 @@ class PaymentPage extends React.Component{
 						</View>
 				 </TouchableOpacity>)
 	  		}
-	  	  </View>
-	  	<View style={styles.containerBottom}></View>
+	  	</View>
+	  	<View style={styles.containerBottom}>
+	  		{this.state.scanner ? <ScannerView close={this.onScanner} navigate={(number) => this.props.navigate(number)} /> :
+	  			<TouchableOpacity onPress={() => this.onScanner()}>
+	  				<Text style={styles.scanText}>Scan QRCode</Text>
+	  			</TouchableOpacity>}
+	  	</View>
 	  </View>  
     );
   }		
@@ -63,7 +75,7 @@ const styles = StyleSheet.create({
 	},
 	containerBottom:{
 		flex: 3,
-		justifyContent: 'space-between',
+		justifyContent: 'center',
 		alignItems: 'center'
 	},
 	textInput: {
@@ -91,6 +103,10 @@ const styles = StyleSheet.create({
 	login: {
 		color: 'white',
 		fontSize: 20
+	},
+	scanText: {
+		fontSize: 16,
+		color: '#007ee5'
 	}
 });
 

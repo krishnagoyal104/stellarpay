@@ -33,7 +33,13 @@ class HomeScreen extends React.Component {
   goToPaymentScreen = () => {
     Navigation.push(this.props.componentId, {
       component: {
-        name: 'stellarPay.PaymentScreen'
+        name: 'stellarPay.PaymentScreen',
+        options: {
+          bottomTabs: {
+            visible: false,
+            drawBehind: true
+          }
+        }
       }                                                  
     });
   }  
