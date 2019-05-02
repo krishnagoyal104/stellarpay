@@ -22,8 +22,7 @@ const PassbookView = (props) => {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		backgroundColor: '#E3E9ED'
+		flex: 1
 	},
 	loadingContainer: {
 		flex: 1,
