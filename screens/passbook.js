@@ -19,7 +19,7 @@ class PassbookScreen extends React.Component {
   render() {
 
     return (
-      <PassbookView ledger={this.props.ledger} />
+      <PassbookView ledger={this.props.ledger} loading={this.props.loading} />
     );  
   }
 
@@ -27,6 +27,7 @@ class PassbookScreen extends React.Component {
 
 const mapStateToProps = (state) => {
   return{
+    loading: state.ui,
     ledger: state.ledger
   };
 };  

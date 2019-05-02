@@ -5,7 +5,7 @@ const PassbookItemView = (props) => {
   return(	
     <View style={styles.mainContainer}>
 			<View style={styles.container}>
-				<Text style={styles.text1} numberOfLines={1}>{props.recipient}</Text>
+				<Text style={styles.text1} numberOfLines={1}>{props.name}</Text>
 				<Text style={styles.text2}>{props.amount}</Text>
 			</View>
     </View>

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {uiStartLoading, uiStopLoading} from './transaction';
 
 export const setLedger = (ledger) => {
   return {
@@ -8,24 +9,18 @@ export const setLedger = (ledger) => {
 };
 
 export const getLedger = () => {
-  return (dispatch, getState) => {
+  return async(dispatch, getState) => {
     const publicKey = getState().account.publicKey;
-    	axios.get(`https://horizon-testnet.stellar.org/accounts/${publicKey}/operations`)
-      .then((res) => {
-        const transactions = [];
-        const array = res.data._embedded.records;
-        array.splice(0, 1);
-        array.map((transaction) => {
-          transactions.push({
-            timestamp: transaction.created_at,
-            to: transaction.to,
-            amount: transaction.amount
-          });
-        });
-        dispatch(setLedger(transactions));
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    dispatch(uiStartLoading());
+    try{
+      const result = await axios(`http://192.168.1.8:3000/getLedger/${publicKey}`);
+      const transactions = result.data.data;
+      dispatch(setLedger(transactions));
+      dispatch(uiStopLoading());
+    }
+    catch(e){
+      console.log(e);
+      dispatch(uiStopLoading());
+    }
   };
-};
+}  
