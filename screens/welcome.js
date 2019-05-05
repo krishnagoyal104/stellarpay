@@ -14,6 +14,32 @@ class WelcomeScreen extends React.Component {
       component: {
         name: 'stellarPay.SignupScreen',
         options: {
+          topBar: {
+            title: {
+              text: 'Create Account',
+              alignment: 'center'
+            }
+          },
+          bottomTabs: {
+            visible: false,
+            drawBehind: true
+          }
+        }
+      }                                           
+    });
+  }
+
+  goToImportAccountScreen = () => {
+    Navigation.push(this.props.componentId, {
+      component: {
+        name: 'stellarPay.ImportAccountScreen',
+        options: {
+          topBar: {
+            title: {
+              text:'Import Account',
+              alignment: 'center'
+            }
+          },
           bottomTabs: {
             visible: false,
             drawBehind: true
@@ -26,7 +52,8 @@ class WelcomeScreen extends React.Component {
   render() {
 
     return (
-      <WelcomeView navigate={this.goToSignupScreen} />
+      <WelcomeView navigateToSignupScreen={() => this.goToSignupScreen()}
+      navigateToImportScreen={() => this.goToImportAccountScreen()} />
     );  
   }
 

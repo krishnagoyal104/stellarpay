@@ -12,10 +12,10 @@ const WelcomeView = (props) => {
 			<View style={styles.bottomContainer}>
 				<Text style={styles.text}>Welcome To StellarPay</Text>
 				<View style={styles.buttonContainer}>
-					<TouchableOpacity style={styles.signup} onPress={() => props.navigate()} >
+					<TouchableOpacity style={styles.signup} onPress={() => props.navigateToSignupScreen()} >
 						<Text style={styles.signupText}>Sign Up</Text>
 					</TouchableOpacity>
-					<TouchableOpacity style={styles.import}>
+					<TouchableOpacity style={styles.import} onPress={() => props.navigateToImportScreen()}>
 						<Text style={styles.importText}>Import</Text>
 					</TouchableOpacity>
 				</View>
@@ -27,7 +27,7 @@ const WelcomeView = (props) => {
 const styles = StyleSheet.create({
 	mainContainer: {
 		flex: 1,
-		backgroundColor: '#E3E9ED'
+		backgroundColor: 'white'
 	},
 	text: {
 		fontSize: 26,
@@ -39,7 +39,8 @@ const styles = StyleSheet.create({
 		borderRadius: 12,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#007ee5'
+		backgroundColor: '#007ee5',
+		elevation: 1
 	},
 	signupText: {
 		fontSize: 20,
@@ -51,7 +52,8 @@ const styles = StyleSheet.create({
 		borderRadius: 12,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: 'white'
+		backgroundColor: 'white',
+		elevation: 1
 	},
 	importText: {
 		fontSize: 20
