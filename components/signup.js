@@ -1,9 +1,8 @@
 import React from 'react';
 import {View, Text, TextInput, Image, StyleSheet, Button, TouchableOpacity, ActivityIndicator, Dimensions} from 'react-native';
 import {signUp} from '../actions/resolve';
-import Font from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/Feather';
-//import Ant from 'react-native-vector-icons/AntDesign';
+import CountryPicker from 'react-native-country-picker-modal';
 
 class SignupView extends React.Component{
 
@@ -11,7 +10,9 @@ class SignupView extends React.Component{
 		super(props);
 		this.state = {
 			name: '',
-			number: null
+			number: null,
+			cca2: 'US',
+			callingCode: '1'
 		}
 	}
 
@@ -28,7 +29,9 @@ class SignupView extends React.Component{
 	}
 
 	onSignUp = () => {
-		this.props.onSubmit(this.state);
+		let {name, number, callingCode} = this.state;
+		number = '+' + callingCode + number; 
+		this.props.onSubmit({name, number});
 	}
 
 	render(){
@@ -41,18 +44,28 @@ class SignupView extends React.Component{
 				 	<View style={styles.container}>
 					 	<View style={styles.inputContainer}>
 					 		<Icon name={"user"} size={25} />
-					 		<TextInput style={styles.input} placeholder="Enter Name" onChangeText={this.onNameChange}/>
+					 		<TextInput style={styles.input1} placeholder="Enter Name" onChangeText={this.onNameChange}/>
 					 	</View>
 					 	<View style={styles.inputContainer}>	
-					 		<Icon name={"phone"} size={25} />
-					 		<TextInput style={styles.input} placeholder="Enter Number" onChangeText={this.onNumberChange}
+					 		<CountryPicker
+					 		showCallingCode={true}
+					 		closable={true}
+					 		filterable={true}
+			          onChange={value => {
+			            this.setState(({cca2: value.cca2, callingCode: value.callingCode}));
+			          }}
+			          cca2={this.state.cca2}
+			          translation="eng"
+        			/>
+        			<TextInput style={styles.codeInput} value={'+' + this.state.callingCode} editable={false} />
+					 		<TextInput style={styles.input2} onChangeText={this.onNumberChange}
 					 		keyboardType="numeric"/>
 					 	</View>
 				 	</View>
 			 		<TouchableOpacity style={styles.signupContainer} onPress={() => this.onSignUp()} >
 		  			<View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
 							<Text style={styles.bottomText}>Sign Up</Text>
-							{this.props.loading ? <ActivityIndicator size="small" color="white" /> : <Font name={'send'} size={20} color={'white'} style={{paddingTop: 4, paddingLeft: 6}} />}
+							{this.props.loading && <ActivityIndicator size="small" color="white" />}
 						</View>
 					 </TouchableOpacity>
 			 	</View>
@@ -67,8 +80,7 @@ class SignupView extends React.Component{
 
 const styles = StyleSheet.create({
 	mainContainer: {
-		flex: 1,
-		backgroundColor: '#E3E9ED'
+		flex: 1
 	},
 	iconContainer: {
 		height: Dimensions.get('window').height * 10/100,
@@ -83,7 +95,7 @@ const styles = StyleSheet.create({
 	},
 	box: {
 		height: '60%',
-		width: '80%',
+		width: '90%',
 		marginTop: Dimensions.get('window').height * 10/100,
 		justifyContent: 'space-around',
 		alignSelf: 'center',
@@ -104,21 +116,32 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	inputContainer: {
-		width: '80%',
+		width: '95%',
 		borderWidth: 1,
 		borderColor: '#E3E9ED',
 		flexDirection: 'row',
 		justifyContent: 'flex-start',
 		alignItems: 'center',
 		paddingLeft: 10,
-		borderRadius: 12,
-		backgroundColor: 'white',
+		borderRadius: 12
 	},
-	input: {
+	codeInput: {
 		height: 50,
+		width: '18%',
+		fontSize: 20
+	},
+	input1: {
+		height: 50,
+		width: '80%',
 		fontSize: 20,
 		borderColor: 'white',
-		paddingLeft: 10
+		paddingLeft: 10,
+	},
+	input2: {
+		height: 50,
+		width: '80%',
+		fontSize: 20,
+		borderColor: 'white',
 	},
 	signupContainer: {
 		height: '15%',

@@ -7,7 +7,7 @@ export const requestOtp = (data, _function) => {
     dispatch(uiStartLoading());
     try{
       const {number} = data;
-      const result = await firebase.auth().signInWithPhoneNumber('+91 9971505705'); //number
+      const result = await firebase.auth().signInWithPhoneNumber(number);
       console.log(result);
       dispatch(uiStopLoading());
       _function(data, result);
