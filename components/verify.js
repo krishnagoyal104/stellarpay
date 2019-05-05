@@ -27,17 +27,23 @@ class VerificationView extends React.Component{
 		return(	
 		 	<View style={styles.mainContainer}>
 		 		<View style={styles.topContainer}>
-		 			<Text style={styles.text}>Enter the verification code</Text>
 		 		</View>
+		 		<View style={styles.bottomContainer}>
+		 			<Text style={styles.text}>Enter the verification code</Text>
 		 			<OtpInputs handleChange={(code) => this.onEnter(code)} numberOfInputs={6}	
 		 			focusedBorderColor="green" unfocusedBorderColor="#007ee5"
 		 			containerStyles={styles.otpContainer}
-		 			inputContainerStyles={styles.otpInputContainer}
+		 			inputsContainerStyles={styles.otpInputContainer}
 		 			inputStyles={styles.otpInputs} />
-		 		<View style={styles.bottomContainer}>
-			 		<TouchableOpacity style={styles.loginContainer} onPress={() => this.onSubmit()} >
+		 			<View style={styles.resendContainer}>
+		 				<Text>Didn't receive the code?</Text>
+		 				<TouchableOpacity>
+		 					<Text style={styles.resend}>Resend</Text>
+		 				</TouchableOpacity>
+		 			</View>	
+			 		<TouchableOpacity style={styles.button} onPress={() => this.onSubmit()} >
 			  			<View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
-								<Text style={styles.bottomText}>Verify</Text>
+								<Text style={styles.buttonText}>Verify</Text>
 								{this.props.loading ? <ActivityIndicator size="small" color="#007ee5" /> : <Font name={'send'} size={20} color={'white'} style={{paddingTop: 4, paddingLeft: 6}} />}
 							</View>
 					 </TouchableOpacity>
@@ -58,25 +64,33 @@ const styles = StyleSheet.create({
 		alignItems: 'center'
 	},
 	text: {
-		fontSize: 24
+		fontSize: 24,
+		color: 'black'
 	},
 	otpContainer: {
-		flex: 2,
-		justifyContent: 'center',
-		alignSelf: 'center'
+		height: '20%',
+		justifyContent: 'center'
 	},
 	otpInputContainer: {
-		backgroundColor: 'white'
+		width: '90%'
 	},
 	otpInputs: {
-		color: '#007ee5'
+		color: '#E32C1F'
 	},
 	bottomContainer: {
 		flex: 2,
-		justifyContent: 'center',
+		justifyContent: 'space-around',
 		alignItems: 'center'
 	},
-	loginContainer: {
+	resendContainer: {
+		width: '60%',
+		flexDirection: 'row',
+		justifyContent: 'space-around'
+	},
+	resend: {
+		color: '#E32C1F'
+	},
+	button: {
 		width: '40%',
 		height: 50,
 		borderRadius: 25,
@@ -84,7 +98,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
-	bottomText: {
+	buttonText: {
 		color: 'white',
 		fontSize: 20
 	}
