@@ -16,6 +16,7 @@ import InitializeScreen from './screens/initialize';
 import VerificationScreen from './screens/verify';
 import WelcomeScreen from './screens/welcome';
 import ImportAccountScreen from './screens/importAccount';
+import SettingsScreen from './screens/settings';
 import configureStore from './store/configureStore';
 
 import Icon from 'react-native-vector-icons/Entypo'; 
@@ -37,6 +38,7 @@ Navigation.registerComponent('stellarPay.SliderScreen', () => SliderScreen);
 Navigation.registerComponent('stellarPay.InitializeScreen', () => InitializeScreen);
 Navigation.registerComponent('stellarPay.WelcomeScreen', () => WelcomeScreen);
 Navigation.registerComponent('stellarPay.ImportAccountScreen', () => ImportAccountScreen);
+Navigation.registerComponentWithRedux('stellarPay.SettingsScreen', () => SettingsScreen, Provider, store);
 
 Navigation.events().registerAppLaunchedListener(() => {
   Navigation.setRoot({
@@ -93,6 +95,7 @@ export const goToHome = () => {
                       {
                         component: {
                           name: 'stellarPay.HomeScreen',
+                          id: 'Home',
                           options: {
                             topBar: {
                               background: {
@@ -177,6 +180,13 @@ export const goToHome = () => {
                   }
                 }
               ],
+            }
+          },
+          options: {
+            sideMenu: {
+              left: {
+                width: 200
+              }
             }
           }
         }

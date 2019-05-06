@@ -1,32 +1,51 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import Font from 'react-native-vector-icons/FontAwesome';
+import Ionicon from 'react-native-vector-icons/Ionicons';
+import Entypo from 'react-native-vector-icons/Entypo';
+import Icon from 'react-native-vector-icons/Feather';
 
 const SideDrawerView = (props) => {
 	return(
 		<View style={styles.mainContainer}>
 	  		<View style={styles.container1}>
-	  			<Text>name</Text>
-	  			<Text>number</Text>
+	  			<Icon name={"user"} size={55} />
+	  			<Text style={styles.name}>name</Text>
+	  			<Text style={styles.number}>9898556412</Text>
 	  		</View>
 	  		<View style={styles.container2}>
-		  		<View style={styles.itemContainer}>
-		  			<Text style={styles.text}>Assets</Text>
-		  		</View>
-		  		<View style={styles.itemContainer}>
-		  			<Text style={styles.text}>Trade</Text>
-		  		</View>
-		  		<View style={styles.itemContainer}>	
-		  			<Text style={styles.text}>Anchor</Text>
-		  		</View>
-		  		<View style={styles.itemContainer}>	
-		  			<Text style={styles.text}>Settings</Text>
-		  		</View>
-		  		<View style={styles.itemContainer}>	
-		  			<Text style={styles.text}>Security</Text>
-		  		</View>
-		  		<View style={styles.itemContainer}>	
-		  			<Text style={styles.text}>About</Text>
-		  		</View>	
+		  		<TouchableOpacity style={styles.itemContainer}>
+		  			<Font name={"dollar"} size={20} color={"black"} />
+		  			<View style={styles.partition}>
+			  			<Text style={styles.text}>Assets</Text>
+		  			</View>
+		  		</TouchableOpacity>
+		  		<TouchableOpacity style={styles.itemContainer}>
+		  			<Font name={"exchange"} size={20} color={"black"} />
+			  		<View style={styles.partition}>
+			  			<Text style={styles.text}>Trade</Text>
+			  		</View>
+			  	</TouchableOpacity>
+			  	<TouchableOpacity style={styles.itemContainer}>	
+			  		<Font name={"anchor"} size={20} color={"black"} />	
+			  		<View style={styles.partition}>
+			  			<Text style={styles.text}>Anchor</Text>
+			  		</View>
+			  	</TouchableOpacity>	
+	  		</View>
+	  		<View style={styles.container3}>
+	  			<TouchableOpacity style={styles.itemContainer} onPress={() => props.navigate()}>
+		  			<Ionicon name={"ios-settings"} size={20} color={"black"} />
+			  		<View style={styles.partition}>
+			  			<Text style={styles.text}>Settings</Text>
+			  		</View>
+			  	</TouchableOpacity>
+			  	<TouchableOpacity style={styles.itemContainer}>
+			  		<Entypo name={"info"} size={20} color={"black"} />
+			  		<View style={styles.partition}>
+			  			<Text style={styles.text}>About</Text>
+			  		</View>
+			  	</TouchableOpacity>
 	  		</View>
 		</View>
 	);
@@ -39,21 +58,44 @@ const styles = StyleSheet.create({
 	},
 	container1: {
 		flex: 1,
-		backgroundColor: '#007ee5'
+		justifyContent: 'center',
+		alignItems: 'center',
+		borderBottomWidth: 2,
+		borderBottomColor: '#E3E9ED'
+	},
+	name: {
+		fontSize: 18,
+		color: 'black',
+		fontWeight: 'bold'
+	},
+	number: {
+		fontSize: 16,
+		color: 'black'
 	},
 	container2: {
-		flex: 3,
+		flex: 2,
+		justifyContent: 'space-evenly',
+		borderBottomWidth: 2,
+		borderBottomColor: '#E3E9ED'
+	},
+	container3: {
+		flex: 1,
 		justifyContent: 'space-evenly'
 	},
 	text: {
-		fontSize: 21
+		fontSize: 21,
+		color: 'black',
 	},
 	itemContainer: {
-		height: '15%',
+		height: 50,
 		width: '100%',
-		borderBottomWidth: 0.2,
-		alignItems: 'center',
-		justifyContent: 'center'
+		flexDirection: 'row',
+		justifyContent: 'space-around'
+	},
+	partition: {
+		width: '70%',
+		flexDirection: 'row',
+		justifyContent: 'flex-start',
 	}
 });
 
