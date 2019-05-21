@@ -48,9 +48,10 @@ class ConfirmPaymentScreen extends React.Component {
 
     return (
       <ConfirmPaymentView {...this.props.recipient} loading={this.props.loading}
-      pay={(_amount) => this.props.dispatch(
+      assets={this.props.assets}
+      pay={(_amount, _code, _issuer) => this.props.dispatch(
           createTransaction(this.props.recipient.publicKey, _amount,
-          () => this.goToReceiptScreen(this.props.recipient.name, _amount))
+          () => this.goToReceiptScreen(this.props.recipient.name, _amount), _code, _issuer)
         )}
       />
     );  
@@ -61,7 +62,8 @@ class ConfirmPaymentScreen extends React.Component {
 const mapStateToProps = (state) => {
   return{
     recipient: state.recipient,
-    loading: state.ui
+    loading: state.ui,
+    assets: state.balances
   };
 };
   

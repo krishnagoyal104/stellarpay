@@ -2,7 +2,7 @@ import stellarSdk from 'stellar-sdk';
 const server = new stellarSdk.Server('https://horizon-testnet.stellar.org');
 stellarSdk.Network.useTestNetwork();
 
-export const transact = (_publicKey, _secretKey, _receiverPublicKey, _amount) => {
+export const transact = (_publicKey, _secretKey, _receiverPublicKey, _amount, _code, _issuer) => {
     const promise = new Promise(async(resolve, reject) => {
     	try {
 			const sourceKeypair = stellarSdk.Keypair.fromSecret(_secretKey);
@@ -12,7 +12,7 @@ export const transact = (_publicKey, _secretKey, _receiverPublicKey, _amount) =>
 	    const transaction = new stellarSdk.TransactionBuilder(account, {fee})
 	    .addOperation(stellarSdk.Operation.payment({
 		    destination: _receiverPublicKey,
-		    asset: stellarSdk.Asset.native(),
+		    asset: _code ? new stellarSdk.Asset(_code, _issuer) : stellarSdk.Asset.native(),
 		    amount: _amount
 	  	}))
 	  	.setTimeout(30)
@@ -26,7 +26,6 @@ export const transact = (_publicKey, _secretKey, _receiverPublicKey, _amount) =>
 		  resolve(true);
 	  } catch(error) {
 	  	console.log('An error has occured:');
-	  	//throw new Error(error);
 	  	reject(error);
 		}
 	});

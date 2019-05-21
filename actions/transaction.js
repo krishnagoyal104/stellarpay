@@ -13,12 +13,12 @@ export const uiStopLoading = () => {
   };
 };
 
-export const createTransaction = (_receiverPublicKey, _amount, _function) => {
+export const createTransaction = (_receiverPublicKey, _amount, _function, _code, _issuer) => {
   return (dispatch, getState) => {
     dispatch(uiStartLoading());
   	const publicKey = getState().account.publicKey;
   	const secretKey = getState().account.secretKey;
-    const promise = transact(publicKey, secretKey, _receiverPublicKey, _amount);
+    const promise = transact(publicKey, secretKey, _receiverPublicKey, _amount, _code, _issuer);
     promise.then((res) => {
       dispatch(uiStopLoading());
       _function();
