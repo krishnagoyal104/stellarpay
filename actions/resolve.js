@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {uiStartLoading, uiStopLoading} from './transaction';
+import {setError} from './error';
 
 export const setReceiver = (receiver) => {
   return {
@@ -19,6 +20,7 @@ export const resolveReceiver = (number, _function) => {
      } catch(e){
      	console.log('Error while resolving...', e);
      	dispatch(uiStopLoading());
+      dispatch(setError('payment', `Could not find wallet linked to ${number}`));
      }    	
   };
 };

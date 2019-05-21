@@ -53,6 +53,7 @@ class PaymentPage extends React.Component{
 						</View>
 				 </TouchableOpacity>)
 	  		}
+	  		{this.props.error.type === 'payment' && <Text style={styles.error}>{this.props.error.text}</Text>}
 	  	</View>
 	  	<View style={styles.containerBottom}>
 	  		{this.state.scanner ? <ScannerView close={this.onScanner} navigate={(number) => this.props.navigate(number)} /> :
@@ -108,6 +109,9 @@ const styles = StyleSheet.create({
 	scanText: {
 		fontSize: 16,
 		color: '#007ee5'
+	},
+	error: {
+		color: '#EC2C1F'
 	}
 });
 
