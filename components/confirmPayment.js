@@ -30,9 +30,9 @@ class ConfirmPaymentView extends React.Component{
 
   render(){
   	const renderItems = () => {
-  		return this.props.assets.map((asset) => {
+  		return this.props.assets.map((asset, index) => {
 				const item = asset.asset_type === 'native' ? 'Lumens' : asset.asset_code;
-				return <Picker.Item label={item} value={item} />
+				return <Picker.Item label={item} key={index} value={item} />
 			});
 		}	
 		return(

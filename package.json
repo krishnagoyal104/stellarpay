@@ -13,6 +13,7 @@
     "@types/stellar-sdk": "^0.11.1",
     "axios": "^0.18.0",
     "lottie-react-native": "2.5.11",
+    "moment": "^2.24.0",
     "node-libs-react-native": "^1.0.3",
     "react": "16.6.3",
     "react-native": "0.58.6",

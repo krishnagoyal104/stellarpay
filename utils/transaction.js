@@ -21,9 +21,7 @@ export const transact = (_publicKey, _secretKey, _receiverPublicKey, _amount, _c
 	    transaction.sign(sourceKeypair);	
 		  const transactionResult = await server.submitTransaction(transaction);
 		  console.log(JSON.stringify(transactionResult, null, 2));
-		  console.log('\nSuccess! View the transaction at: ');
-		  console.log(transactionResult._links.transaction.href);
-		  resolve(true);
+		  resolve(transactionResult.hash);
 	  } catch(error) {
 	  	console.log('An error has occured:');
 	  	reject(error);

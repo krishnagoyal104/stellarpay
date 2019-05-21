@@ -26,13 +26,15 @@ class ConfirmPaymentScreen extends React.Component {
     super(props);
   }
 
-  goToReceiptScreen = (receiver, amount) => {
+  goToReceiptScreen = (recipient, amount, code, id) => {
     Navigation.push(this.props.componentId, {
       component: {
         name: 'stellarPay.ReceiptScreen',
         passProps: {
-          name: receiver,
-          amount: amount
+          recipient,
+          amount,
+          code,
+          id
         },
         options: {
           bottomTabs: {
@@ -51,7 +53,7 @@ class ConfirmPaymentScreen extends React.Component {
       assets={this.props.assets}
       pay={(_amount, _code, _issuer) => this.props.dispatch(
           createTransaction(this.props.recipient.publicKey, _amount,
-          () => this.goToReceiptScreen(this.props.recipient.name, _amount), _code, _issuer)
+          (_id) => this.goToReceiptScreen(this.props.recipient, _amount, _code, _id), _code, _issuer)
         )}
       />
     );  

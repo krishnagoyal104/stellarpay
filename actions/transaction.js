@@ -19,9 +19,9 @@ export const createTransaction = (_receiverPublicKey, _amount, _function, _code,
   	const publicKey = getState().account.publicKey;
   	const secretKey = getState().account.secretKey;
     const promise = transact(publicKey, secretKey, _receiverPublicKey, _amount, _code, _issuer);
-    promise.then((res) => {
+    promise.then((hash) => {
       dispatch(uiStopLoading());
-      _function();
+      _function(hash);
     })
     .catch((e) => {
       console.log(e)
