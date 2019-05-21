@@ -4,6 +4,7 @@ import Font from 'react-native-vector-icons/FontAwesome';
 import Ionicon from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Icon from 'react-native-vector-icons/Feather';
+import Font5 from 'react-native-vector-icons/FontAwesome5';
 
 const SideDrawerView = (props) => {
 	return(
@@ -35,9 +36,9 @@ const SideDrawerView = (props) => {
 	  		</View>
 	  		<View style={styles.container3}>
 	  			<TouchableOpacity style={styles.itemContainer} onPress={() => props.navigate()}>
-		  			<Ionicon name={"ios-settings"} size={20} color={"black"} />
+		  			<Font5 name={"user-alt"} size={20} color={"black"} />
 			  		<View style={styles.partition}>
-			  			<Text style={styles.text}>Settings</Text>
+			  			<Text style={styles.text}>Profile</Text>
 			  		</View>
 			  	</TouchableOpacity>
 			  	<TouchableOpacity style={styles.itemContainer}>
@@ -47,6 +48,7 @@ const SideDrawerView = (props) => {
 			  		</View>
 			  	</TouchableOpacity>
 	  		</View>
+	  		<View style={styles.container4}></View>
 		</View>
 	);
 }
@@ -57,7 +59,7 @@ const styles = StyleSheet.create({
 		backgroundColor: 'white'
 	},
 	container1: {
-		flex: 1,
+		flex: 2,
 		justifyContent: 'center',
 		alignItems: 'center',
 		borderBottomWidth: 2,
@@ -73,29 +75,31 @@ const styles = StyleSheet.create({
 		color: 'black'
 	},
 	container2: {
-		flex: 2,
+		flex: 3,
 		justifyContent: 'space-evenly',
 		borderBottomWidth: 2,
 		borderBottomColor: '#E3E9ED'
 	},
 	container3: {
-		flex: 1,
+		flex: 2,
 		justifyContent: 'space-evenly'
 	},
 	text: {
-		fontSize: 21,
+		fontSize: 20,
 		color: 'black',
 	},
 	itemContainer: {
-		height: 50,
-		width: '100%',
 		flexDirection: 'row',
-		justifyContent: 'space-around'
+		justifyContent: 'space-around',
+		alignItems: 'center'
 	},
 	partition: {
 		width: '70%',
 		flexDirection: 'row',
 		justifyContent: 'flex-start',
+	},
+	container4: {
+		flex: 1
 	}
 });
 

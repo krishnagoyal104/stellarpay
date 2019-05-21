@@ -9,14 +9,14 @@ class SideDrawerScreen extends React.Component {
     super(props);
   }
 
-  goToSettingsScreen = () => {
+  goToProfileScreen = () => {
     Navigation.push('Home', {
       component: {
-        name: 'stellarPay.SettingsScreen',
+        name: 'stellarPay.ProfileScreen',
         options: {
           topBar: {
           	title: {
-          		text: 'Settings',
+          		text: 'Profile',
           		alignment: 'center'
           	}
           },
@@ -37,7 +37,7 @@ class SideDrawerScreen extends React.Component {
   render() {
 
     return (
-      <SideDrawerView navigate={this.goToSettingsScreen} />
+      <SideDrawerView navigate={this.goToProfileScreen} />
     );  
   }
 

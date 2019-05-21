@@ -1,9 +1,9 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
-import SettingsView from '../components/settings';
+import ProfileView from '../components/profile';
 
-class SettingsScreen extends React.Component {
+class ProfileScreen extends React.Component {
 
   constructor(props){
     super(props);
@@ -12,7 +12,7 @@ class SettingsScreen extends React.Component {
   render() {
 
     return (
-      <SettingsView publicKey={this.props.publicKey} privateKey={this.props.privateKey} />
+      <ProfileView {...this.props.account} />
     );  
   }
 
@@ -24,5 +24,5 @@ const mapStateToProps = (state) => {
 	}
 };  
 
-export default connect(mapStateToProps)(SettingsScreen);
+export default connect(mapStateToProps)(ProfileScreen);
 
