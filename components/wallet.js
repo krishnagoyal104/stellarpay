@@ -5,8 +5,11 @@ import WalletItem from './walletItem';
 const WalletView = (props) => {
   return(	
     <FlatList
+    onRefresh={() => props.refresh()}
+    refreshing={props.loading}
   	data={props.balances}
-  	renderItem={({item}) => <WalletItem balance={item.balance} asset_type={item.key} />}
+  	keyExtractor={(item, index) => index.toString()}
+  	renderItem={({item}) => <WalletItem {...item} />}
 	/>
   );		
 }

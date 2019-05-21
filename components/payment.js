@@ -37,6 +37,7 @@ class PaymentPage extends React.Component{
 			  <View style={styles.inputIcons}>
 			  <Icon name={'contacts'} size={26} color={'#007ee5'} style={{paddingTop: 14}} /> 
 		  		<TextInput style={styles.textInput} placeholder={'Enter mobile number'} selectionColor={'#007ee5'}
+		  		keyboardType={"numeric"}
 		  		onChangeText={val => this.onContactChange(val)}	
 		  		autoFocus={true} 
 					underlineColorAndroid={this.state.color}  

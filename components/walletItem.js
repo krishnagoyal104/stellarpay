@@ -7,11 +7,8 @@ const WalletItemView = (props) => {
 			<View style={styles.imageContainer}>
 				<Image source={require('../static/stellar.png')} style={{height: 50, width: 50}} />
 			</View>
-			<View style={styles}>
-				<Text style={styles.text}>Lumens</Text>
+				<Text style={styles.text}>{props.asset_type === 'native' ? 'Lumens' : props.asset_code}</Text>
 				<Text style={styles.text}>{props.balance.slice(0, -8)}</Text>
-			</View>
-			<Text style={styles.text}>${props.balance.slice(0, -8)}</Text>
     </View>
   );		
 }
@@ -23,19 +20,18 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		height: Dimensions.get('window').height/8,
-		backgroundColor: '#007ee5',
 		borderRadius: 12,
 		padding: 5,
-		margin: 8
+		margin: 8,
+		elevation: 2
 	},
 	imageContainer: {
 		borderRadius: 25,
 		backgroundColor: 'white'
 	},
 	text: {
-		color: 'white',
+		color: 'black',
 		fontSize: 20,
-		fontFamily: 'sans-serif-condensed'
 	}
 });
 

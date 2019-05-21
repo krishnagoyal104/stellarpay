@@ -42,7 +42,8 @@ const styles = StyleSheet.create({
 	keyContainer: {
 		width: '95%',
 		padding: 5,
-		backgroundColor: '#E3E9ED'
+		elevation: 2,
+		backgroundColor: 'white'
 	},
 	header: {
 		flexDirection: 'row',

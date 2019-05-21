@@ -17,7 +17,7 @@ const PassbookItemView = (props) => {
 				</View>	
 				<View style={styles.rightContainer}>
 					<Text
-					style={{color: props.type === 'payment' ? 'green' : 'red', fontSize: 20, fontFamily: 'Roboto', fontWeight: 'bold'}}>
+					style={{color: props.type === 'payment' ? 'red' : 'green', fontSize: 20, fontFamily: 'Roboto', fontWeight: 'bold'}}>
 						{props.amount.slice(0, -5)}</Text>
 					<Text>{props.timestamp}</Text>
 				</View>
