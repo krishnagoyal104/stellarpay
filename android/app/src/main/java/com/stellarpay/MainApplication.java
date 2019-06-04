@@ -6,7 +6,6 @@ import com.facebook.react.ReactApplication;
 import com.rnfingerprint.FingerprintAuthPackage;
 import org.reactnative.camera.RNCameraPackage;
 import com.airbnb.android.react.lottie.LottiePackage;
-import io.invertase.firebase.RNFirebasePackage;
 import com.oblador.keychain.KeychainPackage;
 import com.bitgo.randombytes.RandomBytesPackage;
 import com.facebook.react.ReactNativeHost;
@@ -24,7 +23,10 @@ import com.oblador.vectoricons.VectorIconsPackage;
 import java.util.Arrays;
 import java.util.List;
 
+import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.auth.RNFirebaseAuthPackage;
+import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
+import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 
 public class MainApplication extends NavigationApplication {
     
@@ -53,6 +55,8 @@ public class MainApplication extends NavigationApplication {
             new KeychainPackage(),
             new RNFirebasePackage(),
             new RNFirebaseAuthPackage(),
+            new RNFirebaseMessagingPackage(),
+            new RNFirebaseNotificationsPackage(),
             new LottiePackage(),
             new RNCameraPackage(),
             new FingerprintAuthPackage()

@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import {Navigation} from 'react-native-navigation';   
 import HomePage from '../components/home';
 import {fetchKeypair} from '../actions/account';
 import {getBalance, getStreamForAccount} from '../actions/balance';
-import firebase from 'react-native-firebase';
+import {createNotificationListeners} from '../utils/fcm';
 
 class HomeScreen extends React.Component {
 
@@ -13,11 +13,12 @@ class HomeScreen extends React.Component {
     super(props);
   }
 
-  async componentWillMount(){
+  async componentDidMount(){
     await this.props.dispatch(fetchKeypair());
-    await this.props.dispatch(getBalance());
+    this.props.dispatch(getBalance());
     this.props.dispatch(getStreamForAccount());
-  }
+    createNotificationListeners();
+  }  
 
   goToReceiveScreen = () => {
     Navigation.push(this.props.componentId, {
@@ -56,7 +57,6 @@ class HomeScreen extends React.Component {
   
 const mapStateToProps = (state) => {
 	return{
-		balances: state.balances,
     account: state.account.publicKey
 	}
 };  
