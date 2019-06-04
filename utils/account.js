@@ -6,37 +6,51 @@ import * as Keychain from 'react-native-keychain';
 
 const server = new stellarSdk.Server('https://horizon-testnet.stellar.org');
 
-export const createAccount = async (_dispatch, _function) => {
-  const keypair = await Keypair.randomAsync();
-  const publicKey = keypair.publicKey();
-  const secretKey = keypair.secret();
-  _dispatch(_function(publicKey, secretKey));
-  Keychain.setGenericPassword(publicKey, secretKey);
-  AsyncStorage.setItem('token', 'SignIn');
-  try{
-    const url = `https://horizon-testnet.stellar.org/friendbot?addr=${publicKey}`;
-    await axios(url);
-    console.log('Successfully funded account!!');
-  }
-  catch(error){
-      console.log(error);
-  }
-}    
+export const createAccount = () => {
+  const promise = new Promise(async(resolve, reject) => {
+    try{
+      const keypair = await Keypair.randomAsync();
+      const publicKey = keypair.publicKey();
+      const secretKey = keypair.secret();
+      Keychain.setGenericPassword(publicKey, secretKey);
+      resolve({publicKey, secretKey});
+    }
+    catch(e){
+      reject(e);
+    }
+  });
+  return promise;
+}
 
-export const fetchAccount = async (_dispatch, _function) => {
+export const fundAccount = (publicKey) => {
+  const promise = new Promise(async(resolve, reject) => {
+    try{
+      const url = `https://horizon-testnet.stellar.org/friendbot?addr=${publicKey}`;
+      await axios(url);
+      resolve();
+    }
+    catch(e){
+      reject(e);
+    }
+  });
+  return promise;
+}
+
+export const fetchAccount = () => {
+  const promise = new Promise(async(resolve, reject) => {
     try {
-        const credentials = await Keychain.getGenericPassword();
-        if (credentials) {
-          console.log('Credentials successfully loaded for user ' + credentials.username);
-          _dispatch(_function(credentials.username, credentials.password));
-        }else {
-          console.log('No credentials stored')
-          createAccount(_dispatch, _function);
-        }
+      const credentials = await Keychain.getGenericPassword();
+      if (credentials) {
+        resolve(credentials);
+      }else {
+        resolve();
+      }
     } 
-    catch (error) {
-        console.log('Keychain couldn\'t be accessed!', error);
-  }
+    catch (e) {
+      reject(e);
+    }
+  });
+  return promise;
 }       
  
 export const loadAccount = async(_publicKey) => {
@@ -52,7 +66,6 @@ export const getStream = (publicKey, _dispatch, _function) => {
   .stream({
       onmessage: res => {
         _dispatch(_function());
-        console.log('Working');
       }
   });
 }
