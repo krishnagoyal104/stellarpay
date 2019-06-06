@@ -1,7 +1,7 @@
-export const setError = (type, text) => {
+export const setError = (title, description) => {
   return {
     type: 'SET_ERROR',
-    error: {type, text}
+    error: {isVisible: true, title, description}
   };
 };
 
