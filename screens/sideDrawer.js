@@ -1,5 +1,6 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native'; 
+import {View, StyleSheet} from 'react-native';
+import {connect} from 'react-redux';
 import {Navigation} from 'react-native-navigation';  
 import SideDrawerView from '../components/sideDrawer';
 
@@ -25,9 +26,10 @@ class SideDrawerScreen extends React.Component {
             drawBehind: true
           },
           sideMenu: {
-          	left: {
-          		visible: false
-          	}
+            left: {
+              visible: false,
+              enabled: false
+            }
           }
         }
       }                                                  
@@ -37,11 +39,17 @@ class SideDrawerScreen extends React.Component {
   render() {
 
     return (
-      <SideDrawerView navigate={this.goToProfileScreen} />
+      <SideDrawerView navigate={this.goToProfileScreen} {...this.props.user} />
     );  
   }
 
-}  
+}
+
+const mapStateToProps = (state) => {
+  return{
+    user: state.user
+  }
+};
   
-export default SideDrawerScreen;
+export default connect(mapStateToProps)(SideDrawerScreen);
 

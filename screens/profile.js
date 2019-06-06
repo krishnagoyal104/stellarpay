@@ -12,7 +12,7 @@ class ProfileScreen extends React.Component {
   render() {
 
     return (
-      <ProfileView {...this.props.account} />
+      <ProfileView {...this.props.account} {...this.props.user} />
     );  
   }
 
@@ -20,7 +20,8 @@ class ProfileScreen extends React.Component {
   
 const mapStateToProps = (state) => {
 	return{
-    account: state.account
+    account: state.account,
+    user: state.user
 	}
 };  
 

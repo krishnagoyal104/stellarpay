@@ -11,8 +11,8 @@ const SideDrawerView = (props) => {
 		<View style={styles.mainContainer}>
 	  		<View style={styles.container1}>
 	  			<Icon name={"user"} size={55} />
-	  			<Text style={styles.name}>name</Text>
-	  			<Text style={styles.number}>9898556412</Text>
+	  			<Text style={styles.name}>{props.name}</Text>
+	  			<Text style={styles.number}>{props.number}</Text>
 	  		</View>
 	  		<View style={styles.container2}>
 		  		<TouchableOpacity style={styles.itemContainer}>

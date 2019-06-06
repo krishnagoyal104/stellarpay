@@ -34,8 +34,8 @@ class ProfileView extends React.Component{
 		 			<View style={styles.profile}>
 		  			<Icon name={"user"} size={80} color={"white"} />
 	  			</View>
-	  			<Text style={styles.name}>name</Text>
-		  		<Text style={styles.number}>9898556412</Text>
+	  			<Text style={styles.name}>{this.props.name}</Text>
+		  		<Text style={styles.number}>{this.props.number}</Text>
 	  		</View>
 	  		<View style={styles.bottomContainer}>
 		  		<View style={styles.keyContainer}>

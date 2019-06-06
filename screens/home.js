@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {Navigation} from 'react-native-navigation';   
 import HomePage from '../components/home';
 import {fetchKeypair} from '../actions/account';
+import {getUser} from '../actions/user';
 import {getBalance, getStreamForAccount} from '../actions/balance';
 import {createNotificationListeners} from '../utils/fcm';
 
@@ -15,6 +16,7 @@ class HomeScreen extends React.Component {
 
   async componentDidMount(){
     await this.props.dispatch(fetchKeypair());
+    this.props.dispatch(getUser());
     this.props.dispatch(getBalance());
     this.props.dispatch(getStreamForAccount());
     createNotificationListeners();
