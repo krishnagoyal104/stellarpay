@@ -1,5 +1,7 @@
 import axios from 'axios';
 import {uiStartLoading, uiStopLoading} from './transaction';
+import {setError} from './error';
+import {config} from '../config/config';
 
 export const setLedger = (ledger) => {
   return {
@@ -11,16 +13,18 @@ export const setLedger = (ledger) => {
 export const getLedger = () => {
   return async(dispatch, getState) => {
     const publicKey = getState().account.publicKey;
-    dispatch(uiStartLoading());
+    dispatch(uiStartLoading('ledger'));
     try{
-      const result = await axios(`http://192.168.1.8:3000/getLedger/${publicKey}`);
+      const result = await axios(`${config.baseUrl}/getLedger/${publicKey}`);
       const transactions = result.data.data;
       dispatch(setLedger(transactions));
-      dispatch(uiStopLoading());
+      dispatch(uiStopLoading('ledger'));
     }
     catch(e){
-      console.log(e);
-      dispatch(uiStopLoading());
+      if(!e.response){
+        dispatch(setError('Network Error', 'Please check your internet connection.'))
+      }
+      dispatch(uiStopLoading('ledger'));
     }
   };
 }  

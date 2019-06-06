@@ -31,7 +31,7 @@ class PassbookScreen extends React.Component {
 
 const mapStateToProps = (state) => {
   return{
-    loading: state.ui,
+    loading: state.ui.ledger,
     ledger: state.ledger
   };
 };  

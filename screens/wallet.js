@@ -27,7 +27,7 @@ class WalletScreen extends React.Component {
 const mapStateToProps = (state) => {
   return{
     balances: state.balances,
-    loading: state.ui
+    loading: state.ui.balance
   };
 };  
   

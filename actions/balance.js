@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {getStream} from '../utils/account';
 import {uiStartLoading, uiStopLoading} from './transaction';
+import {setError} from './error';
 
 export const setBalance = (balances) => {
   return {
@@ -10,26 +11,28 @@ export const setBalance = (balances) => {
 }; 
 
 export const getBalance = () => {
-  return (dispatch, getState) => {
+  return async(dispatch, getState) => {
     const publicKey = getState().account.publicKey;
-    dispatch(uiStartLoading());
-    return axios(`https://horizon-testnet.stellar.org/accounts/${publicKey}`)
-    .then((res) => {
-    	const balances = res.data.balances;
-    	dispatch(setBalance(balances));
-      dispatch(uiStopLoading());
-    })
-    .catch((e) => {
-    	console.log(e);
-      dispatch(uiStopLoading());
-    });
+    dispatch(uiStartLoading('balance'));
+    try{
+      const result = await axios(`https://horizon-testnet.stellar.org/accounts/${publicKey}`)
+      const balances = result.data.balances;
+      dispatch(setBalance(balances));
+      dispatch(uiStopLoading('balance'));
+    }
+    catch(e){
+      console.log(e);
+      if(!e.response){
+        dispatch(setError('Network Error', 'Please check your internet connection.'))
+      }
+      dispatch(uiStopLoading('balance'));
+    }
   };
 };
 
 export const getStreamForAccount = () => {
   return(dispatch, getState) => {
     const publicKey = getState().account.publicKey;
-    console.log('streaming...................', publicKey);
     getStream(publicKey, dispatch, getBalance);
   }
 }
