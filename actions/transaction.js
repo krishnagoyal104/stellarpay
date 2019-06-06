@@ -1,23 +1,25 @@
 import axios from 'axios';
 import {transact} from '../utils/transaction';
 
-export const uiStartLoading = () => {
+export const uiStartLoading = (context) => {
   return {
     type: 'UI_START_LOADING',
+    context
   };
 };
 
-export const uiStopLoading = () => {
+export const uiStopLoading = (context) => {
   return {
     type: 'UI_STOP_LOADING',
+    context
   };
 };
 
 export const createTransaction = (_receiverPublicKey, _amount, _function, _code, _issuer) => {
   return (dispatch, getState) => {
     dispatch(uiStartLoading());
-  	const publicKey = getState().account.publicKey;
-  	const secretKey = getState().account.secretKey;
+    const publicKey = getState().account.publicKey;
+    const secretKey = getState().account.secretKey;
     const promise = transact(publicKey, secretKey, _receiverPublicKey, _amount, _code, _issuer);
     promise.then((hash) => {
       dispatch(uiStopLoading());
@@ -28,4 +30,4 @@ export const createTransaction = (_receiverPublicKey, _amount, _function, _code,
       dispatch(uiStopLoading());
     });
   };
-};
+};    
