@@ -5,6 +5,7 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 const ScannerView = (props) => {
   return(
     <QRCodeScanner
+    cameraProps={{captureAudio: false}}
     cameraStyle={{width: Dimensions.get('window').width*0.6, alignSelf: 'center'}}
     onRead={(e) => props.navigate(e.data)}
     topContent={

@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, Dimensions, TextInput, TouchableOpacity, ActivityIndicator} from 'react-native';
 import ScannerView from './scanner';
+import ModalView from './modal';
+import Ionicon from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Font from 'react-native-vector-icons/FontAwesome';
 
@@ -11,16 +13,23 @@ class PaymentPage extends React.Component{
 		super(props);
 
 		this.state = {
-			color: '#C7C7CD',
-			receiver: '',
+			code: '+91',
+			number: '',
 			scanner: false
 		}
 
 	}
 
+	onCodeChange = (val) => {
+		if(!val) return;
+		this.setState(({
+			code: val
+		}));
+	}
+
 	onContactChange = (val) => {
 		this.setState(({
-			receiver: val
+			number: val
 		}));
 	}
 
@@ -30,39 +39,46 @@ class PaymentPage extends React.Component{
 		}));
 	}
 
+	onSubmit = () => {
+		const {code, number} = this.state;
+		this.props.navigate(code + number);
+	}
+
   render(){  
-	return(	
-		<View style={styles.mainConatiner}>
-		  <View style={styles.containerTop}>
-			  <View style={styles.inputIcons}>
-			  <Icon name={'contacts'} size={26} color={'#007ee5'} style={{paddingTop: 14}} /> 
-		  		<TextInput style={styles.textInput} placeholder={'Enter mobile number'} selectionColor={'#007ee5'}
-		  		keyboardType={"numeric"}
-		  		onChangeText={val => this.onContactChange(val)}	
-		  		autoFocus={true} 
-					underlineColorAndroid={this.state.color}  
-					onFocus={() => this.setState({color: '#007ee5'})}
-					onBlur={() => this.setState({color: '#C7C7CD'})}
-		  		/>
+		return(	
+			<View style={styles.mainConatiner}>
+			  <View style={styles.containerTop}>
+				  <View style={styles.inputContainer}>
+				  	<TextInput style={styles.codeInput}
+				  	value={this.state.code} selectionColor={'#007ee5'}
+			  		onChangeText={val => this.onCodeChange(val)}
+			  		maxLength={4}
+			  		/>
+			  		<TextInput style={styles.textInput} placeholder={'Enter mobile number'} selectionColor={'#007ee5'}
+			  		onChangeText={val => this.onContactChange(val)}	
+			  		autoFocus={true}
+			  		keyboardType={"numeric"}
+			  		/>
+			  	</View>
+			  	{this.props.loading ? <ActivityIndicator size="small" color="#007ee5" /> :
+		  		(<TouchableOpacity style={styles.loginContainer} onPress={() => this.onSubmit()} >
+			  			<View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
+								<Text style={styles.login}>Proceed</Text>
+								<Icon name={'arrowright'} size={20} color={'white'} style={{paddingTop: 4, paddingLeft: 6}} />
+							</View>
+					 </TouchableOpacity>)
+		  		}
 		  	</View>
-		  	{this.props.loading ? <ActivityIndicator size="small" color="#007ee5" /> :
-	  		(<TouchableOpacity style={styles.loginContainer} onPress={() => this.props.navigate(this.state.receiver)} >
-		  			<View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
-							<Text style={styles.login}>Proceed</Text>
-							<Icon name={'arrowright'} size={20} color={'white'} style={{paddingTop: 4, paddingLeft: 6}} />
-						</View>
-				 </TouchableOpacity>)
-	  		}
-	  		{this.props.error.type === 'payment' && <Text style={styles.error}>{this.props.error.text}</Text>}
-	  	</View>
-	  	<View style={styles.containerBottom}>
-	  		{this.state.scanner ? <ScannerView close={this.onScanner} navigate={(number) => this.props.navigate(number)} /> :
-	  			<TouchableOpacity onPress={() => this.onScanner()}>
-	  				<Text style={styles.scanText}>Scan QRCode</Text>
-	  			</TouchableOpacity>}
-	  	</View>
-	  </View>  
-    );
+		  	<View style={styles.containerBottom}>
+		  		<ModalView />
+		  		{this.state.scanner ? <ScannerView close={this.onScanner} navigate={(publicKey) => this.props.navigate(publicKey)} /> :
+		  			<TouchableOpacity style={styles.scannerContainer} onPress={() => this.onScanner()}>
+		  				<Text style={styles.scanText}>Scan QRCode</Text>
+		  				<Ionicon name={"md-qr-scanner"} size={20} color={"black"} />
+		  			</TouchableOpacity>}
+		  	</View>
+		  </View>  
+	    );
   }		
 }
 
@@ -77,18 +93,28 @@ const styles = StyleSheet.create({
 	},
 	containerBottom:{
 		flex: 3,
-		justifyContent: 'center',
+		paddingTop: 25,
 		alignItems: 'center'
+	},
+	codeInput: {
+		height: 50,
+		width: '15%',
+		marginRight: 5,
+		borderBottomWidth: 2,
+		borderBottomColor: '#007ee5',
+		fontSize: 22
 	},
 	textInput: {
 		height: 50,
-		width: '80%',
+		width: '75%',
+		borderBottomWidth: 2,
+		borderBottomColor: '#007ee5',
 		fontSize: 22
 	},
-	inputIcons: {
-		width: '95%',
-	  justifyContent: 'flex-start',
-	  flexDirection: 'row'
+	inputContainer: {
+		width: '100%',
+		flexDirection: 'row',
+	  justifyContent: 'center',
 	},
 	image: {
 		height: 35,
@@ -106,8 +132,12 @@ const styles = StyleSheet.create({
 		color: 'white',
 		fontSize: 20
 	},
+	scannerContainer: {
+		flexDirection: 'row'
+	},
 	scanText: {
 		fontSize: 16,
+		marginRight: 7,
 		color: '#007ee5'
 	},
 	error: {

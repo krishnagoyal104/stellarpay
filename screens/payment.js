@@ -8,7 +8,7 @@ import {removeError} from '../actions/error';
 
 class PaymentScreen extends React.Component {
 
-  static options(passProps){
+  static options(){
     return{
       topBar: {
         background: {
@@ -25,11 +25,6 @@ class PaymentScreen extends React.Component {
 
   constructor(props){
     super(props);
-    Navigation.events().bindComponent(this);
-  }
-
-  componentDidAppear(){
-    this.props.dispatch(removeError());
   }
 
   goToConfirmPaymentScreen = () => {
@@ -50,7 +45,7 @@ class PaymentScreen extends React.Component {
 
     return (
       <PaymentView loading={this.props.ui}
-      navigate={(_number) => this.props.dispatch(resolveReceiver(_number, this.goToConfirmPaymentScreen))}
+      navigate={(data) => this.props.dispatch(resolveReceiver(data, this.goToConfirmPaymentScreen))}
       error={this.props.error}
       />
     );  
@@ -60,7 +55,7 @@ class PaymentScreen extends React.Component {
 
 const mapStateToProps = (state) => {
   return{
-    ui: state.ui,
+    ui: state.ui.resolve,
     error: state.error
   }
 };
