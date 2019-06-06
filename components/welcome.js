@@ -7,7 +7,7 @@ const WelcomeView = (props) => {
 	return(
 		<View style={styles.mainContainer}>
 			<View style={styles.topContainer}>
-				<LottieView style={styles.animation} source={require('../static/animation.json')} autoPlay loop />
+				<LottieView style={styles.animation} source={require('../static/globe.json')} autoPlay loop />
 			</View>
 			<View style={styles.bottomContainer}>
 				<Text style={styles.text}>Welcome To StellarPay</Text>
