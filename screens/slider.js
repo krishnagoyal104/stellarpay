@@ -1,47 +1,24 @@
 import React from 'react';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
-
-const styles = StyleSheet.create({
-  buttonCircle: {
-    width: 40,
-    height: 40,
-    backgroundColor: 'rgba(0, 0, 0, .2)',
-    borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  image: {
-    width: '100%'
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#007ee5'
-  }
-});
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import {goToWelcome} from '../App';
 
 const slides = [
   {
-    key: 'somethun',
-    title: 'Title 1',
-    text: 'Description.\nSay something cool',
-    image: require('../static/pic1.jpg'),
-    backgroundColor: '#59b2ab',
+    key: 'screen1',
+    title: 'Send payments across the globe.',
+    text: 'Send payments across the globe just using a phone number.'
   },
   {
-    key: 'somethun-dos',
-    title: 'Title 2',
-    text: 'Other cool stuff',
-    image: require('../static/download.png'),
-    backgroundColor: '#febe29',
+    key: 'screen2',
+    title: 'Utilize the power of blockchain',
+    text: 'Infrastructure based on the Stellar Blockchain.'
   },
   {
-    key: 'somethun1',
-    title: 'Rocket guy',
-    text: 'I\'m already out of descriptions\n\nLorem ipsum bla bla bla',
-    image: require('../static/download.png'),
-    backgroundColor: '#22bcb5',
+    key: 'screen3',
+    title: 'Secure',
+    text: 'Your private keys never leave your phone.'
   }
 ];
 
@@ -58,6 +35,20 @@ export default class App extends React.Component {
       </View>
     );
   }
+
+  _renderPrevButton = () => {
+    return (
+      <View style={styles.buttonCircle}>
+        <Ionicons
+          name="md-arrow-round-back"
+          color="rgba(255, 255, 255, .9)"
+          size={24}
+          style={{ backgroundColor: 'transparent' }}
+        />
+      </View>
+    );
+  }
+
   _renderDoneButton = () => {
     return (
       <View style={styles.buttonCircle}>
@@ -71,10 +62,15 @@ export default class App extends React.Component {
     );  
   }
 
-  _renderItem = () => {
+  _renderItem = (props) => {
     return(
-      <View style={styles.container}>
-        <Image style={styles.image} resizeMode={'contain'} source={require('../static/pic1.jpg')} />
+      <View style={styles.mainContainer}>
+        <View style={styles.containerTop}>
+        </View>
+        <View style={styles.containerBottom}>
+          <Text style={styles.title}>{props.title}</Text>
+          <Text style={styles.description}>{props.text}</Text>
+        </View>
       </View>
     );
   }
@@ -83,9 +79,44 @@ export default class App extends React.Component {
     return (
       <AppIntroSlider
         slides={slides}
+        activeDotStyle={{backgroundColor: '#007ee5'}}
+        showPrevButton={true}
+        renderItem={this._renderItem}
         renderDoneButton={this._renderDoneButton}
-        renderNextButton={this._renderNextButton}      
+        renderNextButton={this._renderNextButton}
+        renderPrevButton={this._renderPrevButton}
+        onDone={() => goToWelcome()}      
       />
     );
   }
 }
+
+const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: 'white'
+  },
+  containerTop: {
+    flex: 1
+  },
+  containerBottom: {
+    flex: 1,
+    alignItems: 'center'
+  },
+  title: {
+    fontSize: 20,
+    color: 'black'
+  },
+  description: {
+    fontSize: 16,
+    color: 'black'
+  },
+  buttonCircle: {
+    width: 40,
+    height: 40,
+    backgroundColor: 'rgba(0, 0, 0, .2)',
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
+});

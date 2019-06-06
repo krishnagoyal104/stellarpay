@@ -11,7 +11,7 @@ class SignupScreen extends React.Component {
     super(props);
   }
 
-  onSubmit = async(data) => {
+  onSubmit = (data) => {
     this.props.dispatch(requestOtp(data, this.goToVerificationScreen));
   }
 
@@ -38,7 +38,7 @@ class SignupScreen extends React.Component {
 
 const mapStateToProps = (state) => {
   return{
-    loading: state.ui
+    loading: state.ui.user
   };
 }; 
   
