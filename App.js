@@ -21,6 +21,7 @@ import configureStore from './store/configureStore';
 
 import Icon from 'react-native-vector-icons/Entypo'; 
 import Font from 'react-native-vector-icons/FontAwesome';
+import Font5 from 'react-native-vector-icons/FontAwesome5';
 
 const store = configureStore();
 
@@ -50,6 +51,22 @@ Navigation.events().registerAppLaunchedListener(() => {
   });
 });
 
+export const goToIntroScreens = () => {
+  Navigation.setRoot({
+    root: {
+      component: {
+        name: 'stellarPay.SliderScreen',
+        options: {
+          topBar: {
+            visible: false,
+            drawBehind: true
+          }
+        }
+      }
+    }
+  });
+}    
+
 export const goToWelcome = () => {
   Navigation.setRoot({
     root: {
@@ -74,9 +91,10 @@ export const goToWelcome = () => {
 
 export const goToHome = () => {
   Promise.all([
-    Icon.getImageSource('home', 25, '#007ee5'),
-    Icon.getImageSource('wallet', 25, '#007ee5'),
-    Icon.getImageSource('list', 25, '#007ee5')
+    Icon.getImageSource('home'),
+    Icon.getImageSource('wallet'),
+    Icon.getImageSource('list'),
+    Font5.getImageSource('user-alt')
   ]).then((sources) => {
     Navigation.setRoot({
       root: {
@@ -112,9 +130,9 @@ export const goToHome = () => {
                     ],
                     options: {
                       bottomTab: {
-                        fontSize: 12,
-                        text: 'Home',
-                        icon: sources[0]
+                        icon: sources[0],
+                        iconColor: '#E3E9ED',
+                        selectedIconColor: '#007ee5'
                       }
                     }
                   }
@@ -142,9 +160,9 @@ export const goToHome = () => {
                     ],
                     options: {
                       bottomTab: {
-                        fontSize: 12,
-                        text: 'Wallet',
-                        icon: sources[1]
+                        icon: sources[1],
+                        iconColor: '#E3E9ED',
+                        selectedIconColor: '#007ee5'
                       }
                     }
                   }
@@ -172,14 +190,49 @@ export const goToHome = () => {
                     ],
                     options: {
                       bottomTab: {
-                        fontSize: 12,
-                        text: 'Ledger',
-                        icon: sources[2]
+                        icon: sources[2],
+                        iconColor: '#E3E9ED',
+                        selectedIconColor: '#007ee5'
+                      }
+                    }
+                  }
+                },
+                {
+                  stack: {
+                    children: [
+                      {
+                        component: {
+                          name: 'stellarPay.ProfileScreen',
+                          options: {
+                            topBar: {
+                              background: {
+                                color: '#007ee5'
+                              },
+                              title: {
+                                text: 'Profile',
+                                alignment: 'center',
+                                color: 'white'
+                              }
+                            }
+                          }
+                        }
+                      }  
+                    ],
+                    options: {
+                      bottomTab: {
+                        icon: sources[3],
+                        iconColor: '#E3E9ED',
+                        selectedIconColor: '#007ee5'
                       }
                     }
                   }
                 }
               ],
+              options: {
+                bottomTabs: {
+                  titleDisplayMode: 'alwaysHide'
+                }
+              }
             }
           },
           options: {
