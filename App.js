@@ -16,6 +16,7 @@ import InitializeScreen from './screens/initialize';
 import VerificationScreen from './screens/verify';
 import WelcomeScreen from './screens/welcome';
 import ImportAccountScreen from './screens/importAccount';
+import WelcomeBackScreen from './screens/welcomeBack';
 import ProfileScreen from './screens/profile';
 import configureStore from './store/configureStore';
 
@@ -32,14 +33,15 @@ Navigation.registerComponentWithRedux('stellarPay.PassbookScreen', () => Passboo
 Navigation.registerComponentWithRedux('stellarPay.ConfirmPaymentScreen', () => ConfirmPaymentScreen, Provider, store);
 Navigation.registerComponentWithRedux('stellarPay.VerificationScreen', () => VerificationScreen, Provider, store);
 Navigation.registerComponentWithRedux('stellarPay.SignupScreen', () => SignupScreen, Provider, store);
+Navigation.registerComponentWithRedux('stellarPay.ImportAccountScreen', () => ImportAccountScreen, Provider, store);
+Navigation.registerComponentWithRedux('stellarPay.ProfileScreen', () => ProfileScreen, Provider, store);
 Navigation.registerComponent('stellarPay.SideDrawerScreen', () => SideDrawerScreen);
 Navigation.registerComponent('stellarPay.ReceiveScreen', () => ReceiveScreen);
 Navigation.registerComponent('stellarPay.ReceiptScreen', () => ReceiptScreen);
 Navigation.registerComponent('stellarPay.SliderScreen', () => SliderScreen);
 Navigation.registerComponent('stellarPay.InitializeScreen', () => InitializeScreen);
 Navigation.registerComponent('stellarPay.WelcomeScreen', () => WelcomeScreen);
-Navigation.registerComponent('stellarPay.ImportAccountScreen', () => ImportAccountScreen);
-Navigation.registerComponentWithRedux('stellarPay.ProfileScreen', () => ProfileScreen, Provider, store);
+Navigation.registerComponent('stellarPay.WelcomeBackScreen', () => WelcomeBackScreen);
 
 Navigation.events().registerAppLaunchedListener(() => {
   Navigation.setRoot({

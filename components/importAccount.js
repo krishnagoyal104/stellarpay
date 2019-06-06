@@ -1,23 +1,42 @@
 import React from 'react';
-import {View, Text, TextInput, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, TextInput, Image, StyleSheet, TouchableOpacity, ActivityIndicator} from 'react-native';
+import ModalView from './modal';
 
-const ImportAccountView = (props) => {
-  return(	
- 		<View style={styles.mainContainer}>
-	 		<View style={styles.containerTop}>
-	 			<View style={styles.imageContainer}>
-	 				<Image source={require('../static/keychain.png')} resizeMode={"contain"} style={styles.image} />
-	 			</View>
+class ImportAccountView extends React.Component{
+
+	constructor(props){
+		super(props);
+		this.state = {
+			key: ''
+		}
+	}
+
+	onKeyChange = (val) => {
+		this.setState(({
+			key: val
+		}));
+	}
+
+	render(){
+		return(	
+	 		<View style={styles.mainContainer}>
+		 		<View style={styles.containerTop}>
+		 			<View style={styles.imageContainer}>
+		 				<Image source={require('../static/keychain.png')} resizeMode={"contain"} style={styles.image} />
+		 			</View>
+		 		</View>
+		 		<View style={styles.containerBottom}>
+		 			<ModalView /> 
+		 			<Text style={styles.instruction}>Please enter your private key.</Text>
+		 			<TextInput style={styles.input} selectionColor={"black"} onChangeText={val => this.onKeyChange(val)} />
+		 			{this.props.loading ? <ActivityIndicator size="small" color="#007ee5" /> :
+		 			<TouchableOpacity style={styles.import} onPress={() => this.props.importAccount(this.state.key)}>
+						<Text style={styles.importText}>Import</Text>
+					</TouchableOpacity>}
+		 		</View>
 	 		</View>
-	 		<View style={styles.containerBottom}>
-	 			<Text style={styles.instruction}>Please enter your private key.</Text>
-	 			<TextInput style={styles.input} />
-	 			<TouchableOpacity style={styles.import}>
-					<Text style={styles.importText}>Import</Text>
-				</TouchableOpacity>
-	 		</View>
- 		</View>
-  );
+  	);
+	}
 }
 
 const styles = StyleSheet.create({
@@ -49,7 +68,8 @@ const styles = StyleSheet.create({
 	input: {
 		height: 55,
 		width: '80%',
-		borderWidth: 0.5
+		fontSize: 22,
+		borderWidth: 0.5,
 	},
 	import: {
 		height: 50,
