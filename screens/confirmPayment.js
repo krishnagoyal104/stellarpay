@@ -7,7 +7,7 @@ import {createTransaction} from '../actions/transaction';
 
 class ConfirmPaymentScreen extends React.Component {
 
-	static options(passProps){
+	static options(){
 		return{
 			topBar: {
 				background: {
@@ -26,7 +26,7 @@ class ConfirmPaymentScreen extends React.Component {
     super(props);
   }
 
-  goToReceiptScreen = (recipient, amount, code, id) => {
+  goToReceiptScreen = (recipient, amount, code, id, status) => {
     Navigation.push(this.props.componentId, {
       component: {
         name: 'stellarPay.ReceiptScreen',
@@ -34,9 +34,16 @@ class ConfirmPaymentScreen extends React.Component {
           recipient,
           amount,
           code,
-          id
+          id,
+          status
         },
         options: {
+          topBar: {
+            title: {
+              text: 'Receipt',
+              alignment: 'center'
+            }
+          },
           bottomTabs: {
             visible: false,
             drawBehind: true
@@ -53,7 +60,7 @@ class ConfirmPaymentScreen extends React.Component {
       assets={this.props.assets}
       pay={(_amount, _code, _issuer) => this.props.dispatch(
           createTransaction(this.props.recipient.publicKey, _amount,
-          (_id) => this.goToReceiptScreen(this.props.recipient, _amount, _code, _id), _code, _issuer)
+          (_id, _status) => this.goToReceiptScreen(this.props.recipient, _amount, _code, _id, _status), _code, _issuer)
         )}
       />
     );  
@@ -64,7 +71,7 @@ class ConfirmPaymentScreen extends React.Component {
 const mapStateToProps = (state) => {
   return{
     recipient: state.recipient,
-    loading: state.ui,
+    loading: state.ui.transaction,
     assets: state.balances
   };
 };

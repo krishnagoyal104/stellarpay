@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, TextInput, TouchableOpacity, Picker, ActivityIndicator} from 'react-native';
+import ModalView from './modal';
 import Font from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/Entypo';
 
@@ -41,6 +42,7 @@ class ConfirmPaymentView extends React.Component{
 					<Text style={styles.text}>{this.props.name}</Text>
 				</View>
 				<View style={styles.containerBottom}>
+				<ModalView />
 					<View style={styles.picker}>
 						<Picker
 						  selectedValue={this.state.asset}
@@ -70,7 +72,7 @@ class ConfirmPaymentView extends React.Component{
 					  	<Text style={{fontSize: 18, color: 'black'}}>Wallet balance</Text>
 					  	<Text style={{fontSize: 14, color: 'black'}}>{this.state.asset}</Text>
 				  	</View>
-				  	<Text style={{fontSize: 20, color: 'black'}}>{this.props.assets[this.state.index].balance.slice(0, -8)}</Text>
+				  	<Text style={{fontSize: 20, color: 'black'}}>{this.props.assets.length && this.props.assets[this.state.index].balance.slice(0, -8)}</Text>
 				  </View>
 				  {this.props.loading ? <ActivityIndicator size="small" color="#007ee5" /> :
 					(<TouchableOpacity style={styles.payContainer} onPress={this.makePayment} >
