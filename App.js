@@ -155,6 +155,12 @@ export const goToHome = () => {
                                 alignment: 'center',
                                 color: 'white'
                               }
+                            },
+                            sideMenu: {
+                              left: {
+                                visible: false,
+                                enabled: false
+                              }
                             }
                           }
                         }
@@ -184,6 +190,12 @@ export const goToHome = () => {
                                 text: 'Ledger',
                                 alignment: 'center',
                                 color: 'white'
+                              }
+                            },
+                            sideMenu: {
+                              left: {
+                                visible: false,
+                                enabled: false
                               }
                             }
                           }
@@ -215,6 +227,12 @@ export const goToHome = () => {
                                 alignment: 'center',
                                 color: 'white'
                               }
+                            },
+                            sideMenu: {
+                              left: {
+                                visible: false,
+                                enabled: false
+                              }
                             }
                           }
                         }
@@ -240,6 +258,8 @@ export const goToHome = () => {
           options: {
             sideMenu: {
               left: {
+                visible: false,
+                enabled: false,
                 width: 200
               }
             }
