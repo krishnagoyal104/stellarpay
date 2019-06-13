@@ -6,26 +6,49 @@ import Icon from 'react-native-vector-icons/Entypo';
 
 const ReceiptView = (props) => {
 	const status = props.status === 'successful';
-	const animation = status ? 'tick.json' : 'error.json';
+	const renderItems = () => {
+		switch(props.status){
+			case 'successful':
+				return {
+					type: 'payment',
+					text: 'Paid Successfully',
+					animation: <LottieView style={styles.animation} source={require(`../static/success.json`)} autoPlay loop={false} />
+				};
+			case 'failed':
+				return {
+					type: 'payment',
+					text: 'Transaction Failed',
+					animation: <LottieView style={styles.animation} source={require(`../static/error.json`)} autoPlay loop={false} />		
+				};
+			case 'deposited':
+				return {
+					type: 'deposit',
+					text: 'Added Successfully',
+					animation: <LottieView style={styles.animation} source={require(`../static/success.json`)} autoPlay loop={false} />
+					}
+		}
+	}
+	const {type, text, animation} = renderItems();
   return(	
 		<View style={styles.mainContainer}>
 			<View style={styles.container}>
 				<View>
 					<View style={styles.header}>
-						<Text style={styles.font1}>{status ? 'Paid Successfully' : 'Transaction failed'}</Text>
-						{status ? <LottieView style={styles.animation} source={require(`../static/success.json`)} autoPlay loop={false} /> :
-						<LottieView style={styles.animation} source={require(`../static/error.json`)} autoPlay loop={false} />}
+						<Text style={styles.font1}>{text}</Text>
+						{animation}
 					</View>
-					<Text style={styles.font1}>{props.amount} {props.code || 'Lumens'}</Text>
+					<Text style={styles.font1}>{props.amount} {props.code || type === 'deposit' ? 'INR' : 'Lumens'}</Text>
 				</View>
-				<View>
-					<Text style={styles.font2}>{props.recipient.name.toUpperCase()}'s wallet linked to</Text>
-					<Text style={styles.font1}>{props.recipient.number}</Text>
-				</View>
+				{type !== 'deposit' && 
+					<View>
+						<Text style={styles.font2}>{props.recipient.name.toUpperCase()}'s wallet linked to</Text>
+						<Text style={styles.font1}>{props.recipient.number}</Text>
+					</View>
+				}
 				<Text style={styles.font2}>{moment().format('LLL')}</Text>
 				<View>
-					<Text style={styles.font2}>{status && 'Transaction Id:'}</Text>
-					{status ? <Text style={styles.font2} numberOfLines={1} ellipsizeMode={'tail'} selectable={true}>{props.id}</Text> :
+					<Text style={styles.font2}>{props.id && 'Transaction Id:'}</Text>
+					{status ? <Text style={styles.font2} selectable={true}>{props.id}</Text> :
 					<Text style={styles.font3}>{props.id}</Text>}
 				</View>
 				<TouchableOpacity style={styles.navigationButton} onPress={() => props.navigate()}>

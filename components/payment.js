@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image, StyleSheet, Dimensions, TextInput, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {View, Text, Image, StyleSheet, Dimensions, TextInput, TouchableOpacity, Keyboard, ActivityIndicator} from 'react-native';
 import ScannerView from './scanner';
 import ModalView from './modal';
 import Ionicon from 'react-native-vector-icons/Ionicons';
@@ -40,6 +40,7 @@ class PaymentPage extends React.Component{
 	}
 
 	onSubmit = () => {
+		Keyboard.dismiss();
 		const {code, number} = this.state;
 		this.props.navigate(code + number);
 	}

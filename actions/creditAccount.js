@@ -26,7 +26,7 @@ export const createTrustline = () => {
   }
 };    
 
-export const creditAccount = (_amount) => {
+export const creditAccount = (_amount, _function) => {
   return async(dispatch, getState) => {
     dispatch(uiStartLoading('credit'));
     const publicKey = getState().account.publicKey;
@@ -40,15 +40,12 @@ export const creditAccount = (_amount) => {
         }
       });
       dispatch(uiStopLoading('credit'));
-      return Promise.resolve('Deposit Successful.');
+      _function(_amount, result.data.hash, 'deposited');
     }
     catch(e){
       dispatch(uiStopLoading('credit'));
       if(!e.response){
         dispatch(setError('Network Error', 'Please check your internet connection.'));
-      }
-      else{
-        return Promise.reject(e.response.data);
       }
     }    
   };

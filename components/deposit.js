@@ -18,6 +18,10 @@ class DepositView extends React.Component{
 		}));
 	}
 
+	onSubmit = () => {
+		this.props.creditAccount(this.state.amount);
+	}
+
 	render(){
 		return(	
  		<View style={styles.mainContainer}>
@@ -45,7 +49,7 @@ class DepositView extends React.Component{
 	 				</TouchableOpacity>
  				</View>
  				{this.props.loading ? <ActivityIndicator size="small" color="#007ee5" /> :
- 				<TouchableOpacity style={styles.button} onPress={() => this.props.creditAccount(this.state.amount)} >
+ 				<TouchableOpacity style={styles.button} onPress={() => this.onSubmit()} >
 					<Text style={styles.buttonText}>Add Amount</Text>
 				</TouchableOpacity>}
  			</View>

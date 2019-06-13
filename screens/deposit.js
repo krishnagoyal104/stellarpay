@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
+import {Navigation} from 'react-native-navigation';
 import DepositView from '../components/deposit';
 import {createTrustline, creditAccount} from '../actions/creditAccount';
 
@@ -13,22 +14,37 @@ class DepositScreen extends React.Component {
     }
   }
 
-  creditUserAccount = async(_amount) => {
-    try{
-      const result = await this.props.dispatch(creditAccount(_amount));
-      this.setState(({
-        status: result
-      }));
-    }
-    catch(e){
-      this.setState(({
-        status: e
-      }));
-    }
+  creditUserAccount = (_amount) => {
+    this.props.dispatch(creditAccount(_amount, this.goToReceiptScreen));
   }
 
   createTrust = () => {
     this.props.dispatch(createTrustline());
+  }
+
+  goToReceiptScreen = (amount, id, status) => {
+    Navigation.push(this.props.componentId, {
+      component: {
+        name: 'stellarPay.ReceiptScreen',
+        passProps: {
+          amount,
+          id,
+          status
+        },
+        options: {
+          topBar: {
+            title: {
+              text: 'Receipt',
+              alignment: 'center'
+            }
+          },
+          bottomTabs: {
+            visible: false,
+            drawBehind: true
+          }
+        }
+      },                                                
+    });
   }
 
   render() {
