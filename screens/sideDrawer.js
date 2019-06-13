@@ -36,10 +36,38 @@ class SideDrawerScreen extends React.Component {
     });
   }
 
+  goToDepositScreen = () => {
+    Navigation.push('Home', {
+      component: {
+        name: 'stellarPay.DepositScreen',
+        options: {
+          topBar: {
+            title: {
+              text: 'Add Money',
+              alignment: 'center'
+            }
+          },
+          bottomTabs: {
+            visible: false,
+            drawBehind: true
+          },
+          sideMenu: {
+            left: {
+              visible: false,
+              enabled: false
+            }
+          }
+        }
+      }                                                  
+    });
+  }
+
   render() {
 
     return (
-      <SideDrawerView navigate={this.goToProfileScreen} {...this.props.user} />
+      <SideDrawerView navigateToProfileScreen={this.goToProfileScreen}
+      navigateToDepositScreen={this.goToDepositScreen}
+      {...this.props.user} />
     );  
   }
 

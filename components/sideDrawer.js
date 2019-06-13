@@ -15,10 +15,10 @@ const SideDrawerView = (props) => {
 	  			<Text style={styles.number}>{props.number}</Text>
 	  		</View>
 	  		<View style={styles.container2}>
-		  		<TouchableOpacity style={styles.itemContainer}>
+		  		<TouchableOpacity style={styles.itemContainer} onPress={() => props.navigateToDepositScreen()}>
 		  			<Font name={"dollar"} size={20} color={"black"} />
 		  			<View style={styles.partition}>
-			  			<Text style={styles.text}>Assets</Text>
+			  			<Text style={styles.text}>Add Money</Text>
 		  			</View>
 		  		</TouchableOpacity>
 		  		<TouchableOpacity style={styles.itemContainer}>
@@ -35,7 +35,7 @@ const SideDrawerView = (props) => {
 			  	</TouchableOpacity>	
 	  		</View>
 	  		<View style={styles.container3}>
-	  			<TouchableOpacity style={styles.itemContainer} onPress={() => props.navigate()}>
+	  			<TouchableOpacity style={styles.itemContainer} onPress={() => props.navigateToProfileScreen()}>
 		  			<Font5 name={"user-alt"} size={20} color={"black"} />
 			  		<View style={styles.partition}>
 			  			<Text style={styles.text}>Profile</Text>

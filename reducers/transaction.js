@@ -1,4 +1,4 @@
-const initialState = {resolve: false, payment: false, balance: false, transaction: false, ledger: false, user: false};
+const initialState = {resolve: false, payment: false, balance: false, transaction: false, ledger: false, user: false, credit: false};
 
 export default(state = initialState, {type, context}) => {
   switch (type) {
@@ -15,7 +15,9 @@ export default(state = initialState, {type, context}) => {
       	case 'ledger':
       		return {...state, ledger: true};
       	case 'user':
-      		return {...state, user: true};				
+      		return {...state, user: true};
+        case 'credit':
+          return {...state, credit: true}				
       }
     case 'UI_STOP_LOADING':
       switch(context) {
@@ -30,7 +32,9 @@ export default(state = initialState, {type, context}) => {
       	case 'ledger':
       		return {...state, ledger: false};	
       	case 'user':
-      		return {...state, user: false};			
+      		return {...state, user: false};
+        case 'credit':
+          return {...state, credit: false};  			
       }
     default:
       return state;  
