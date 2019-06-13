@@ -58,9 +58,9 @@ class ConfirmPaymentScreen extends React.Component {
     return (
       <ConfirmPaymentView {...this.props.recipient} loading={this.props.loading}
       assets={this.props.assets}
-      pay={(_amount, _code, _issuer) => this.props.dispatch(
+      pay={(_amount, _code, _issuer, _closeModal) => this.props.dispatch(
           createTransaction(this.props.recipient.publicKey, _amount,
-          (_id, _status) => this.goToReceiptScreen(this.props.recipient, _amount, _code, _id, _status), _code, _issuer)
+          (_id, _status) => this.goToReceiptScreen(this.props.recipient, _amount, _code, _id, _status), _code, _issuer, _closeModal)
         )}
       />
     );  

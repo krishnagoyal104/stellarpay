@@ -17,7 +17,7 @@ export const uiStopLoading = (context) => {
   };
 };
 
-export const createTransaction = (_receiverPublicKey, _amount, _function, _code, _issuer) => {
+export const createTransaction = (_receiverPublicKey, _amount, _function1, _code, _issuer, _function2) => {
   return async(dispatch, getState) => {
     try{
       dispatch(uiStartLoading('transaction'));
@@ -25,7 +25,8 @@ export const createTransaction = (_receiverPublicKey, _amount, _function, _code,
       const secretKey = getState().account.secretKey;
       const hash = await transact(publicKey, secretKey, _receiverPublicKey, _amount, _code, _issuer);
       dispatch(uiStopLoading('transaction'));
-      _function(hash, 'successful');
+      _function2();
+      _function1(hash, 'successful');
       const result = await axios({
         method: 'post',
         url: `${config.baseUrl}/notify`,
@@ -38,12 +39,12 @@ export const createTransaction = (_receiverPublicKey, _amount, _function, _code,
       });
     }
     catch(e){
-      console.log(e);
       if(!e.response){
         dispatch(setError('Network Error', 'Please check your internet connection.'))
       }
       dispatch(uiStopLoading('transaction'));
-      _function(e.response.data.extras.result_codes.operations[0], 'failed');
+      _function2();
+      _function1(e.response.data.extras.result_codes.operations[0], 'failed');
     }    
   };
 };

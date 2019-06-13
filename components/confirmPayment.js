@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, TextInput, TouchableOpacity, Picker, ActivityIndicator} from 'react-native';
-import ModalView from './modal';
+import PaymentModal from './paymentModal';
 import Font from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/Entypo';
 
@@ -13,7 +13,8 @@ class ConfirmPaymentView extends React.Component{
 			amount: '',
 			color: '#C7C7CD',
 			asset: 'Lumens',
-			index: this.props.assets.length-1
+			index: this.props.assets.length-1,
+			modal: false
 		}
 
 	}
@@ -24,9 +25,15 @@ class ConfirmPaymentView extends React.Component{
 		}));
 	}
 
+	changeModalState = () => {
+		this.setState((prevState) => ({
+			modal: !prevState.modal
+		}));
+	}
+
 	makePayment = () => {
 		const {asset_code, asset_issuer} = this.props.assets[this.state.index];
-		this.props.pay(this.state.amount, asset_code, asset_issuer);
+		this.props.pay(this.state.amount, asset_code, asset_issuer, this.changeModalState);
 	}
 
   render(){
@@ -39,10 +46,10 @@ class ConfirmPaymentView extends React.Component{
 		return(
 			<View style={styles.mainContainer}>
 				<View style={styles.containerTop}>
-					<Text style={styles.text}>{this.props.name}</Text>
+					<Text style={styles.text1}>{this.props.name.toUpperCase()}</Text>
+					<Text style={styles.text2}>Wallet linked to {this.props.number}</Text>
 				</View>
 				<View style={styles.containerBottom}>
-				<ModalView />
 					<View style={styles.picker}>
 						<Picker
 						  selectedValue={this.state.asset}
@@ -56,7 +63,6 @@ class ConfirmPaymentView extends React.Component{
 					<View style={styles.inputIcons}>
 						<Icon name={'triangle-right'} size={20} color={'#007ee5'} style={{paddingTop: 16}} />
 						<TextInput style={styles.textInput} placeholder={'Enter Amount'} selectionColor={'#007ee5'}
-						autoFocus={true}
 						keyboardType={"numeric"}
 			  		onChangeText={val => this.onAmountChange(val)}
 						underlineColorAndroid={this.state.color}  
@@ -74,15 +80,20 @@ class ConfirmPaymentView extends React.Component{
 				  	</View>
 				  	<Text style={{fontSize: 20, color: 'black'}}>{this.props.assets.length && this.props.assets[this.state.index].balance.slice(0, -8)}</Text>
 				  </View>
-				  {this.props.loading ? <ActivityIndicator size="small" color="#007ee5" /> :
-					(<TouchableOpacity style={styles.payContainer} onPress={this.makePayment} >
+					<TouchableOpacity style={styles.payContainer} onPress={() => this.changeModalState()} >
 		  			<View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
 							<Text style={styles.pay}>Pay</Text>
 							<Font name={'send'} size={20} color={'white'} style={{paddingTop: 4, paddingLeft: 6}} />
 						</View>
-					</TouchableOpacity>)
-				}
-				</View> 
+					</TouchableOpacity>
+				</View>
+				<View>
+					<PaymentModal isVisible={this.state.modal}
+					name={this.props.name} amount={this.state.amount} asset={this.state.asset}
+					number={this.props.number} loading={this.props.loading}
+					makePayment={this.makePayment}
+					closeModal={this.changeModalState} />
+				</View>
 	    </View>   
 		);
 	}
@@ -107,9 +118,13 @@ const styles = StyleSheet.create({
 		borderRadius: 16,
 		elevation: 2
 	},
-	text: {
-		fontSize: 22,
+	text1: {
+		fontSize: 20,
 		fontWeight: 'bold',
+		color: 'black'
+	},
+	text2: {
+		fontSize: 16,
 		color: 'black'
 	},
 	textInput: {
@@ -143,9 +158,10 @@ const styles = StyleSheet.create({
 		height: '12%',
 		width: '85%',
 		marginTop: 6,
-		backgroundColor: '#007ee5',
+		borderRadius: 8,
 		alignItems: 'center',
-		justifyContent: 'center'
+		justifyContent: 'center',
+		backgroundColor: '#007ee5',
 	},
 	pay: {
 		color: 'white',
