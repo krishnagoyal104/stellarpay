@@ -40,13 +40,14 @@ export const creditAccount = (_amount, _function) => {
         }
       });
       dispatch(uiStopLoading('credit'));
-      _function(_amount, result.data.hash, 'deposited');
+      _function(_amount, result.data.hash, 'deposit successful');
     }
     catch(e){
       dispatch(uiStopLoading('credit'));
       if(!e.response){
         dispatch(setError('Network Error', 'Please check your internet connection.'));
       }
+      _function(_amount, e.response.data.error, 'deposit failed');
     }    
   };
 }

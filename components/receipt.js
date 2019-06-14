@@ -20,12 +20,18 @@ const ReceiptView = (props) => {
 					text: 'Transaction Failed',
 					animation: <LottieView style={styles.animation} source={require(`../static/error.json`)} autoPlay loop={false} />		
 				};
-			case 'deposited':
+			case 'deposit successful':
 				return {
 					type: 'deposit',
 					text: 'Added Successfully',
 					animation: <LottieView style={styles.animation} source={require(`../static/success.json`)} autoPlay loop={false} />
-					}
+				};
+			case 'deposit failed':
+				return {
+					type: 'deposit',
+					text: 'Transaction Failed',
+					animation: <LottieView style={styles.animation} source={require(`../static/error.json`)} autoPlay loop={false} />
+				};	
 		}
 	}
 	const {type, text, animation} = renderItems();
