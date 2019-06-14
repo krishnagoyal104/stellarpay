@@ -19,6 +19,7 @@ import ImportAccountScreen from './screens/importAccount';
 import WelcomeBackScreen from './screens/welcomeBack';
 import ProfileScreen from './screens/profile';
 import DepositScreen from './screens/deposit';
+import TrustlineScreen from './screens/trustline';
 import configureStore from './store/configureStore';
 
 import Icon from 'react-native-vector-icons/Entypo'; 
@@ -37,6 +38,7 @@ Navigation.registerComponentWithRedux('stellarPay.ImportAccountScreen', () => Im
 Navigation.registerComponentWithRedux('stellarPay.ProfileScreen', () => ProfileScreen, Provider, store);
 Navigation.registerComponentWithRedux('stellarPay.SideDrawerScreen', () => SideDrawerScreen, Provider, store);
 Navigation.registerComponentWithRedux('stellarPay.DepositScreen', () => DepositScreen, Provider, store);
+Navigation.registerComponentWithRedux('stellarPay.TrustlineScreen', () => TrustlineScreen, Provider, store);
 Navigation.registerComponent('stellarPay.ReceiveScreen', () => ReceiveScreen);
 Navigation.registerComponent('stellarPay.ReceiptScreen', () => ReceiptScreen);
 Navigation.registerComponent('stellarPay.SliderScreen', () => SliderScreen);

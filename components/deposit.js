@@ -1,5 +1,6 @@
 import React from 'react';
-import {View, Text, StyleSheet, TextInput, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
+import ActivityIndicator from './activityIndicator';
 import Font from 'react-native-vector-icons/FontAwesome5';
 import Icon from 'react-native-vector-icons/Entypo';
 
@@ -48,7 +49,7 @@ class DepositView extends React.Component{
 	 					<Text style={styles.text}>2000</Text>
 	 				</TouchableOpacity>
  				</View>
- 				{this.props.loading ? <ActivityIndicator size="small" color="#007ee5" /> :
+ 				{this.props.loading ? <ActivityIndicator /> :
  				<TouchableOpacity style={styles.button} onPress={() => this.onSubmit()} >
 					<Text style={styles.buttonText}>Add Amount</Text>
 				</TouchableOpacity>}

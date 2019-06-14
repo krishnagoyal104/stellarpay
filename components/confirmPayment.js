@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, TextInput, TouchableOpacity, Picker, ActivityIndicator} from 'react-native';
+import {View, Text, StyleSheet, TextInput, TouchableOpacity, Picker} from 'react-native';
 import PaymentModal from './paymentModal';
 import Font from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/Entypo';
