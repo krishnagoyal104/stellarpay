@@ -54,19 +54,7 @@ class DepositView extends React.Component{
 					<Text style={styles.buttonText}>Add Amount</Text>
 				</TouchableOpacity>}
  			</View>
- 			<View style={styles.bottomContainer}>
- 				{this.props.status === 'op_no_trust' &&
- 					<View style={styles.errorContainer}>
- 						<Text style={styles.error}>Not Authorized</Text>
-		 				<Text style={styles.error}>
-		 					You are not authorized to hold this asset. Please create a trustline with the issuer.
-		 				</Text>
-		 				<TouchableOpacity style={styles.trustButton} onPress={() => this.props.createTrust()}>
-							<Font name={'link'} size={20} color={'#007ee5'} style={{paddingTop: 4, paddingRight: 6}} />
-							<Text style={styles.trustButtonText}>Create Trust</Text>
-						</TouchableOpacity>
-					</View>}
- 			</View>
+ 			<View style={styles.bottomContainer}></View>
  		</View>
  		);
 	}

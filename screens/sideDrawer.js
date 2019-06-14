@@ -10,42 +10,16 @@ class SideDrawerScreen extends React.Component {
     super(props);
   }
 
-  goToProfileScreen = () => {
+  navigate = (name, text) => {
     Navigation.push('Home', {
       component: {
-        name: 'stellarPay.ProfileScreen',
+        name: `stellarPay.${name}`,
         options: {
           topBar: {
           	title: {
-          		text: 'Profile',
+          		text,
           		alignment: 'center'
           	}
-          },
-          bottomTabs: {
-            visible: false,
-            drawBehind: true
-          },
-          sideMenu: {
-            left: {
-              visible: false,
-              enabled: false
-            }
-          }
-        }
-      }                                                  
-    });
-  }
-
-  goToDepositScreen = () => {
-    Navigation.push('Home', {
-      component: {
-        name: 'stellarPay.DepositScreen',
-        options: {
-          topBar: {
-            title: {
-              text: 'Add Money',
-              alignment: 'center'
-            }
           },
           bottomTabs: {
             visible: false,
@@ -65,9 +39,7 @@ class SideDrawerScreen extends React.Component {
   render() {
 
     return (
-      <SideDrawerView navigateToProfileScreen={this.goToProfileScreen}
-      navigateToDepositScreen={this.goToDepositScreen}
-      {...this.props.user} />
+      <SideDrawerView {...this.props.user} navigate={this.navigate} />
     );  
   }
 

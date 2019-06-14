@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import {Navigation} from 'react-native-navigation';
 import DepositView from '../components/deposit';
-import {createTrustline, creditAccount} from '../actions/creditAccount';
+import {creditAccount} from '../actions/creditAccount';
 
 class DepositScreen extends React.Component {
 
@@ -16,10 +16,6 @@ class DepositScreen extends React.Component {
 
   creditUserAccount = (_amount) => {
     this.props.dispatch(creditAccount(_amount, this.goToReceiptScreen));
-  }
-
-  createTrust = () => {
-    this.props.dispatch(createTrustline());
   }
 
   goToReceiptScreen = (amount, id, status) => {
@@ -51,8 +47,7 @@ class DepositScreen extends React.Component {
 
     return (
       <DepositView balance={this.props.balance} loading={this.props.loading}
-      creditAccount={this.creditUserAccount} status={this.state.status}
-      createTrust={this.createTrust} />
+      creditAccount={this.creditUserAccount} status={this.state.status} />
     );  
   }
 
@@ -65,7 +60,7 @@ const mapStateToProps = (state) => {
     }),
     loading: state.ui.credit
 	}
-};  
+};
 
 export default connect(mapStateToProps)(DepositScreen);
 

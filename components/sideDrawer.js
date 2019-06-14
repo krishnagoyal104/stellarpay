@@ -15,27 +15,27 @@ const SideDrawerView = (props) => {
 	  			<Text style={styles.number}>{props.number}</Text>
 	  		</View>
 	  		<View style={styles.container2}>
-		  		<TouchableOpacity style={styles.itemContainer} onPress={() => props.navigateToDepositScreen()}>
+		  		<TouchableOpacity style={styles.itemContainer} onPress={() => props.navigate('DepositScreen', 'Add Money')}>
 		  			<Font name={"dollar"} size={20} color={"black"} />
 		  			<View style={styles.partition}>
 			  			<Text style={styles.text}>Add Money</Text>
 		  			</View>
 		  		</TouchableOpacity>
+		  		<TouchableOpacity style={styles.itemContainer} onPress={() => props.navigate('TrustlineScreen', 'Create Trust')}>	
+			  		<Font name={"anchor"} size={20} color={"black"} />	
+			  		<View style={styles.partition}>
+			  			<Text style={styles.text}>Trustline</Text>
+			  		</View>
+			  	</TouchableOpacity>
 		  		<TouchableOpacity style={styles.itemContainer}>
 		  			<Font name={"exchange"} size={20} color={"black"} />
 			  		<View style={styles.partition}>
 			  			<Text style={styles.text}>Trade</Text>
 			  		</View>
-			  	</TouchableOpacity>
-			  	<TouchableOpacity style={styles.itemContainer}>	
-			  		<Font name={"anchor"} size={20} color={"black"} />	
-			  		<View style={styles.partition}>
-			  			<Text style={styles.text}>Anchor</Text>
-			  		</View>
 			  	</TouchableOpacity>	
 	  		</View>
 	  		<View style={styles.container3}>
-	  			<TouchableOpacity style={styles.itemContainer} onPress={() => props.navigateToProfileScreen()}>
+	  			<TouchableOpacity style={styles.itemContainer} onPress={() => props.navigate('ProfileScreen', 'Profile')}>
 		  			<Font5 name={"user-alt"} size={20} color={"black"} />
 			  		<View style={styles.partition}>
 			  			<Text style={styles.text}>Profile</Text>
