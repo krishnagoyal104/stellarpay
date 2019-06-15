@@ -10,12 +10,26 @@ export const setLedger = (ledger) => {
   };
 };
 
-export const getLedger = () => {
+export const clearLedger = () => {
+  return {
+    type: 'CLEAR_LEDGER',
+  };
+};
+
+export const getLedger = (cursor) => {
   return async(dispatch, getState) => {
     const publicKey = getState().account.publicKey;
     dispatch(uiStartLoading('ledger'));
+    var url;
+    if(cursor){
+      url = `${config.baseUrl}/getLedger/${publicKey}?cursor=${cursor}`;
+    }
+    else{
+      url = `${config.baseUrl}/getLedger/${publicKey}`;
+      dispatch(clearLedger());
+    }
     try{
-      const result = await axios(`${config.baseUrl}/getLedger/${publicKey}`);
+      const result = await axios(url);
       const transactions = result.data.data;
       dispatch(setLedger(transactions));
       dispatch(uiStopLoading('ledger'));
