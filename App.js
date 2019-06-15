@@ -24,6 +24,7 @@ import configureStore from './store/configureStore';
 
 import Icon from 'react-native-vector-icons/Entypo'; 
 import Font5 from 'react-native-vector-icons/FontAwesome5';
+import Feather from 'react-native-vector-icons/Feather';
 
 const store = configureStore();
 
@@ -99,7 +100,8 @@ export const goToHome = () => {
     Icon.getImageSource('home'),
     Icon.getImageSource('wallet'),
     Icon.getImageSource('list'),
-    Font5.getImageSource('user-alt')
+    Font5.getImageSource('user-alt'),
+    Feather.getImageSource('menu', 25, 'white')
   ]).then((sources) => {
     Navigation.setRoot({
       root: {
@@ -121,6 +123,11 @@ export const goToHome = () => {
                           id: 'Home',
                           options: {
                             topBar: {
+                              leftButtons: [
+                                {
+                                  icon: sources[4]
+                                }
+                              ],
                               background: {
                                   color: '#007ee5'
                               },

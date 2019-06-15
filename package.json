@@ -25,7 +25,7 @@
     "react-native-firebase": "^5.3.1",
     "react-native-keychain": "^3.1.1",
     "react-native-modal": "^11.0.1",
-    "react-native-navigation": "^2.13.1",
+    "react-native-navigation": "^2.21.0-experimental.4",
     "react-native-phone-input": "^0.2.2",
     "react-native-qrcode": "^0.2.7",
     "react-native-qrcode-scanner": "^1.1.2",

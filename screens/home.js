@@ -12,6 +12,7 @@ class HomeScreen extends React.Component {
 
   constructor(props){
     super(props);
+    Navigation.events().bindComponent(this);
   }
 
   async componentDidMount(){
@@ -20,7 +21,21 @@ class HomeScreen extends React.Component {
     this.props.dispatch(getBalance());
     this.props.dispatch(getStreamForAccount());
     createNotificationListeners();
-  }  
+  }
+
+  toggleSideDrawer = () => {
+    Navigation.mergeOptions(this.props.componentId, {
+      sideMenu: {
+        left: {
+          visible: true
+        }
+      }
+    });
+  }
+
+  navigationButtonPressed({buttonId}){
+    this.toggleSideDrawer();
+  }
 
   goToReceiveScreen = () => {
     Navigation.push(this.props.componentId, {
