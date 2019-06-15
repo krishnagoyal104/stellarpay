@@ -1,12 +1,10 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, FlatList, ActivityIndicator} from 'react-native';
 import PassbookItemView from './passbookItem';
-import ModalView from './modal';
 
 const PassbookView = (props) => {
   return(
   	<View style={styles.container}>
-  	<ModalView />
   		{props.loading ? 
   			<View style={styles.loadingContainer}>
   				<ActivityIndicator size="large" color="#007ee5" />

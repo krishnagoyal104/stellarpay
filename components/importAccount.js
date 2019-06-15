@@ -1,6 +1,5 @@
 import React from 'react';
 import {View, Text, TextInput, Image, StyleSheet, TouchableOpacity, ActivityIndicator} from 'react-native';
-import ModalView from './modal';
 
 class ImportAccountView extends React.Component{
 
@@ -26,7 +25,6 @@ class ImportAccountView extends React.Component{
 		 			</View>
 		 		</View>
 		 		<View style={styles.containerBottom}>
-		 			<ModalView /> 
 		 			<Text style={styles.instruction}>Please enter your private key.</Text>
 		 			<TextInput style={styles.input} selectionColor={"black"} onChangeText={val => this.onKeyChange(val)} />
 		 			{this.props.loading ? <ActivityIndicator size="small" color="#007ee5" /> :

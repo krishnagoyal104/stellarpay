@@ -1,6 +1,5 @@
 import React from 'react';
 import {View, Text, Image, TextInput, StyleSheet, TouchableOpacity, ActivityIndicator} from 'react-native';
-import ModalView from './modal';
 import Font from 'react-native-vector-icons/FontAwesome';
 
 class VerificationView extends React.Component{
@@ -49,9 +48,7 @@ class VerificationView extends React.Component{
 							</View>
 					 </TouchableOpacity>
 		 		</View>
-		 		<View style={styles.bottomContainer}>
-		 			<ModalView />
-			 	</View>
+		 		<View style={styles.bottomContainer}></View>
 		 	</View>
 	  );
 	}

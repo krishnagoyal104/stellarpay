@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, Dimensions, TextInput, TouchableOpacity, Keyboard, ActivityIndicator} from 'react-native';
 import ScannerView from './scanner';
-import ModalView from './modal';
 import Ionicon from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Font from 'react-native-vector-icons/FontAwesome';
@@ -71,7 +70,6 @@ class PaymentPage extends React.Component{
 		  		}
 		  	</View>
 		  	<View style={styles.containerBottom}>
-		  		<ModalView />
 		  		{this.state.scanner ? <ScannerView close={this.onScanner} navigate={(publicKey) => this.props.navigate(publicKey)} /> :
 		  			<TouchableOpacity style={styles.scannerContainer} onPress={() => this.onScanner()}>
 		  				<Text style={styles.scanText}>Scan QRCode</Text>
