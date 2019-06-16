@@ -54,7 +54,14 @@ class DepositView extends React.Component{
 					<Text style={styles.buttonText}>Add Amount</Text>
 				</TouchableOpacity>}
  			</View>
- 			<View style={styles.bottomContainer}></View>
+ 			<View style={styles.bottomContainer}>
+ 				<View style={styles.infoContainer}>
+ 					<Text style={styles.infoText}>
+ 						INR is a stable coin issued by StellarPay. You can add these tokens to your account
+ 						once you've established a trustline with StellarPay.
+ 					</Text>
+ 				</View>
+ 			</View>
  		</View>
  		);
 	}
@@ -72,14 +79,16 @@ const styles = StyleSheet.create({
 	},
 	bottomContainer: {
 		flex: 1,
-		justifyContent: 'flex-end'
+		justifyContent: 'center',
+		alignItems: 'center'
 	},
 	balanceContainer: {
 		height: 35,
-		width: '100%',
+		width: '90%',
+		borderRadius: 8,
 		paddingLeft: '10%',
 		justifyContent: 'center',
-		backgroundColor: '#007ee5'
+		backgroundColor: '#53b6eb'
 	},
 	balance: {
 		color: 'white'
@@ -102,6 +111,7 @@ const styles = StyleSheet.create({
 	},
 	card: {
 		width: '25%',
+		borderRadius: 5,
 		justifyContent: 'center',
 		alignItems: 'center',
 		borderWidth: 2,
@@ -112,8 +122,9 @@ const styles = StyleSheet.create({
 		color: 'black'
 	},
 	button: {
-		height: 40,
+		height: 50,
 		width: '90%',
+		borderRadius: 8,
 		justifyContent: 'center',
 		alignItems: 'center',
 		backgroundColor: '#007ee5',
@@ -133,14 +144,18 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		color: 'red'
 	},
-	trustButton: {
-		flexDirection: 'row',
-		justifyContent: 'flex-start',
-		alignSelf: 'center'
+	infoContainer: {
+		height: 120,
+		width: '90%',
+		padding: 8,
+		borderWidth: 0.2,
+		borderRadius: 8,
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
-	trustButtonText: {
-		color: 'black',
-		fontSize: 20
+	infoText: {
+		textAlign: 'center',
+		fontSize: 16
 	}
 });
 
