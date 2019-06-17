@@ -34,6 +34,7 @@
     "react-native-vector-icons": "^6.3.0",
     "react-redux": "^6.0.1",
     "redux": "^4.0.1",
+    "redux-persist": "^5.10.0",
     "redux-thunk": "^2.3.0",
     "stellar-sdk": "^0.14.0",
     "vm-browserify": "^1.1.0"

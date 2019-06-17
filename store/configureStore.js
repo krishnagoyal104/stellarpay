@@ -1,4 +1,6 @@
+import {AsyncStorage} from 'react-native';
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
+import {persistStore, persistReducer} from 'redux-persist'
 import thunk from 'redux-thunk';
 import balanceReducer from '../reducers/balance';
 import accountReducer from '../reducers/account';
@@ -13,10 +15,13 @@ if(__DEV__){
 	composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE__ || compose;
 }*/
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const persistConfig = {
+  key: 'root',
+  storage: AsyncStorage,
+  whitelist: ['balances', 'ledger']
+}
 
-export default () => {
-  const store = createStore(combineReducers({
+const rootReducer = combineReducers({
 	balances: balanceReducer,
 	account: accountReducer,
 	ui: transactionReducer,
@@ -24,9 +29,14 @@ export default () => {
 	recipient: receiverReducer,
 	user: userReducer,
 	error: errorReducer
-  }),
-  composeEnhancers(applyMiddleware(thunk))
-		  
-  );
-  return store;
+  })
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+export default () => {
+  const store = createStore(persistedReducer, composeEnhancers(applyMiddleware(thunk)));
+  const persistor = persistStore(store)
+  return {store, persistor};
 };

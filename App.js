@@ -26,7 +26,7 @@ import Icon from 'react-native-vector-icons/Entypo';
 import Font5 from 'react-native-vector-icons/FontAwesome5';
 import Feather from 'react-native-vector-icons/Feather';
 
-const store = configureStore();
+const store = configureStore().store;
 
 Navigation.registerComponentWithRedux('stellarPay.HomeScreen', () => HomeScreen, Provider, store);
 Navigation.registerComponentWithRedux('stellarPay.PaymentScreen', () => PaymentScreen, Provider, store);
