@@ -11,7 +11,9 @@ class SignupView extends React.Component{
 		this.state = {
 			name: '',
 			code: '+91',
-			number: null
+			number: null,
+			color1: '#C7C7CD',
+			color2: '#C7C7CD'
 		}
 	}
 
@@ -43,19 +45,26 @@ class SignupView extends React.Component{
 		return(	
 		 	<View style={styles.mainContainer}>
 			 	<View style={styles.container}>
-				 	<View style={styles.inputContainer1}>
+				 	<View style={[styles.inputContainer1, {borderColor: this.state.color1}]}>
 				 		<Icon name={"user"} size={25} />
 				 		<TextInput style={styles.input1}
 				 		placeholder="Enter Name" onChangeText={(val) => this.onNameChange(val)}
-				 		selectionColor={"black"}/>
+				 		selectionColor={"black"}
+				 		onFocus={() => this.setState({color1: '#007ee5'})}
+						onBlur={() => this.setState({color1: '#C7C7CD'})}
+				 		/>
 				 	</View>
 				 	<View style={styles.inputContainer2}>	
-				 		<PhoneInput ref='phone' value={this.state.code} textStyle={{fontSize: 20}} style={styles.code}
+				 		<PhoneInput ref='phone' value={this.state.code} textStyle={{fontSize: 20}}
+				 		textProps={{selectionColor: '#007ee5', maxLength: 4}}
+				 		style={[styles.code, {borderColor: this.state.color2}]}
 				 		onChangePhoneNumber={(val) => this.onCodeChange(val)} />
-				 		<TextInput style={styles.input2}
+				 		<TextInput style={[styles.input2, {borderColor: this.state.color2}]}
 				 		placeholder={"Enter number"}
 				 		onChangeText={(val) => this.onNumberChange(val)}
-				 		selectionColor={"black"}
+				 		selectionColor={"#007ee5"}
+				 		onFocus={() => this.setState({color2: '#007ee5'})}
+						onBlur={() => this.setState({color2: '#C7C7CD'})}
 				 		keyboardType="numeric"/>
 				 	</View>
 		 		<TouchableOpacity style={styles.signupContainer} onPress={() => this.onSignUp()} >
@@ -85,8 +94,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'flex-start',
 		alignItems: 'center',
-		borderBottomWidth: 2,
-		borderColor: '#007ee5'
+		borderBottomWidth: 2
 	},
 	inputContainer2: {
 		width: '90%',
@@ -99,14 +107,13 @@ const styles = StyleSheet.create({
 		height: 50,
 		width: '100%',
 		fontSize: 20,
-		marginLeft: 5,
 		paddingLeft: 10,
+		marginLeft: 5
 	},
 	code: {
 		height: 50,
 		width: '25%',
 		borderBottomWidth: 2,
-		borderColor: '#007ee5',
 		fontSize: 20
 	},
 	input2: {
@@ -115,7 +122,6 @@ const styles = StyleSheet.create({
 		paddingTop: 5,
 		marginLeft: 5,
 		borderBottomWidth: 2,
-		borderColor: '#007ee5',
 		fontSize: 20
 	},
 	signupContainer: {
