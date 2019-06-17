@@ -6,19 +6,22 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 const PassbookView = (props) => {
 	const footer = 
-		<TouchableOpacity style={styles.footer} onPress={() => props.fetchTransactions(props.ledger[props.ledger.length-1].pagingToken)} >
+		<TouchableOpacity style={styles.footer} onPress={() => props.fetchTransactions(props.ledger[props.ledger.length-1].pagingToken, 'desc')} >
 			<Text style={styles.text}>{props.loading ? 'Loading...' : 'Load more transactions'}</Text>
 			<Icon name={"md-cloud-download"} size={40} color={'#007ee5'} />	
 		</TouchableOpacity>
   return(
 	  	<FlatList
 			data={props.ledger}
-			onRefresh={() => props.fetchTransactions()}
+			onRefresh={() => {
+				props.ledger.length ?	props.fetchTransactions(props.ledger[0].pagingToken, 'asc') :
+				props.fetchTransactions();
+			}}
 			refreshing={props.loading}
 			keyExtractor={item => item.id}
 			renderItem={({item}) => <PassbookItemView {...item} />}
 			ListEmptyComponent={!props.loading && ListEmptyComponent}
-			ListFooterComponent={props.ledger.length && footer}
+			ListFooterComponent={props.ledger.length >= 10 && footer}
 			contentContainerStyle={[{ flexGrow: 1 }, props.ledger.length ? null : { alignItems: 'center'} ]}
 			/>
   );	 	

@@ -3,35 +3,28 @@ import {uiStartLoading, uiStopLoading} from './transaction';
 import {setError} from './error';
 import {config} from '../config/config';
 
-export const setLedger = (ledger) => {
+export const setLedger = (ledger, order) => {
   return {
     type: 'SET_LEDGER',
-    ledger
+    payload: {ledger, order}
   };
 };
 
-export const clearLedger = () => {
-  return {
-    type: 'CLEAR_LEDGER',
-  };
-};
-
-export const getLedger = (cursor) => {
+export const getLedger = (cursor, order) => {
   return async(dispatch, getState) => {
     const publicKey = getState().account.publicKey;
     dispatch(uiStartLoading('ledger'));
     var url;
     if(cursor){
-      url = `${config.baseUrl}/getLedger/${publicKey}?cursor=${cursor}`;
+      url = `${config.baseUrl}/getLedger/${publicKey}?cursor=${cursor}&order=${order}`;
     }
     else{
       url = `${config.baseUrl}/getLedger/${publicKey}`;
-      dispatch(clearLedger());
     }
     try{
       const result = await axios(url);
       const transactions = result.data.data;
-      dispatch(setLedger(transactions));
+      dispatch(setLedger(transactions, order));
       dispatch(uiStopLoading('ledger'));
     }
     catch(e){
