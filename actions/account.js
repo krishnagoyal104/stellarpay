@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {fetchAccount, createAccount, fundAccount} from '../utils/account';
+import {fetchAccount, createAccount} from '../utils/account';
 
 export const setKeypair = (publicKey, secretKey) => {
   return {
@@ -18,7 +18,6 @@ export const fetchKeypair = () => {
   		}
 	  	else{
 	  		const {publicKey, secretKey} = await createAccount();
-	  		await fundAccount(publicKey);
 	  		dispatch(setKeypair(publicKey, secretKey));
 	  	}
 	  }	

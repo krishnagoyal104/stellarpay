@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {View, StyleSheet} from 'react-native';
 import {Navigation} from 'react-native-navigation';   
 import WalletView from '../components/wallet';
-import {getBalance} from '../actions/balance';
+import {getBalance, fundUserAccount} from '../actions/balance';
 
 class WalletScreen extends React.Component {
 
@@ -15,10 +15,15 @@ class WalletScreen extends React.Component {
     this.props.dispatch(getBalance());
   }
 
+  fundUserAccount = () => {
+    this.props.dispatch(fundUserAccount());
+  }
+
   render() {
 
     return (
-      <WalletView balances={this.props.balances} loading={this.props.loading} refresh={this.fetchBalance} />
+      <WalletView balances={this.props.balances} loading={this.props.loading} refresh={this.fetchBalance}
+      fundUserAccount={this.fundUserAccount}/>
     );  
   }
 

@@ -28,11 +28,6 @@ const PassbookView = (props) => {
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
 	footer: {
 		height: 100,
 		width: '100%',
