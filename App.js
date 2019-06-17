@@ -83,8 +83,9 @@ export const goToWelcome = () => {
               name: 'stellarPay.WelcomeScreen',
               options: {
                 topBar: {
-                  visible: false,
-                  drawBehind: true
+                  background: {
+                    color: '#007ee5'
+                  }
                 }
               }
             }

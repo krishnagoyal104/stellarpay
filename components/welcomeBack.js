@@ -15,15 +15,11 @@ const WelcomeBackView = (props) => {
 				   <Text style={styles.text}>Wallet linked to:</Text>
 				   <Text style={styles.number}>{props.user.number}</Text>
 			   </View>
-			 </View> 
-			 <View style={styles.containerBottom}>
 			   <TouchableOpacity style={styles.button} onPress={() => goToHome()}>
-			   		<View style={styles.buttonView}>
-							<Text style={styles.buttonText}>Proceed</Text>
-							<Icon name={'arrowright'} size={20} color={'white'} style={{paddingTop: 4, paddingLeft: 6}} />
-						</View>	
+						<Text style={styles.buttonText}>Proceed</Text>
 				 </TouchableOpacity>
 			 </View> 
+			 <View style={styles.containerBottom}></View> 
 		 </View>
 	);
 }
@@ -38,7 +34,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center'
 	},
 	containerBottom: {
-		flex: 2,
+		flex: 1,
 		justifyContent: 'flex-end',
 		alignItems: 'center',
 	},
@@ -60,17 +56,12 @@ const styles = StyleSheet.create({
 		color: 'black'
 	},
 	button: {
-		height: 40,
+		height: 50,
 		width: '85%',
-		marginTop: 6,
-		marginBottom: 12,
+		borderRadius: 8,
 		backgroundColor: '#007ee5',
 		alignItems: 'center',
 		justifyContent: 'center'
-	},
-	buttonView: {
-		flexDirection: 'row',
-		justifyContent: 'flex-start'
 	},
 	buttonText: {
 		fontSize: 20,

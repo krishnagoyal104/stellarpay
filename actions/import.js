@@ -4,6 +4,7 @@ import * as Keychain from 'react-native-keychain';
 import {setKeypair} from './account';
 import {uiStartLoading, uiStopLoading} from './transaction';
 import {setError} from './error';
+import {setUserStorage} from './user';
 import {config} from '../config/config';
 
 export const importAccount = (_privateKey, _function1, _function2) => {
@@ -18,6 +19,7 @@ export const importAccount = (_privateKey, _function1, _function2) => {
         Keychain.setGenericPassword(publicKey, secretKey);
         dispatch(setKeypair(publicKey, secretKey));
         const {name, number} = result.data;
+        setUserStorage(name, number);
         _function1(name, number);
       }
       else{

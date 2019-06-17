@@ -9,6 +9,12 @@ export const setUser = (user) => {
   };
 };
 
+export const setUserStorage = (name, number) => {
+  AsyncStorage.setItem('token', 'SignedIn');
+  AsyncStorage.setItem('name', name);
+  AsyncStorage.setItem('number', number);
+}
+
 export const signUp = (credentials) => {
   return async(dispatch) => {
     try{
@@ -18,9 +24,7 @@ export const signUp = (credentials) => {
         data: {...credentials}
       });
       const {name, number} = credentials;
-      AsyncStorage.setItem('token', 'SignedIn');
-      AsyncStorage.setItem('name', name);
-      AsyncStorage.setItem('number', number);
+      setUserStorage(name, number);
       dispatch(setUser({name, number}));
       return Promise.resolve();
     }

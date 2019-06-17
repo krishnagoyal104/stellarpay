@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TextInput, Image, StyleSheet, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {View, Text, TextInput, Image, StyleSheet, TouchableOpacity, ActivityIndicator, KeyboardAvoidingView} from 'react-native';
 
 class ImportAccountView extends React.Component{
 
@@ -18,7 +18,7 @@ class ImportAccountView extends React.Component{
 
 	render(){
 		return(	
-	 		<View style={styles.mainContainer}>
+	 		<KeyboardAvoidingView style={styles.mainContainer} behavior="padding">
 		 		<View style={styles.containerTop}>
 		 			<View style={styles.imageContainer}>
 		 				<Image source={require('../static/keychain.png')} resizeMode={"contain"} style={styles.image} />
@@ -32,7 +32,7 @@ class ImportAccountView extends React.Component{
 						<Text style={styles.importText}>Import</Text>
 					</TouchableOpacity>}
 		 		</View>
-	 		</View>
+	 		</KeyboardAvoidingView>
   	);
 	}
 }
