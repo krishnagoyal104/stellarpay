@@ -1,9 +1,11 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, Dimensions, TextInput, TouchableOpacity, Keyboard, ActivityIndicator} from 'react-native';
-import ScannerView from './scanner';
 import Ionicon from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Font from 'react-native-vector-icons/FontAwesome';
+import { Formik } from 'formik';
+import * as yup from 'yup';
+import ScannerView from './scanner';
 
 class PaymentPage extends React.Component{
 
@@ -12,24 +14,9 @@ class PaymentPage extends React.Component{
 		super(props);
 
 		this.state = {
-			code: '+91',
-			number: '',
 			scanner: false
 		}
 
-	}
-
-	onCodeChange = (val) => {
-		if(!val) return;
-		this.setState(({
-			code: val
-		}));
-	}
-
-	onContactChange = (val) => {
-		this.setState(({
-			number: val
-		}));
 	}
 
 	onScanner = () => {
@@ -38,37 +25,57 @@ class PaymentPage extends React.Component{
 		}));
 	}
 
-	onSubmit = () => {
+	onSubmit = (values) => {
 		Keyboard.dismiss();
-		const {code, number} = this.state;
+		const {code, number} = values;
 		this.props.navigate(code + number);
 	}
 
   render(){  
 		return(	
 			<View style={styles.mainConatiner}>
-			  <View style={styles.containerTop}>
-				  <View style={styles.inputContainer}>
-				  	<TextInput style={styles.codeInput}
-				  	value={this.state.code} selectionColor={'#007ee5'}
-			  		onChangeText={val => this.onCodeChange(val)}
-			  		maxLength={4}
-			  		/>
-			  		<TextInput style={styles.textInput} placeholder={'Enter mobile number'} selectionColor={'#007ee5'}
-			  		onChangeText={val => this.onContactChange(val)}	
-			  		autoFocus={true}
-			  		keyboardType={"numeric"}
-			  		/>
+			<Formik
+	    initialValues={{code: '+91', number: ''}}
+	    onSubmit={values => this.onSubmit(values)}
+	    validationSchema={yup.object().shape({
+        code: yup
+        	.string()
+        	.max(4)
+          .required(),
+        number: yup
+          .number()
+          .required()
+      })}
+		  >
+		  	{props => (
+				  <View style={styles.containerTop}>
+					  <View style={styles.inputContainer}>
+					  	<TextInput style={styles.codeInput}
+					  	value={props.values.code} selectionColor={'#007ee5'}
+				  		onChangeText={props.handleChange('code')}
+				  		maxLength={4}
+				  		/>
+				  		<TextInput style={styles.textInput} value={props.values.number}
+				  		placeholder={'Enter mobile number'} selectionColor={'#007ee5'}
+				  		onChangeText={props.handleChange('number')}	
+				  		autoFocus={true}
+				  		keyboardType={"numeric"}
+				  		/>
+				  	</View>
+				  	{props.touched.number && props.errors.number &&
+            	<Text style={styles.error}>{props.errors.number}</Text>
+            }
+				  	{this.props.loading ? <ActivityIndicator size="small" color="#007ee5" /> :
+			  		(<TouchableOpacity style={styles.loginContainer} onPress={props.handleSubmit} >
+				  			<View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
+									<Text style={styles.login}>Proceed</Text>
+									<Icon name={'arrowright'} size={20} color={'white'} style={{paddingTop: 4, paddingLeft: 6}} />
+								</View>
+						 </TouchableOpacity>)
+			  		}
 			  	</View>
-			  	{this.props.loading ? <ActivityIndicator size="small" color="#007ee5" /> :
-		  		(<TouchableOpacity style={styles.loginContainer} onPress={() => this.onSubmit()} >
-			  			<View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
-								<Text style={styles.login}>Proceed</Text>
-								<Icon name={'arrowright'} size={20} color={'white'} style={{paddingTop: 4, paddingLeft: 6}} />
-							</View>
-					 </TouchableOpacity>)
-		  		}
-		  	</View>
+		  	)}
+		  </Formik>	
 		  	<View style={styles.containerBottom}>
 		  		{this.state.scanner ? <ScannerView close={this.onScanner} navigate={(publicKey) => this.props.navigate(publicKey)} /> :
 		  			<TouchableOpacity style={styles.scannerContainer} onPress={() => this.onScanner()}>
@@ -140,7 +147,8 @@ const styles = StyleSheet.create({
 		color: '#007ee5'
 	},
 	error: {
-		color: '#EC2C1F'
+		fontSize: 16,
+		color: 'red'
 	}
 });
 

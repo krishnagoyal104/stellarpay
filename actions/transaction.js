@@ -39,11 +39,14 @@ export const createTransaction = (_receiverPublicKey, _amount, _function1, _code
       });
     }
     catch(e){
+      dispatch(uiStopLoading('transaction'));
       if(!e.response){
         dispatch(setError('Network Error', 'Please check your internet connection.'))
       }
-      dispatch(uiStopLoading('transaction'));
-      _function2();
+      else if(e.response.status == 500){
+        return;
+      }
+      function2();
       _function1(e.response.data.extras.result_codes.operations[0], 'failed');
     }    
   };

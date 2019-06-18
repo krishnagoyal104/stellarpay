@@ -3,6 +3,8 @@ import {View, Text, StyleSheet, TextInput, TouchableOpacity, Picker} from 'react
 import PaymentModal from './paymentModal';
 import Font from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/Entypo';
+import { Formik } from 'formik';
+import * as yup from 'yup';
 
 class ConfirmPaymentView extends React.Component{
 
@@ -19,14 +21,14 @@ class ConfirmPaymentView extends React.Component{
 
 	}
 
-	onAmountChange = (val) => {
-		this.setState(({
-			amount: val 
-		}));
-	}
+	onAmountChange = (val) => { 
+    this.setState(({ 
+      amount: val  
+    })); 
+  }
 
 	changeModalState = () => {
-		this.setState((prevState) => ({
+		this.setState((prevState) => ({ 
 			modal: !prevState.modal
 		}));
 	}
@@ -49,44 +51,64 @@ class ConfirmPaymentView extends React.Component{
 					<Text style={styles.text1}>{this.props.name.toUpperCase()}</Text>
 					<Text style={styles.text2}>Wallet linked to {this.props.number}</Text>
 				</View>
-				<View style={styles.containerBottom}>
-					<View style={styles.picker}>
-						<Picker
-						  selectedValue={this.state.asset}
-						  style={{height: 50, width: '100%'}}
-						  onValueChange={(itemValue, itemIndex) => {
-						    this.setState(({asset: itemValue, index: itemIndex}))
-						  }}>
-						  {renderItems()}
-						</Picker>
-					</View>
-					<View style={styles.inputIcons}>
-						<Icon name={'triangle-right'} size={20} color={'#007ee5'} style={{paddingTop: 16}} />
-						<TextInput style={styles.textInput} placeholder={'Enter Amount'} selectionColor={'#007ee5'}
-						keyboardType={"numeric"}
-			  		onChangeText={val => this.onAmountChange(val)}
-						underlineColorAndroid={this.state.color}  
-						onFocus={() => this.setState({color: '#007ee5'})}
-						onBlur={() => this.setState({color: '#C7C7CD'})}
-						/>
-				  </View>
-				  <View style={styles.balance}>
-				  	<View style={styles.walletIcon}>
-				  		<Icon name={"wallet"} size={30} />
-				  	</View>
-				  	<View>
-					  	<Text style={{fontSize: 18, color: 'black'}}>Wallet balance</Text>
-					  	<Text style={{fontSize: 14, color: 'black'}}>{this.state.asset}</Text>
-				  	</View>
-				  	<Text style={{fontSize: 20, color: 'black'}}>{this.props.assets.length && this.props.assets[this.state.index].balance.slice(0, -8)}</Text>
-				  </View>
-					<TouchableOpacity style={styles.payContainer} onPress={() => this.changeModalState()} >
-		  			<View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
-							<Text style={styles.pay}>Pay</Text>
-							<Font name={'send'} size={20} color={'white'} style={{paddingTop: 4, paddingLeft: 6}} />
+				<Formik
+			    initialValues={{amount: ''}}
+			    onSubmit={(values) => {
+			    	this.onAmountChange(values.amount);
+			    	this.changeModalState();
+			    }}
+			    validationSchema={yup.object().shape({
+		        amount: yup
+		          .number()
+		          .max(10000)
+		          .required()
+		      })}
+				  >
+				  {props => (
+						<View style={styles.containerBottom}>
+							<View style={styles.picker}>
+								<Picker
+								  selectedValue={this.state.asset}
+								  style={{height: 50, width: '100%'}}
+								  onValueChange={(itemValue, itemIndex) => {
+								    this.setState(({asset: itemValue, index: itemIndex}))
+								  }}>
+								  {renderItems()}
+								</Picker>
+							</View>
+							<View style={styles.inputIcons}>
+								<Icon name={'triangle-right'} size={20} color={'#007ee5'} style={{paddingTop: 16}} />
+								<TextInput style={styles.textInput} placeholder={'Enter Amount'} selectionColor={'#007ee5'}
+								value={props.values.amount}
+								keyboardType={"numeric"}
+					  		onChangeText={props.handleChange('amount')}
+								underlineColorAndroid={this.state.color}  
+								onFocus={() => this.setState({color: '#007ee5'})}
+								onBlur={() => this.setState({color: '#C7C7CD'})}
+								/>
+						  </View>
+						  {props.touched.amount && props.errors.amount &&
+            		<Text style={styles.error}>{props.errors.amount}</Text>
+            	}
+						  <View style={styles.balance}>
+						  	<View style={styles.walletIcon}>
+						  		<Icon name={"wallet"} size={30} />
+						  	</View>
+						  	<View>
+							  	<Text style={{fontSize: 18, color: 'black'}}>Wallet balance</Text>
+							  	<Text style={{fontSize: 14, color: 'black'}}>{this.state.asset}</Text>
+						  	</View>
+						  	<Text style={{fontSize: 20, color: 'black'}}>{this.props.assets.length && this.props.assets[this.state.index].balance.slice(0, -8)}</Text>
+						  </View>
+							<TouchableOpacity style={styles.payContainer} onPress={props.handleSubmit} >
+				  			<View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
+									<Text style={styles.pay}>Pay</Text>
+									<Font name={'send'} size={20} color={'white'} style={{paddingTop: 4, paddingLeft: 6}} />
+								</View>
+							</TouchableOpacity>
 						</View>
-					</TouchableOpacity>
-				</View>
+					)}	
+				</Formik>	
 				<View>
 					<PaymentModal isVisible={this.state.modal}
 					name={this.props.name} amount={this.state.amount} asset={this.state.asset}
@@ -166,6 +188,10 @@ const styles = StyleSheet.create({
 	pay: {
 		color: 'white',
 		fontSize: 20
+	},
+	error: {
+		fontSize: 16,
+		color: 'red'
 	}
 });
 

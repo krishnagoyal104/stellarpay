@@ -1,8 +1,10 @@
 import React from 'react';
 import {View, Text, TextInput, Image, StyleSheet, Button, TouchableOpacity, ActivityIndicator, Dimensions} from 'react-native';
-import Ionicon from 'react-native-vector-icons/Ionicons'
+import Ionicon from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/Feather';
-import PhoneInput from 'react-native-phone-input'
+import PhoneInput from 'react-native-phone-input';
+import { Formik } from 'formik';
+import * as yup from 'yup';
 
 class SignupView extends React.Component{
 
@@ -35,45 +37,67 @@ class SignupView extends React.Component{
 		}))
 	}
 
-	onSignUp = () => {
-		let {name, number, code} = this.state;
+	onSignUp = (values) => {
+		let {name, number, code} = values;
 		number = code + number;
-		this.props.onSubmit({name, number});
 	}
 
 	render(){
 		return(	
 		 	<View style={styles.mainContainer}>
-			 	<View style={styles.container}>
-				 	<View style={[styles.inputContainer1, {borderColor: this.state.color1}]}>
-				 		<Icon name={"user"} size={25} />
-				 		<TextInput style={styles.input1}
-				 		placeholder="Enter Name" onChangeText={(val) => this.onNameChange(val)}
-				 		selectionColor={"black"}
-				 		onFocus={() => this.setState({color1: '#007ee5'})}
-						onBlur={() => this.setState({color1: '#C7C7CD'})}
-				 		/>
-				 	</View>
-				 	<View style={styles.inputContainer2}>	
-				 		<PhoneInput ref='phone' value={this.state.code} textStyle={{fontSize: 20}}
-				 		textProps={{selectionColor: '#007ee5', maxLength: 4}}
-				 		style={[styles.code, {borderColor: this.state.color2}]}
-				 		onChangePhoneNumber={(val) => this.onCodeChange(val)} />
-				 		<TextInput style={[styles.input2, {borderColor: this.state.color2}]}
-				 		placeholder={"Enter number"}
-				 		onChangeText={(val) => this.onNumberChange(val)}
-				 		selectionColor={"#007ee5"}
-				 		onFocus={() => this.setState({color2: '#007ee5'})}
-						onBlur={() => this.setState({color2: '#C7C7CD'})}
-				 		keyboardType="numeric"/>
-				 	</View>
-		 		<TouchableOpacity style={styles.signupContainer} onPress={() => this.onSignUp()} >
-	  			<View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
-						<Text style={styles.bottomText}>Sign Up</Text>
-						{this.props.loading && <ActivityIndicator size="small" color="white" />}
-					</View>
-				</TouchableOpacity>
-		 	</View>
+		 		<Formik
+		    initialValues={{name: '', code: '+91', number: ''}}
+		    onSubmit={values => this.onSignUp(values)}
+		    validationSchema={yup.object().shape({
+	        name: yup
+	        	.string()
+	        	.min(3)
+	          .required(),
+	        code: yup
+	        	.string()
+	        	.min(2)
+	        	.required(),  
+	        number: yup
+	          .number()
+	          .required()
+	      })}
+			  >
+			  	{props => (
+					 	<View style={styles.container}>
+						 	<View style={[styles.inputContainer1, {borderColor: this.state.color1}]}>
+						 		<Icon name={"user"} size={25} />
+						 		<TextInput style={styles.input1}
+						 		placeholder="Enter Name" onChangeText={props.handleChange('name')}
+						 		selectionColor={"#007ee5"}
+						 		onFocus={() => this.setState({color1: '#007ee5'})}
+								onBlur={() => this.setState({color1: '#C7C7CD'})}
+						 		/>
+						 	</View>
+						 	<View style={styles.inputContainer2}>	
+						 		<PhoneInput ref='phone' value={props.values.code} textStyle={{fontSize: 20}}
+						 		textProps={{selectionColor: '#007ee5', maxLength: 4}}
+						 		style={[styles.code, {borderColor: this.state.color2}]}
+						 		onChangePhoneNumber={props.handleChange('code')} />
+						 		<TextInput style={[styles.input2, {borderColor: this.state.color2}]}
+						 		placeholder={"Enter number"}
+						 		onChangeText={props.handleChange('number')}
+						 		selectionColor={"#007ee5"}
+						 		onFocus={() => this.setState({color2: '#007ee5'})}
+								onBlur={() => this.setState({color2: '#C7C7CD'})}
+						 		keyboardType="numeric"/>
+						 	</View>
+						 	{props.touched.name && (props.errors.name || props.errors.code || props.errors.number) && 
+            		<Text style={styles.error}>{props.errors.name || props.errors.code || props.errors.number}</Text>
+            	}
+					 		<TouchableOpacity style={styles.signupContainer} onPress={props.handleSubmit} >
+				  			<View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
+									<Text style={styles.bottomText}>Sign Up</Text>
+									{this.props.loading && <ActivityIndicator size="small" color="white" />}
+								</View>
+							</TouchableOpacity>
+					 	</View>
+					)} 	
+		 		</Formik>
 		 	</View>
   	);
 	}
@@ -136,6 +160,10 @@ const styles = StyleSheet.create({
 	bottomText: {
 		color: 'white',
 		fontSize: 20
+	},
+	error: {
+		fontSize: 16,
+		color: 'red'
 	}
 });
 
