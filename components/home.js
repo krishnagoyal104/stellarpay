@@ -7,16 +7,16 @@ const HomeView = (props) => {
   return(	
  	<View style={styles.mainContainer}>
  		<View style={styles.container1}>
- 		<View style={styles.innerContainers}>
-	 		<TouchableOpacity onPress={() => props.navigateToPayment()}>
- 				<Text style={styles.text}>Send</Text>
+	 		<TouchableOpacity style={styles.innerContainers} onPress={() => props.navigateToPayment()}>
+		 		<View>
+	 				<Text style={styles.text}>Send</Text>
+		 		</View>
 	 		</TouchableOpacity>
- 		</View>
- 		<View style={styles.innerContainers}>
- 		<TouchableOpacity onPress={() => props.navigateToReceive()}> 		
- 			<Text style={styles.text}>Receive</Text>
- 		</TouchableOpacity>	
- 		</View>	
+	 		<TouchableOpacity style={styles.innerContainers} onPress={() => props.navigateToReceive()}>
+	 		<View> 		
+	 			<Text style={styles.text}>Receive</Text>
+	 		</View>	
+	 		</TouchableOpacity>	
  		</View>	
 	 	<View style={styles.container2}>
 	 		<ModalView />
@@ -40,30 +40,22 @@ const styles = StyleSheet.create({
 		flex: 1
 	},
 	innerContainers: {
-		height: 35,
-		width: 90,
-		alignItems: 'center',
+		height: 50,
+		width: 120,
 		justifyContent: 'center',
+		alignItems: 'center',
 		backgroundColor: 'white',
-		borderRadius: 8
+		borderRadius: 60
 	},
 	text: {
-		fontSize: 16,
-		color: '#007ee5',
-		/*paddingTop: 8,
-		paddingLeft: 25,
-		paddingRight: 25,
-		paddingBottom: 8,
-		alignItems: 'center',
-		borderRadius: 10,
-		backgroundColor: 'white'*/
+		fontSize: 18,
+		color: '#007ee5'
 	},
 	icon: {
 		padding: 8,
 		borderRadius: 50,
 		backgroundColor: 'white',
 		justifyContent: 'flex-start'
-		//alignItems: 'center'
 	}
 });
 
