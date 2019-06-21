@@ -9,15 +9,27 @@ export const setBalance = (balances) => {
     type: 'SET_BALANCES',
     balances
   };
-}; 
+};
+
+export const fetchBalance = (publicKey) => {
+  const promise = new Promise(async(resolve, reject) => {
+    try{
+      const result = await axios(`https://horizon-testnet.stellar.org/accounts/${publicKey}`);
+      resolve(result.data.balances);
+    }
+    catch(e){
+      reject(e);
+    }
+  });
+  return promise;
+} 
 
 export const getBalance = () => {
   return async(dispatch, getState) => {
     const publicKey = getState().account.publicKey;
     dispatch(uiStartLoading('balance'));
     try{
-      const result = await axios(`https://horizon-testnet.stellar.org/accounts/${publicKey}`)
-      const balances = result.data.balances;
+      const balances = await fetchBalance(publicKey);
       dispatch(setBalance(balances));
       dispatch(uiStopLoading('balance'));
     }
@@ -36,14 +48,17 @@ export const fundUserAccount = () => {
     dispatch(uiStartLoading('balance'));
     try{
       await fundAccount(publicKey);
-      const result = await axios(`https://horizon-testnet.stellar.org/accounts/${publicKey}`)
-      const balances = result.data.balances;
+      const balances = await fetchBalance(publicKey);
       dispatch(setBalance(balances));
       dispatch(uiStopLoading('balance'));
     }
     catch(e){
       if(!e.response){
         dispatch(setError('Network Error', 'Please check your internet connection.'))
+      }
+      else{
+        const balances = await fetchBalance(publicKey);
+        dispatch(setBalance(balances));
       }
       dispatch(uiStopLoading('balance'));
     }
