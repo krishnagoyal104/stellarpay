@@ -144,8 +144,8 @@ export const goToHome = () => {
                     options: {
                       bottomTab: {
                         icon: require('./static/home.png'),
-                        iconColor: '#99D3EC',
-                        selectedIconColor: '#007ee5'
+                        iconColor: '#007ee5',
+                        selectedIconColor: '#99D3EC'
                       }
                     }
                   }
@@ -180,8 +180,8 @@ export const goToHome = () => {
                     options: {
                       bottomTab: {
                         icon: require('./static/wallet.png'),
-                        iconColor: '#99D3EC',
-                        selectedIconColor: '#007ee5'
+                        iconColor: '#007ee5',
+                        selectedIconColor: '#99D3EC'
                       }
                     }
                   }
@@ -216,8 +216,8 @@ export const goToHome = () => {
                     options: {
                       bottomTab: {
                         icon: require('./static/passbook.png'),
-                        iconColor: '#99D3EC',
-                        selectedIconColor: '#007ee5'
+                        iconColor: '#007ee5',
+                        selectedIconColor: '#99D3EC'
                       }
                     }
                   }
@@ -251,9 +251,9 @@ export const goToHome = () => {
                     ],
                     options: {
                       bottomTab: {
-                        icon: require('./static/profile.png'),
-                        iconColor: '#99D3EC',
-                        selectedIconColor: '#007ee5'
+                        icon: sources[3],
+                        iconColor: '#007ee5',
+                        selectedIconColor: '#99D3EC'
                       }
                     }
                   }
