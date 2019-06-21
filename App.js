@@ -271,7 +271,7 @@ export const goToHome = () => {
               left: {
                 visible: false,
                 enabled: false,
-                width: 200
+                width: 250
               }
             }
           }
