@@ -1,10 +1,11 @@
 import React from 'react';
 import {View, Text, StyleSheet, TextInput, TouchableOpacity, Picker} from 'react-native';
-import PaymentModal from './paymentModal';
 import Font from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/Entypo';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import PaymentModal from './paymentModal';
+import ActivityIndicator from './activityIndicator';
 
 class ConfirmPaymentView extends React.Component{
 
@@ -100,12 +101,13 @@ class ConfirmPaymentView extends React.Component{
 						  	</View>
 						  	<Text style={{fontSize: 20, color: 'black'}}>{this.props.assets.length && this.props.assets[this.state.index].balance.slice(0, -8)}</Text>
 						  </View>
-							<TouchableOpacity style={styles.payContainer} onPress={props.handleSubmit} >
-				  			<View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
-									<Text style={styles.pay}>Pay</Text>
-									<Font name={'send'} size={20} color={'white'} style={{paddingTop: 4, paddingLeft: 6}} />
-								</View>
-							</TouchableOpacity>
+							{this.props.loading ? <ActivityIndicator /> :
+								<TouchableOpacity style={styles.payContainer} onPress={props.handleSubmit} >
+					  			<View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
+										<Text style={styles.pay}>Pay</Text>
+										<Font name={'send'} size={20} color={'white'} style={{paddingTop: 4, paddingLeft: 6}} />
+									</View>
+								</TouchableOpacity>}
 						</View>
 					)}	
 				</Formik>	

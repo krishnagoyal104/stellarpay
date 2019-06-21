@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Modal from "react-native-modal";
-import ActivityIndicator from './activityIndicator';
 import Ionicon from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/Entypo';
 
@@ -31,10 +30,12 @@ const PaymentModal = (props) => {
 				  		<Icon name={"wallet"} size={30} color={"#007ee5"} />
 				  	</View>
 					</View>
-					{props.loading ? <ActivityIndicator /> :
-					<TouchableOpacity style={styles.button} onPress={() => props.makePayment()} >
+					<TouchableOpacity style={styles.button} 
+						onPress={() => {
+							props.closeModal();
+							props.makePayment()}}>
 						<Text style={styles.buttonText}>Confirm</Text>
-					</TouchableOpacity>}
+					</TouchableOpacity>
 				</View>
 			</Modal>
 		</View>

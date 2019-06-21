@@ -5,36 +5,39 @@ import moment from 'moment';
 import Icon from 'react-native-vector-icons/Entypo';
 
 const ReceiptView = (props) => {
-	const status = props.status === 'successful';
 	const renderItems = () => {
 		switch(props.status){
 			case 'successful':
 				return {
 					type: 'payment',
+					status: 1,
 					text: 'Paid Successfully',
 					animation: <LottieView style={styles.animation} source={require(`../static/success.json`)} autoPlay loop={false} />
 				};
 			case 'failed':
 				return {
 					type: 'payment',
+					status: 0,
 					text: 'Transaction Failed',
 					animation: <LottieView style={styles.animation} source={require(`../static/error.json`)} autoPlay loop={false} />		
 				};
 			case 'deposit successful':
 				return {
 					type: 'deposit',
+					status: 1,
 					text: 'Added Successfully',
 					animation: <LottieView style={styles.animation} source={require(`../static/success.json`)} autoPlay loop={false} />
 				};
 			case 'deposit failed':
 				return {
 					type: 'deposit',
+					status: 0,
 					text: 'Transaction Failed',
 					animation: <LottieView style={styles.animation} source={require(`../static/error.json`)} autoPlay loop={false} />
 				};	
 		}
 	}
-	const {type, text, animation} = renderItems();
+	const {type, status, text, animation} = renderItems();
   return(	
 		<View style={styles.mainContainer}>
 			<View style={styles.container}>
@@ -54,8 +57,8 @@ const ReceiptView = (props) => {
 				<Text style={styles.font2}>{moment().format('LLL')}</Text>
 				<View>
 					<Text style={styles.font2}>{props.id && 'Transaction Id:'}</Text>
-					{status ? <Text style={styles.font2} selectable={true}>{props.id}</Text> :
-					<Text style={styles.font3}>{props.id}</Text>}
+					{status ? <Text style={styles.font3} selectable={true}>{props.id}</Text> :
+					<Text style={styles.font4}>{props.id}</Text>}
 				</View>
 				<TouchableOpacity style={styles.navigationButton} onPress={() => props.navigate()}>
 						<Icon name={'home'} size={20} color={'#007ee5'} style={{paddingTop: 4, paddingRight: 6}} />
@@ -95,6 +98,10 @@ const styles = StyleSheet.create({
 		color: 'black'
 	},
 	font3: {
+		fontSize: 14,
+		color: 'black'
+	},
+	font4: {
 		fontSize: 20,
 		color: 'black'
 	},
