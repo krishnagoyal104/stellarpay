@@ -34,7 +34,21 @@ const ReceiptView = (props) => {
 					status: 0,
 					text: 'Transaction Failed',
 					animation: <LottieView style={styles.animation} source={require(`../static/error.json`)} autoPlay loop={false} />
+				};
+			case 'trustline successful':
+				return {
+					type: 'trustline',
+					status: 1,
+					text: 'Trustline Created',
+					animation: <LottieView style={styles.animation} source={require(`../static/success.json`)} autoPlay loop={false} />
 				};	
+			case 'trustline failed':
+				return {
+					type: 'trustline',
+					status: 0,
+					text: 'Trustline Failed',
+					animation: <LottieView style={styles.animation} source={require(`../static/error.json`)} autoPlay loop={false} />
+				};		
 		}
 	}
 	const {type, status, text, animation} = renderItems();
@@ -46,9 +60,9 @@ const ReceiptView = (props) => {
 						<Text style={styles.font1}>{text}</Text>
 						{animation}
 					</View>
-					<Text style={styles.font1}>{props.amount} {props.code || type === 'deposit' ? 'INR' : 'Lumens'}</Text>
+					<Text style={styles.font1}>{props.amount} {props.code || type === 'deposit' || 'trustline' ? 'INR' : 'Lumens'}</Text>
 				</View>
-				{type !== 'deposit' && 
+				{type === 'payment' && 
 					<View>
 						<Text style={styles.font2}>{props.recipient.name.toUpperCase()}'s wallet linked to</Text>
 						<Text style={styles.font1}>{props.recipient.number}</Text>

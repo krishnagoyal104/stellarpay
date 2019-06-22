@@ -1,10 +1,11 @@
 import axios from 'axios';
+import {AsyncStorage} from 'react-native';
 import {changeTrust} from '../utils/transaction';
 import {uiStartLoading, uiStopLoading} from './transaction';
 import {setError} from './error';
 import {config} from '../config/config';
 
-export const createTrustline = () => {
+export const createTrustline = (_function1, _function2) => {
   return async(dispatch, getState) => {
     dispatch(uiStartLoading('credit'));
     const {publicKey, secretKey} = getState().account;
@@ -13,15 +14,18 @@ export const createTrustline = () => {
     try{
       const publicKey = getState().account.publicKey;
       const secretKey = getState().account.secretKey;
-      const result = await changeTrust(publicKey, secretKey, code, issuer);
+      const hash = await changeTrust(publicKey, secretKey, code, issuer);
+      AsyncStorage.setItem('trust', 'created');
+      _function2();
       dispatch(uiStopLoading('credit'));
+      _function1(10000, hash, 'trustline successful');
     }
     catch(e){
-      console.log(e);
+      dispatch(uiStopLoading('credit'));
       if(!e.response){
         dispatch(setError('Network Error', 'Please check your internet connection.'))
       }
-      dispatch(uiStopLoading('credit'));
+      _function1(10000, e.response.data.extras.result_codes.operations[0], 'trustline failed');
     }
   }
 };    
