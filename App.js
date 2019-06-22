@@ -20,6 +20,7 @@ import WelcomeBackScreen from './screens/welcomeBack';
 import ProfileScreen from './screens/profile';
 import DepositScreen from './screens/deposit';
 import TrustlineScreen from './screens/trustline';
+import AboutScreen from './screens/about';
 import configureStore from './store/configureStore';
 
 import Icon from 'react-native-vector-icons/Entypo'; 
@@ -46,6 +47,7 @@ Navigation.registerComponent('stellarPay.SliderScreen', () => SliderScreen);
 Navigation.registerComponent('stellarPay.InitializeScreen', () => InitializeScreen);
 Navigation.registerComponent('stellarPay.WelcomeScreen', () => WelcomeScreen);
 Navigation.registerComponent('stellarPay.WelcomeBackScreen', () => WelcomeBackScreen);
+Navigation.registerComponent('stellarPay.AboutScreen', () => AboutScreen);
 
 Navigation.events().registerAppLaunchedListener(() => {
   Navigation.setRoot({

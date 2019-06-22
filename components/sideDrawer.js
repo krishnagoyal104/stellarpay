@@ -47,7 +47,7 @@ const SideDrawerView = (props) => {
 			  			<Text style={styles.text}>Profile</Text>
 			  		</View>
 			  	</TouchableOpacity>
-			  	<TouchableOpacity style={styles.itemContainer}>
+			  	<TouchableOpacity style={styles.itemContainer} onPress={() => props.navigate('AboutScreen', 'About')}>
 			  		<View style={styles.vectorIcon}>
 			  			<Entypo name={"info"} size={20} color={"black"} />
 			  		</View>
