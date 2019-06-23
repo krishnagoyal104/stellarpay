@@ -54,7 +54,7 @@ class TrustlineView extends React.Component {
           </Text>
         </View>
           <View style={styles.buttonContainer}>
-            {this.state.showButton ?
+            {this.props.loading ? <ActivityIndicator /> : this.state.showButton ?
               <View style={styles.parentContainer}>
                 <TouchableOpacity style={styles.trustButton} onPress={() => this.props.createTrust(this.hideButton)}>
                   <Font name={'link'} size={20} color={'white'} />
@@ -70,10 +70,10 @@ class TrustlineView extends React.Component {
               </View>  
             }
             <View style={styles.parentContainer}>  
-              <View style={styles.trustButton}>
+              <TouchableOpacity style={styles.trustButton} onPress={() => this.props.navigate()}>
                 <Font name={'link'} size={20} color={'white'} />
                 <Text style={styles.trustButtonText}>Create Trust with an Anchor</Text>
-              </View>
+              </TouchableOpacity>
               <TouchableOpacity onPress={() => this.changeInfo2State()}>
                 <Icon name={'info-with-circle'} size={25} color={'#99D3EC'} />
               </TouchableOpacity>  

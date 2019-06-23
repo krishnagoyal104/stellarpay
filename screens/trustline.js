@@ -40,10 +40,30 @@ class TrustlineScreen extends React.Component {
     });
   }
 
+  goToAnchorScreen = () => {
+    Navigation.push(this.props.componentId, {
+      component: {
+        name: 'stellarPay.AnchorScreen',
+        options: {
+          topBar: {
+            title: {
+              text: 'Create Trust with Anchor',
+              alignment: 'center'
+            }
+          },
+          bottomTabs: {
+            visible: false,
+            drawBehind: true
+          }
+        }
+      },                                                
+    });
+  }
+
   render() {
 
     return (
-      <TrustlineView loading={this.props.loading} createTrust={this.createTrust} />
+      <TrustlineView loading={this.props.loading} createTrust={this.createTrust} navigate={this.goToAnchorScreen} />
     );  
   }
 

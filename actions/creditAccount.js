@@ -5,27 +5,29 @@ import {uiStartLoading, uiStopLoading} from './transaction';
 import {setError} from './error';
 import {config} from '../config/config';
 
-export const createTrustline = (_function1, _function2) => {
+export const createTrustline = (_function1, _function2, _issuer, _code, _limit) => {
   return async(dispatch, getState) => {
     dispatch(uiStartLoading('credit'));
     const {publicKey, secretKey} = getState().account;
-    const code = 'INR';
-    const issuer = 'GBBUWL3AA5LK5F7HFZNLNJNWOMW4XB6WFPP53IJQ527KDWE7Y24EVAMI';
+    const code = _code || 'INR';
+    const issuer = _issuer || 'GBBUWL3AA5LK5F7HFZNLNJNWOMW4XB6WFPP53IJQ527KDWE7Y24EVAMI';
+    const limit = _limit || '10000';
     try{
-      const publicKey = getState().account.publicKey;
-      const secretKey = getState().account.secretKey;
-      const hash = await changeTrust(publicKey, secretKey, code, issuer);
-      AsyncStorage.setItem('trust', 'created');
-      _function2();
+      const hash = await changeTrust(publicKey, secretKey, code, issuer, limit);
+      if(!_issuer){
+        AsyncStorage.setItem('trust', 'created');
+        _function2();
+      }
       dispatch(uiStopLoading('credit'));
-      _function1(10000, hash, 'trustline successful');
+      _function1(limit, hash, 'trustline successful');
     }
     catch(e){
+      console.log(e.response);
       dispatch(uiStopLoading('credit'));
       if(!e.response){
         dispatch(setError('Network Error', 'Please check your internet connection.'))
       }
-      _function1(10000, e.response.data.extras.result_codes.operations[0], 'trustline failed');
+      _function1(limit, e.response.data.extras.result_codes.operations[0], 'trustline failed');
     }
   }
 };    

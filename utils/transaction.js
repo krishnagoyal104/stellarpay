@@ -28,7 +28,7 @@ export const transact = (_publicKey, _secretKey, _receiverPublicKey, _amount, _c
     return promise
 }
 
-export const changeTrust = (_publicKey, _secretKey, _code, _issuer) => {
+export const changeTrust = (_publicKey, _secretKey, _code, _issuer, _limit) => {
     const promise = new Promise(async(resolve, reject) => {
     	try{
 			const sourceKeypair = stellarSdk.Keypair.fromSecret(_secretKey);
@@ -38,7 +38,7 @@ export const changeTrust = (_publicKey, _secretKey, _code, _issuer) => {
 	    const transaction = new stellarSdk.TransactionBuilder(account, {fee})
 	    .addOperation(stellarSdk.Operation.changeTrust({
 		    asset: new stellarSdk.Asset(_code, _issuer),
-		    limit: '10000'
+		    limit: _limit
 	  	}))
 	  	.setTimeout(30)
 	    .build();
