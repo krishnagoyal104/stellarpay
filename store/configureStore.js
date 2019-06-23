@@ -9,11 +9,12 @@ import ledgerReducer from '../reducers/ledger';
 import receiverReducer from '../reducers/resolve';
 import userReducer from '../reducers/signup';
 import errorReducer from '../reducers/error';
-/*let composeEnhancers = compose;
+
+let composeEnhancers = compose;
 
 if(__DEV__){
-	composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE__ || compose;
-}*/
+	composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+}
 
 const persistConfig = {
   key: 'root',
@@ -32,8 +33,6 @@ const rootReducer = combineReducers({
   })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export default () => {
   const store = createStore(persistedReducer, composeEnhancers(applyMiddleware(thunk)));
