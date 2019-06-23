@@ -2,6 +2,7 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import ProfileView from '../components/profile';
+import {setError} from '../actions/error';
 
 class ProfileScreen extends React.Component {
 
@@ -9,10 +10,14 @@ class ProfileScreen extends React.Component {
     super(props);
   }
 
+  alert = () => {
+    this.props.dispatch(setError('Insecure keys', 'You have not enabled fingerprint authentication'));
+  }
+
   render() {
 
     return (
-      <ProfileView {...this.props.account} {...this.props.user} />
+      <ProfileView {...this.props.account} {...this.props.user} {...this.props.error} alert={this.alert} />
     );  
   }
 
@@ -21,7 +26,8 @@ class ProfileScreen extends React.Component {
 const mapStateToProps = (state) => {
 	return{
     account: state.account,
-    user: state.user
+    user: state.user,
+    error: state.error
 	}
 };  
 

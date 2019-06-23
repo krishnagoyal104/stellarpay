@@ -19,10 +19,13 @@ class ProfileView extends React.Component{
 			await TouchID.authenticate('Reveal Private Key', {});
 			this.setState(({
 				auth: true
-			}))
+			}));
 		}
   	catch(e){
-  		console.log(e);
+  		this.props.alert();
+  		this.setState(({
+  			auth: true
+  		}));
   	}
   }	
 
@@ -48,7 +51,7 @@ class ProfileView extends React.Component{
 						</View>
 						<Text selectable={true} style={styles.key}>{this.props.publicKey}</Text>
 				</View>
-				{this.state.auth ?
+				{this.state.auth && !this.props.isVisible ?
 					<View style={styles.keyContainer}>
 						<View style={styles.header}>
 							<Text style={styles.text}>Your private key</Text>
