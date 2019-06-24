@@ -18,7 +18,7 @@
     "moment": "^2.24.0",
     "node-libs-react-native": "^1.0.3",
     "react": "16.6.3",
-    "react-native": "0.58.6",
+    "react-native": "^0.59.9",
     "react-native-app-intro": "https://github.com/merryjs/react-native-app-intro",
     "react-native-app-intro-slider": "^2.0.1",
     "react-native-camera": "^2.6.0",
