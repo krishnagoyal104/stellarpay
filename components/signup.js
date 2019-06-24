@@ -5,41 +5,22 @@ import Icon from 'react-native-vector-icons/Feather';
 import PhoneInput from 'react-native-phone-input';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import ModalView from './modal';
 
 class SignupView extends React.Component{
 
 	constructor(props){
 		super(props);
 		this.state = {
-			name: '',
-			code: '+91',
-			number: null,
 			color1: '#C7C7CD',
 			color2: '#C7C7CD'
 		}
 	}
 
-	onNameChange = (val) => {
-		this.setState(({
-			name: val
-		}))
-	}
-
-	onCodeChange = (val) => {
-		this.setState(({
-			code: val
-		}))
-	}
-
-	onNumberChange = (val) => {
-		this.setState(({
-			number: val
-		}))
-	}
-
 	onSignUp = (values) => {
 		let {name, number, code} = values;
 		number = code + number;
+		this.props.onSubmit({name, number}); 
 	}
 
 	render(){
@@ -98,6 +79,7 @@ class SignupView extends React.Component{
 					 	</View>
 					)} 	
 		 		</Formik>
+		 		<ModalView />
 		 	</View>
   	);
 	}
