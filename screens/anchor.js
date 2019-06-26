@@ -2,31 +2,39 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Navigation} from 'react-native-navigation';
 import AnchorView from '../components/anchor';
-import {createTrustWithAnchor} from '../actions/anchor';
+import {fetchAssets} from '../actions/anchor';
 
 class AnchorScreen extends React.Component {
 
   constructor(props){
     super(props);
+    this.state = {
+      assets: []
+    }
   }
 
-  createTrust = (url, code, limit) => {
-  	this.props.dispatch(createTrustWithAnchor(this.goToReceiptScreen, url, code, limit));
+  fetchAssetList = async(url) => {
+    try{
+      const result = await this.props.dispatch(fetchAssets(url));
+      this.setState(({
+        assets: result
+      }));
+    }
+    catch(e){}
   }
 
-  goToReceiptScreen = (amount, id, status) => {
+  goToAssetInfo = (index) => {
+    const asset = this.state.assets[index];
     Navigation.push(this.props.componentId, {
       component: {
-        name: 'stellarPay.ReceiptScreen',
+        name: 'stellarPay.AssetInfoScreen',
         passProps: {
-          amount,
-          id,
-          status
+          asset
         },
         options: {
           topBar: {
             title: {
-              text: 'Receipt',
+              text: asset.name,
               alignment: 'center'
             }
           },
@@ -42,7 +50,7 @@ class AnchorScreen extends React.Component {
   render() {
 
     return (
-      <AnchorView createTrust={this.createTrust} loading={this.props.loading} navigate={this.goToReceiptScreen} />
+      <AnchorView assets={this.state.assets} fetchAssets={this.fetchAssetList} loading={this.props.loading} navigate={this.goToAssetInfo} />
     );  
   }
 
@@ -50,7 +58,7 @@ class AnchorScreen extends React.Component {
 
 const mapStateToProps = (state) => {
   return{
-    loading: state.ui.credit
+    loading: state.ui.anchor
   }
 };
 

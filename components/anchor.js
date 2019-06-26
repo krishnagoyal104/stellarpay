@@ -3,23 +3,18 @@ import {View, Text, StyleSheet, TextInput, Image, TouchableOpacity, ActivityIndi
 import Icon from 'react-native-vector-icons/Octicons';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import AssetView from './asset';
 
 const AnchorView = (props) => {
   return( 
     <View style={styles.mainContainer}>
       <Formik
-      initialValues={{url: '', code: '', limit: ''}}
-      onSubmit={({url, code, limit}) => props.createTrust(url, code, limit)}
+      initialValues={{url: ''}}
+      onSubmit={({url}) => props.fetchAssets(url)}
       validationSchema={yup.object().shape({
         url: yup
           .string()
-          .required(),
-        code: yup
-          .string()
-          .required(),
-        limit: yup
-          .number()
-          .required() 
+          .required()
       })}
       >
         {formikProps => (
@@ -31,29 +26,22 @@ const AnchorView = (props) => {
               <TextInput style={styles.input1} value={formikProps.values.url}
               placeholder={'Enter Url'} selectionColor={'#007ee5'}
               onChangeText={formikProps.handleChange('url')}
-              autoFocus={true} />
-            </View>
-            <View style={styles.inputContainer}>
-              <TextInput style={styles.input2} value={formikProps.values.code}
-              placeholder={'Enter Asset'} selectionColor={'#007ee5'}
-              onChangeText={formikProps.handleChange('code')} />
-              <TextInput style={styles.input2} value={formikProps.values.limit}
-              placeholder={'Enter Limit'} selectionColor={'#007ee5'}
-              onChangeText={formikProps.handleChange('limit')}
-              keyboard={'numeric'} />
+              autoFocus={true} autoCapitalize={'none'} />
             </View>
             {
-              formikProps.touched.url && (formikProps.errors.url || formikProps.errors.code || formikProps.errors.limit) &&
-              <Text style={styles.error}>{formikProps.errors.url || formikProps.errors.code || formikProps.errors.limit}</Text>
+              formikProps.touched.url && formikProps.errors.url &&
+              <Text style={styles.error}>{formikProps.errors.url}</Text>
             }
             {props.loading ? <ActivityIndicator size="small" color="#007ee5" /> :
               <TouchableOpacity style={styles.button} onPress={formikProps.handleSubmit}>
-                <Text style={styles.buttonText}>Create Trust</Text>
+                <Text style={styles.buttonText}>Fetch assets</Text>
               </TouchableOpacity>}
           </View>
         )}
       </Formik>
-      <View style={styles.bottomContainer}></View>
+      <View style={styles.bottomContainer}>
+        <AssetView assets={props.assets} navigate={props.navigate} />
+      </View>
     </View>
   );
 }
@@ -68,7 +56,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   bottomContainer: {
-    flex: 2
+    flex: 3
   },
   inputContainer: {
     width: '95%',
@@ -83,7 +71,7 @@ const styles = StyleSheet.create({
   input1: {
     height: 50,
     width: '90%',
-    fontSize: 20,
+    fontSize: 22,
     borderBottomWidth: 2,
     borderBottomColor: '#007ee5',
   },
