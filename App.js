@@ -104,10 +104,6 @@ export const goToWelcome = () => {
 
 export const goToHome = () => {
   Promise.all([
-    Icon.getImageSource('home'),
-    Icon.getImageSource('wallet'),
-    Icon.getImageSource('list'),
-    Font5.getImageSource('user-alt'),
     Feather.getImageSource('menu', 25, 'white')
   ]).then((sources) => {
     Navigation.setRoot({
@@ -132,7 +128,7 @@ export const goToHome = () => {
                             topBar: {
                               leftButtons: [
                                 {
-                                  icon: sources[4]
+                                  icon: sources[0]
                                 }
                               ],
                               background: {
@@ -257,7 +253,7 @@ export const goToHome = () => {
                     ],
                     options: {
                       bottomTab: {
-                        icon: sources[3],
+                        icon: require('./static/profile.png'),
                         iconColor: '#007ee5',
                         selectedIconColor: '#99D3EC'
                       }
