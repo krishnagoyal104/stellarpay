@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {getStream} from '../utils/account';
 import {uiStartLoading, uiStopLoading} from './transaction';
-import {setError} from './error';
+import alert from '../utils/alert';
 import {fundAccount} from '../utils/account';
 
 export const setBalance = (balances) => {
@@ -35,7 +35,7 @@ export const getBalance = () => {
     }
     catch(e){
       if(!e.response){
-        dispatch(setError('Network Error', 'Please check your internet connection.'))
+        alert();
       }
       dispatch(uiStopLoading('balance'));
     }
@@ -54,7 +54,7 @@ export const fundUserAccount = () => {
     }
     catch(e){
       if(!e.response){
-        dispatch(setError('Network Error', 'Please check your internet connection.'))
+        alert();
       }
       else{
         const balances = await fetchBalance(publicKey);

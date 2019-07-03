@@ -3,7 +3,7 @@ import stellarSdk from 'stellar-sdk';
 import * as Keychain from 'react-native-keychain';
 import {setKeypair} from './account';
 import {uiStartLoading, uiStopLoading} from './transaction';
-import {setError} from './error';
+import alert from '../utils/alert';
 import {setUserStorage} from './user';
 import {config} from '../config/config';
 
@@ -14,7 +14,7 @@ export const importAccount = (_privateKey, _function1, _function2) => {
       const keypair = stellarSdk.Keypair.fromSecret(_privateKey);
       const publicKey = stellarSdk.StrKey.encodeEd25519PublicKey(keypair._publicKey);
       const secretKey = _privateKey;
-      const result = await axios(`${config.baseUrl}/import/${publicKey}`);
+      const result = await axios(`${config.baseUrl}/account/${publicKey}`);
       if(result.data){
         Keychain.setGenericPassword(publicKey, secretKey);
         dispatch(setKeypair(publicKey, secretKey));
@@ -29,13 +29,13 @@ export const importAccount = (_privateKey, _function1, _function2) => {
       dispatch(uiStopLoading('user'));
     }
     catch(e){
-      if(!e.response){
-        dispatch(setError('Network Error', 'Please check your internet connection.'))
+      dispatch(uiStopLoading('user'));
+      if(e.message === 'Network Error'){
+        alert();
       }
       else{
-        dispatch(setError('Invalid keys', 'Incorrect checksum or length. Please enter valid keys.'));
+        alert(e.message, 'Please enter valid keys.');
       }
-      dispatch(uiStopLoading('user'));
     }
   };
 };

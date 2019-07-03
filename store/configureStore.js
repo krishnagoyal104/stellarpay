@@ -8,7 +8,6 @@ import transactionReducer from '../reducers/transaction';
 import ledgerReducer from '../reducers/ledger';
 import receiverReducer from '../reducers/resolve';
 import userReducer from '../reducers/signup';
-import errorReducer from '../reducers/error';
 
 let composeEnhancers = compose;
 
@@ -28,8 +27,7 @@ const rootReducer = combineReducers({
 	ui: transactionReducer,
 	ledger: ledgerReducer,
 	recipient: receiverReducer,
-	user: userReducer,
-	error: errorReducer
+	user: userReducer
   })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

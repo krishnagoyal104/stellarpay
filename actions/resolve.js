@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {uiStartLoading, uiStopLoading} from './transaction';
-import {setError} from './error';
 import {config} from '../config/config';
+import alert from '../utils/alert';
 
 export const setReceiver = (receiver) => {
   return {
@@ -13,25 +13,22 @@ export const setReceiver = (receiver) => {
 export const resolveReceiver = (data, _function) => {
   return async(dispatch) => {
   	dispatch(uiStartLoading('resolve'));
-    let result;
     try{
-      if(data[0] === 'G'){
-        result = await axios(`${config.baseUrl}/address/${data}`);
+      const result = await axios(`${config.baseUrl}/account/${data}`);
+      if(result.data){
+        dispatch(setReceiver(result.data));
+        _function();
       }
       else{
-        result = await axios(`${config.baseUrl}/number/${data}`);
-      }
-  	 	dispatch(setReceiver(result.data));
-  	 	dispatch(uiStopLoading('resolve'));
-      _function();
-     } catch(e){
-      if(!e.response){
-        dispatch(setError('Network Error', 'Please check your internet connection.'))
-      }
-      else{
-        dispatch(setError('Payment Error', `Could not find wallet linked to ${data}`));
+        alert('Payment Error', `Could not find wallet linked to ${data}`);
       }
       dispatch(uiStopLoading('resolve'));
+    }
+    catch(e){
+      dispatch(uiStopLoading('resolve'));
+      if(!e.response){
+        alert();
+      }
      }    	
   };
 };

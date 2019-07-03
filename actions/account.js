@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {fetchAccount, createAccount} from '../utils/account';
 
 export const setKeypair = (publicKey, secretKey) => {
@@ -14,12 +13,12 @@ export const fetchKeypair = () => {
   		const credentials = await fetchAccount();
   		if(credentials){
   		dispatch(setKeypair(credentials.username, credentials.password));
-  		return Promise.resolve();
   		}
 	  	else{
 	  		const {publicKey, secretKey} = await createAccount();
 	  		dispatch(setKeypair(publicKey, secretKey));
 	  	}
+      return Promise.resolve();
 	  }	
   	catch(e){
   		return Promise.reject();

@@ -1,7 +1,6 @@
-import axios from 'axios';
 import stellarSdk from 'stellar-sdk';
 import {uiStartLoading, uiStopLoading} from './transaction';
-import {setError} from './error';
+import alert from '../utils/alert';
 
 export const fetchAssets = (url) => {
   return async(dispatch, getState) => {
@@ -21,7 +20,7 @@ export const fetchAssets = (url) => {
     }
     catch(e){
       if(!e.response){
-        dispatch(setError('Network Error', 'Please check your internet connection.'))
+        alert();
       }
       dispatch(uiStopLoading('anchor'));
       return Promise.reject();

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {transact} from '../utils/transaction';
-import {setError} from './error';
+import alert from '../utils/alert';
 import {config} from '../config/config';
 
 export const uiStartLoading = (context) => {
@@ -40,12 +40,14 @@ export const createTransaction = (_receiverPublicKey, _amount, _function, _code,
     catch(e){
       dispatch(uiStopLoading('transaction'));
       if(!e.response){
-        dispatch(setError('Network Error', 'Please check your internet connection.'))
+        alert();
       }
       else if(e.response.status === 500){
         return;
       }
-      _function(e.response.data.extras.result_codes.operations[0], 'failed');
+      else{
+        _function(e.response.data.extras.result_codes.operations[0], 'failed');
+      }
     }    
   };
 };

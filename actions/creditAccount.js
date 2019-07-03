@@ -2,7 +2,7 @@ import axios from 'axios';
 import {AsyncStorage} from 'react-native';
 import {changeTrust} from '../utils/transaction';
 import {uiStartLoading, uiStopLoading} from './transaction';
-import {setError} from './error';
+import alert from '../utils/alert';
 import {config} from '../config/config';
 
 export const createTrustline = (_function1, _function2, _issuer, _code, _limit) => {
@@ -22,12 +22,13 @@ export const createTrustline = (_function1, _function2, _issuer, _code, _limit) 
       _function1(limit, hash, 'trustline successful');
     }
     catch(e){
-      console.log(e.response);
       dispatch(uiStopLoading('credit'));
       if(!e.response){
-        dispatch(setError('Network Error', 'Please check your internet connection.'))
+        alert();
       }
-      _function1(limit, e.response.data.extras.result_codes.operations[0], 'trustline failed');
+      else{
+        _function1(limit, e.response.data.extras.result_codes.operations[0], 'trustline failed');
+      }
     }
   }
 };    
@@ -51,9 +52,11 @@ export const creditAccount = (_amount, _function) => {
     catch(e){
       dispatch(uiStopLoading('credit'));
       if(!e.response){
-        dispatch(setError('Network Error', 'Please check your internet connection.'));
+        alert();
       }
-      _function(_amount, e.response.data.error, 'deposit failed');
+      else{
+        _function(_amount, e.response.data.extras.result_codes.operations[0], 'deposit failed');
+      }
     }    
   };
 }

@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/Feather';
 import PhoneInput from 'react-native-phone-input';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import ModalView from './modal';
 
 class SignupView extends React.Component{
 
@@ -79,7 +78,6 @@ class SignupView extends React.Component{
 					 	</View>
 					)} 	
 		 		</Formik>
-		 		<ModalView />
 		 	</View>
   	);
 	}

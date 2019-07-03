@@ -20,7 +20,7 @@ export const signUp = (credentials) => {
     try{
       const result = await axios({
         method: 'post',
-        url: config.baseUrl,
+        url: `${config.baseUrl}/signup`,
         data: {...credentials}
       });
       const {name, number} = credentials;

@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import ModalView from './modal';
 
 const HomeView = (props) => {
   return(	
@@ -18,9 +17,7 @@ const HomeView = (props) => {
 	 		</View>	
 	 		</TouchableOpacity>	
  		</View>	
-	 	<View style={styles.container2}>
-	 		<ModalView />
-	 	</View>
+	 	<View style={styles.container2}></View>
  	</View>
   );
 }

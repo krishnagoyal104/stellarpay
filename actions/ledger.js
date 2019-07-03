@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {uiStartLoading, uiStopLoading} from './transaction';
-import {setError} from './error';
 import {config} from '../config/config';
+import alert from '../utils/alert';
 
 export const setLedger = (ledger, order) => {
   return {
@@ -16,10 +16,10 @@ export const getLedger = (cursor, order) => {
     dispatch(uiStartLoading('ledger'));
     var url;
     if(cursor){
-      url = `${config.baseUrl}/getLedger/${publicKey}?cursor=${cursor}&order=${order}`;
+      url = `${config.baseUrl}/transactions/${publicKey}?cursor=${cursor}&order=${order}`;
     }
     else{
-      url = `${config.baseUrl}/getLedger/${publicKey}`;
+      url = `${config.baseUrl}/transactions/${publicKey}`;
     }
     try{
       const result = await axios(url);
@@ -29,7 +29,7 @@ export const getLedger = (cursor, order) => {
     }
     catch(e){
       if(!e.response){
-        dispatch(setError('Network Error', 'Please check your internet connection.'))
+        alert();
       }
       dispatch(uiStopLoading('ledger'));
     }
