@@ -55,7 +55,7 @@ class SignupView extends React.Component{
 						 		/>
 						 	</View>
 						 	<View style={styles.inputContainer2}>	
-						 		<PhoneInput ref='phone' value={props.values.code} textStyle={{fontSize: 20}}
+						 		<PhoneInput ref='phone' value={props.values.code} textStyle={{height: 50, fontSize: 20}}
 						 		textProps={{selectionColor: '#007ee5', maxLength: 4}}
 						 		style={[styles.code, {borderColor: this.state.color2}]}
 						 		onChangePhoneNumber={props.handleChange('code')} />
@@ -115,13 +115,11 @@ const styles = StyleSheet.create({
 	code: {
 		height: 50,
 		width: '25%',
-		borderBottomWidth: 2,
-		fontSize: 20
+		borderBottomWidth: 2
 	},
 	input2: {
 		height: 50,
 		width: '100%',
-		paddingTop: 5,
 		marginLeft: 5,
 		borderBottomWidth: 2,
 		fontSize: 20

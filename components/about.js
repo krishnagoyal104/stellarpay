@@ -15,7 +15,7 @@ const AboutView = (props) => {
 	  			and is powered by the Stellar Blockchain.
 	  		</Text>
 	  	</View>
-  		<View style={styles.container}>
+  		<View>
   			<Text style={styles.text2}>Features:</Text>
   			<View style={styles.itemContainer}>
   				<View style={styles.iconContainer}>
@@ -30,7 +30,7 @@ const AboutView = (props) => {
   					<Entypo name={'lock'} size={20} color={'#007ee5'} />
   				</View>
           <View style={styles.textContainer}>
-  				  <Text style={styles.text3}>Secure: Private keys are stored in the keystore and never leave your phone.</Text>
+  				  <Text style={styles.text3}>Private keys are stored in the keystore and never leave your phone.</Text>
           </View>
   			</View>
   			<View style={styles.itemContainer}>
@@ -70,16 +70,14 @@ const AboutView = (props) => {
   					<Ionicon name={'md-download'} size={20} color={'#007ee5'} />
   				</View>
           <View style={styles.textContainer}>
-  				  <Text style={styles.text3}>Import existing StellarPay account or import your own private keys to a new account.</Text>
+  				  <Text style={styles.text3}>Import existing account or create a new account with personal keys.</Text>
           </View>  
   			</View>	
   		</View>
-  		<View style={styles.bottomContainer}>
-  			<View>
-  				<Text style={styles.text2}>Note:</Text>
-  				<Text style={styles.text3}>StellarPay is currently on the testnet.</Text>
-  				<Text style={styles.text3}>This is not an official wallet by the Stellar Foundation.</Text>
-  			</View>
+  		<View>
+				<Text style={styles.text2}>Note:</Text>
+				<Text style={styles.text3}>StellarPay is currently on the testnet.</Text>
+				<Text style={styles.text3}>This is not an official wallet by the Stellar Foundation.</Text>
   		</View>
   	</View>
   );	 	
@@ -91,25 +89,25 @@ const styles = StyleSheet.create({
     padding: 12,
     justifyContent: 'space-around'
 	},
-	container: {
-		justifyContent: 'space-around'
-	},
 	text1: {
 		textAlign: 'center',
 		fontSize: 18,
 		color: 'black'
 	},
   text2: {
+    paddingBottom: 8,
     fontSize: 18,
     fontWeight: 'bold',
     color: 'black'
   },
   text3: {
+    paddingBottom: 8,
     fontSize: 16,
     color: 'black'
   },
 	itemContainer: {
-		flexDirection: 'row'
+		flexDirection: 'row',
+    alignItems: 'center'
 	},
 	iconContainer: {
 		height: 30,

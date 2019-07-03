@@ -17,14 +17,13 @@ const ReceiveView = (props) => {
 					</View>	
 						<Text selectable={true} style={styles.key}>{props.publicKey}</Text>
 				</View>
-			</View>		
-			<View style={styles.container2}>
 				<QRCode
         value={props.publicKey}
         size={Dimensions.get('window').width/2}
         bgColor='#007ee5'
         fgColor='white'/>
-    	</View>    
+			</View>		
+			<View style={styles.container2}></View>    
     </View>   
 	);
 }
@@ -34,15 +33,21 @@ const styles = StyleSheet.create({
 		flex: 1
 	},
 	container1: {
-		flex: 1,
+		flex: 3,
 		alignItems: 'center',
-		justifyContent: 'center',
+		justifyContent: 'space-around',
+		alignItems: 'center'
+	},
+	container2: {
+		flex: 1,
 		alignItems: 'center'
 	},
 	keyContainer: {
+		height: 80,
 		width: '95%',
+		justifyContent: 'center',
 		padding: 5,
-		elevation: 2,
+		elevation: 4,
 		backgroundColor: 'white'
 	},
 	header: {
@@ -52,10 +57,6 @@ const styles = StyleSheet.create({
 	text: {
 		fontSize: 18,
 		color: 'black'
-	},
-	container2: {
-		flex: 3,
-		alignItems: 'center'
 	},
 	key: {
 		fontSize: 12

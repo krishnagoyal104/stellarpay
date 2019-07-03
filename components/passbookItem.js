@@ -28,15 +28,16 @@ const PassbookItemView = (props) => {
 
 const styles = StyleSheet.create({
 	container: {
-		width: '95%',
-		height: Dimensions.get('window').height * 0.12,
+		width: '90%',
+		height: 80,
 		alignSelf: 'center',
 		borderRadius: 6,
 		padding: 8,
 		marginTop: 11,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
-		elevation: 3
+		elevation: 4,
+		backgroundColor: 'white'
 	},
 	imageContainer: {
 		height: 45,

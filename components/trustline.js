@@ -123,7 +123,6 @@ const styles = StyleSheet.create({
   },
   info: {
     fontSize: 18,
-    color: 'black',
     textAlign: 'center',
   },
   parentContainer: {

@@ -29,12 +29,8 @@ class AssetInfoView extends React.Component{
     return keys.map((key, index) =>  {
       return (
         <View style={styles.container} key={index}>
-          <View style={styles.leftContainer}>
-            <Text style={styles.text}>{key}</Text>
-          </View>
-          <View style={styles.rightContainer}>
-            <Text style={styles.text}>{this.props.asset[key]}</Text>
-          </View>
+          <Text style={styles.key}>{key}:</Text>
+          <Text style={styles.value}>{this.props.asset[key]}</Text>
         </View>
       );
     });
@@ -43,16 +39,21 @@ class AssetInfoView extends React.Component{
   render(){
     return(
       <View style={styles.mainContainer}>
-        <ScrollView>{this.renderList()}</ScrollView>
+        <View style={styles.topContainer}>
+          <Text style={styles.text}>About {this.props.asset.code} :</Text>
+          <ScrollView style={styles.scrollView}>{this.renderList()}</ScrollView>
+        </View>
         <TrustModalView isVisible={this.state.modal} close={this.changeModalState}
         createTrust={this.createTrust} />
-        {
-          this.props.loading ? <ActivityIndicator /> :
-          <TouchableOpacity style={styles.button} onPress={() => this.changeModalState()}>
-            <Text style={styles.buttonText}>Create Trust</Text>
-            <Font name={'link'} size={20} color={'#007ee5'} style={styles.icon} />
-          </TouchableOpacity>
-        }
+        <View style={styles.bottomContainer}>
+          {
+            this.props.loading ? <ActivityIndicator /> :
+            <TouchableOpacity style={styles.button} onPress={() => this.changeModalState()}>
+              <Text style={styles.buttonText}>Create Trust</Text>
+              <Font name={'link'} size={20} color={'#007ee5'} style={styles.icon} />
+            </TouchableOpacity>
+          }
+        </View>
       </View>
     );
   }
@@ -62,34 +63,47 @@ class AssetInfoView extends React.Component{
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    paddingTop: 8
+    padding: 25
+  },
+  topContainer: {
+    flex: 2,
+    justifyContent: 'space-around'
+  },
+  bottomContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  scrollView: {
+    padding: 12,
+    elevation: 2,
+    backgroundColor: 'white'
   },
   container: {
-    flexDirection: 'row',
-    borderBottomWidth: 0.2
-  },
-  leftContainer: {
-    flex: 1,
-    padding: 5
-  },
-  rightContainer: {
-    flex: 2,
-    padding: 5,
+    paddingBottom: 8
   },
   text: {
-    fontSize: 14,
+    fontSize: 20,
+    color: 'black',
+    marginBottom: 20
+  },
+  key: {
+    fontSize: 20,
     color: 'black'
+  },
+  value: {
+    fontSize: 16
   },
   button: {
     height: 50,
     width: '60%',
-    marginBottom: 16,
+    marginTop: 50,
     borderRadius: 6,
-    alignSelf: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 2
+    elevation: 4,
+    backgroundColor: 'white'
   },
   buttonText: {
     fontSize: 20,

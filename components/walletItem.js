@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Entypo';
 
 const WalletItemView = (props) => {
   return(	
-    <View style={styles.mainContainer}>
+    <View style={styles.container}>
 			<View style={styles.imageContainer}>
 				<Icon name={"wallet"} size={25} />
 			</View>
@@ -15,16 +15,18 @@ const WalletItemView = (props) => {
 }
 
 const styles = StyleSheet.create({
-	mainContainer: {
-		flex: 1,
+	container: {
+		height: 80,
+		width: '90%',
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',
-		height: Dimensions.get('window').height/8,
-		borderRadius: 12,
+		alignSelf: 'center',
+		borderRadius: 6,
 		padding: 5,
-		margin: 8,
-		elevation: 2
+		marginTop: 16,
+		elevation: 4,
+		backgroundColor: 'white'
 	},
 	imageContainer: {
 		height: 50,

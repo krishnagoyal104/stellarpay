@@ -7,7 +7,7 @@ const WelcomeView = (props) => {
 	return(
 		<View style={styles.mainContainer}>
 			<View style={styles.topContainer}>
-				<LottieView style={styles.animation} source={require('../static/globe.json')} autoPlay loop />
+				<LottieView style={styles.animation} source={require('../static/globe.json')} autoPlay={true} loop />
 			</View>
 			<View style={styles.bottomContainer}>
 				<Text style={styles.text}>Welcome To StellarPay</Text>
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 		color: 'black'
 	},
 	signup: {
-		height: '35%',
+		height: 50,
 		width: '75%',
 		borderRadius: 12,
 		justifyContent: 'center',
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
 		color: 'white'
 	},
 	import: {
-		height: '35%',
+		height: 50,
 		width: '75%',
 		borderRadius: 12,
 		justifyContent: 'center',

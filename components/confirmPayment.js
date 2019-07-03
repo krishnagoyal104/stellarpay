@@ -135,8 +135,9 @@ const styles = StyleSheet.create({
 	picker: {
 		width: '85%',
 		padding: 5,
-		borderRadius: 16,
-		elevation: 2
+		//borderRadius: 16,
+		elevation: 4,
+		backgroundColor: 'white'
 	},
 	text1: {
 		fontSize: 20,
@@ -157,13 +158,14 @@ const styles = StyleSheet.create({
 	  flexDirection: 'row'
 	},
 	balance: {
-		height: '25%',
+		height: 140,
 		width: '80%',
 		flexDirection: 'row',
 		justifyContent: 'space-around',
 		alignItems: 'center',
 		borderRadius: 20,
-		elevation: 2
+		elevation: 4,
+		backgroundColor: 'white'
 	},
 	walletIcon: {
 		height: 50,

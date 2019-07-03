@@ -56,10 +56,11 @@ const styles = StyleSheet.create({
 		backgroundColor: 'white'
 	},
 	containerTop: {
-		height: '70%'
+		height: '60%',
+		justifyContent: 'space-around'
 	},
 	containerBottom: {
-		height: '30%',
+		height: '40%',
 		justifyContent: 'flex-end',
 		alignItems: 'flex-end'
 	},
@@ -74,8 +75,9 @@ const styles = StyleSheet.create({
 		fontSize: 20
 	},
 	button: {
-		height: 40,
+		height: 50,
 		width: '100%',
+		borderRadius: 8,
 		justifyContent: 'center',
 		alignItems: 'center',
 		backgroundColor: '#007ee5'
@@ -83,6 +85,10 @@ const styles = StyleSheet.create({
 	buttonText: {
 		fontSize: 20,
 		color: 'white'
+	},
+	error: {
+		fontSize: 16,
+		color: 'red'
 	}
 });
 

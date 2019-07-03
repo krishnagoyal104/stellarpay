@@ -60,7 +60,9 @@ const ReceiptView = (props) => {
 						<Text style={styles.font1}>{text}</Text>
 						{animation}
 					</View>
-					<Text style={styles.font1}>{props.amount} {props.code || type === 'deposit' || 'trustline' ? 'INR' : 'Lumens'}</Text>
+					<Text style={styles.font1}>
+						{props.amount} {props.code || type === 'deposit' || 'trustline' ? 'INR' : 'Lumens'}
+					</Text>
 				</View>
 				{type === 'payment' && 
 					<View>
@@ -68,11 +70,15 @@ const ReceiptView = (props) => {
 						<Text style={styles.font1}>{props.recipient.number}</Text>
 					</View>
 				}
-				<Text style={styles.font2}>{moment().format('LLL')}</Text>
+				<Text style={styles.font3}>{moment().format('LLL')}</Text>
 				<View>
-					<Text style={styles.font2}>{props.id && 'Transaction Id:'}</Text>
-					{status ? <Text style={styles.font3} selectable={true}>{props.id}</Text> :
-					<Text style={styles.font4}>{props.id}</Text>}
+					<Text style={styles.font3}>{status ? 'Transaction Id:' : 'Response Code:'}</Text>
+					{status ? <Text style={styles.font4} selectable={true}>{props.id}</Text> :
+					<Text style={styles.font3}>{props.id}</Text>}
+					{type === 'trustline' && props.id === 'op_no_issuer' &&
+					<Text>
+						Cannot create trustline since this asset is on the mainnet while your account is on the testnet.
+					</Text>}
 				</View>
 				<TouchableOpacity style={styles.navigationButton} onPress={() => props.navigate()}>
 						<Icon name={'home'} size={20} color={'#007ee5'} style={{paddingTop: 4, paddingRight: 6}} />
@@ -108,15 +114,15 @@ const styles = StyleSheet.create({
 		color: 'black'
 	},
 	font2: {
-		fontSize: 16,
+		fontSize: 20,
 		color: 'black'
 	},
 	font3: {
-		fontSize: 14,
+		fontSize: 18,
 		color: 'black'
 	},
 	font4: {
-		fontSize: 20,
+		fontSize: 14,
 		color: 'black'
 	},
 	animation: {
