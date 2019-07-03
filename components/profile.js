@@ -1,77 +1,51 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity, ToastAndroid, Clipboard} from 'react-native';
-import TouchID from 'react-native-touch-id';
 import Icon from 'react-native-vector-icons/Feather';
 import Font from 'react-native-vector-icons/FontAwesome';
 import MI from 'react-native-vector-icons/MaterialIcons';
 
-class ProfileView extends React.Component{
-	
-	constructor(props){
-		super(props);
-		this.state = {
-			auth: false
+const ProfileView = (props) => {
+
+	return(	
+	 	<View style={styles.mainContainer}>
+	 		<View style={styles.topContainer}>
+	 			<View style={styles.profile}>
+	  			<Icon name={"user"} size={80} color={"white"} />
+  			</View>
+  			<Text style={styles.name}>{props.name}</Text>
+	  		<Text style={styles.number}>{props.number}</Text>
+  		</View>
+  		<View style={styles.bottomContainer}>
+	  		<View style={styles.keyContainer}>
+					<View style={styles.header}>
+						<Text style={styles.text}>Your stellar address</Text>
+						<TouchableOpacity onPress={() => {Clipboard.setString(props.publicKey);
+							ToastAndroid.show('Copied Text', ToastAndroid.SHORT);}}>
+							<MI name="content-copy" size={20} />
+						</TouchableOpacity>
+					</View>
+					<Text selectable={true} style={styles.key}>{props.publicKey}</Text>
+			</View>
+			{props.auth ?
+				<View style={styles.keyContainer}>
+					<View style={styles.header}>
+						<Text style={styles.text}>Your private key</Text>
+						<TouchableOpacity onPress={() => {Clipboard.setString(props.secretKey);
+							ToastAndroid.show('Copied Text', ToastAndroid.SHORT);}}>
+							<MI name={"content-copy"} size={20} />
+						</TouchableOpacity>
+					</View>	
+					<Text selectable={true} style={styles.key}>{props.secretKey}</Text>
+			</View> :
+	  		<TouchableOpacity style={styles.privateKeyContainer} onPress={() => props.authenticate()}>
+	  			<Font name={"lock"} size={25} color={"black"} />
+	  			<Text style={styles.text}>Reveal Private Key</Text>
+	  		</TouchableOpacity>
 		}
-	}
+  		</View>
+	 	</View>
+ 	);
 
-	authenticate = async() => {
-		try{
-			await TouchID.authenticate('Reveal Private Key', {});
-			this.setState(({
-				auth: true
-			}));
-		}
-  	catch(e){
-  		this.props.alert();
-  		this.setState(({
-  			auth: true
-  		}));
-  	}
-  }	
-
-	render(){
-
-		return(	
-		 	<View style={styles.mainContainer}>
-		 		<View style={styles.topContainer}>
-		 			<View style={styles.profile}>
-		  			<Icon name={"user"} size={80} color={"white"} />
-	  			</View>
-	  			<Text style={styles.name}>{this.props.name}</Text>
-		  		<Text style={styles.number}>{this.props.number}</Text>
-	  		</View>
-	  		<View style={styles.bottomContainer}>
-		  		<View style={styles.keyContainer}>
-						<View style={styles.header}>
-							<Text style={styles.text}>Your stellar address</Text>
-							<TouchableOpacity onPress={() => {Clipboard.setString(this.props.publicKey);
-								ToastAndroid.show('Copied Text', ToastAndroid.SHORT);}}>
-								<MI name="content-copy" size={20} />
-							</TouchableOpacity>
-						</View>
-						<Text selectable={true} style={styles.key}>{this.props.publicKey}</Text>
-				</View>
-				{this.state.auth && !this.props.isVisible ?
-					<View style={styles.keyContainer}>
-						<View style={styles.header}>
-							<Text style={styles.text}>Your private key</Text>
-							<TouchableOpacity onPress={() => {Clipboard.setString(this.props.secretKey);
-								ToastAndroid.show('Copied Text', ToastAndroid.SHORT);}}>
-								<MI name={"content-copy"} size={20} />
-							</TouchableOpacity>
-						</View>	
-						<Text selectable={true} style={styles.key}>{this.props.secretKey}</Text>
-				</View> :
-		  		<TouchableOpacity style={styles.privateKeyContainer} onPress={() => this.authenticate()}>
-		  			<Font name={"lock"} size={25} color={"black"} />
-		  			<Text style={styles.text}>Reveal Private Key</Text>
-		  		</TouchableOpacity>
-			}
-	  		</View>
-		 	</View>
-	 	);
-
-	}
 }
 
 const styles = StyleSheet.create({
