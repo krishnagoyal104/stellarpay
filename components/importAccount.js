@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, TextInput, Image, StyleSheet, TouchableOpacity, ActivityIndicator, KeyboardAvoidingView} from 'react-native';
+import ButtonView from './button';
 
 class ImportAccountView extends React.Component{
 
@@ -28,9 +29,7 @@ class ImportAccountView extends React.Component{
 		 			<Text style={styles.instruction}>Please enter your private key.</Text>
 		 			<TextInput style={styles.input} selectionColor={"black"} onChangeText={val => this.onKeyChange(val)} />
 		 			{this.props.loading ? <ActivityIndicator size="small" color="#007ee5" /> :
-		 			<TouchableOpacity style={styles.import} onPress={() => this.props.importAccount(this.state.key)}>
-						<Text style={styles.importText}>Import</Text>
-					</TouchableOpacity>}
+		 			<ButtonView name={'Import'} handler={() => this.props.importAccount(this.state.key)} />}
 		 		</View>
 	 		</KeyboardAvoidingView>
   	);
@@ -68,18 +67,6 @@ const styles = StyleSheet.create({
 		width: '80%',
 		fontSize: 22,
 		borderWidth: 0.5,
-	},
-	import: {
-		height: 50,
-		width: '80%',
-		borderRadius: 12,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#007ee5'
-	},
-	importText: {
-		fontSize: 20,
-		color: 'white'
 	}
 });
 

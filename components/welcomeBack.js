@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {goToHome} from '../App';
 import Icon from 'react-native-vector-icons/AntDesign';
+import ButtonView from './button';
 
 const WelcomeBackView = (props) => {
 	return(
@@ -15,9 +16,7 @@ const WelcomeBackView = (props) => {
 				   <Text style={styles.text}>Wallet linked to:</Text>
 				   <Text style={styles.number}>{props.user.number}</Text>
 			   </View>
-			   <TouchableOpacity style={styles.button} onPress={() => goToHome()}>
-						<Text style={styles.buttonText}>Proceed</Text>
-				 </TouchableOpacity>
+			   <ButtonView name={'Proceed'} handler={() => goToHome()} />
 			 </View> 
 			 <View style={styles.containerBottom}></View> 
 		 </View>
@@ -54,18 +53,6 @@ const styles = StyleSheet.create({
 		fontSize: 26,
 		fontWeight: 'bold',
 		color: 'black'
-	},
-	button: {
-		height: 50,
-		width: '85%',
-		borderRadius: 8,
-		backgroundColor: '#007ee5',
-		alignItems: 'center',
-		justifyContent: 'center'
-	},
-	buttonText: {
-		fontSize: 20,
-		color: 'white'
 	}
 });
 

@@ -5,6 +5,7 @@ import Font from 'react-native-vector-icons/FontAwesome5';
 import Icon from 'react-native-vector-icons/Entypo';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import ButtonView from './button';
 
 const DepositView = (props) => {
 
@@ -49,9 +50,7 @@ const DepositView = (props) => {
 			 				</TouchableOpacity>
 		 				</View>
 		 				{props.loading ? <ActivityIndicator /> :
-		 				<TouchableOpacity style={styles.button} onPress={formikProps.handleSubmit} >
-							<Text style={styles.buttonText}>Add Amount</Text>
-						</TouchableOpacity>}
+		 				<ButtonView name={'Add Amount'} handler={formikProps.handleSubmit} />}
 		 			</View>
 	 			)}
 			</Formik>
@@ -121,18 +120,6 @@ const styles = StyleSheet.create({
 	text: {
 		fontSize: 18,
 		color: 'black'
-	},
-	button: {
-		height: 50,
-		width: '90%',
-		borderRadius: 8,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#007ee5',
-	},
-	buttonText: {
-		fontSize: 22,
-		color: 'white'
 	},
 	error: {
 		fontSize: 16,

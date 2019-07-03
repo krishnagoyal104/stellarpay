@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Modal from "react-native-modal";
 import Ionicon from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/Entypo';
+import ButtonView from './button';
 
 const PaymentModal = (props) => {
 	return(
@@ -23,19 +24,16 @@ const PaymentModal = (props) => {
 					<View style={styles.bottomContainer}>
 						<View>
 							<Text>To</Text>
-							<Text style={styles.text1}>{props.number}</Text>
 							<Text style={styles.text2}>{props.name.toUpperCase()}</Text>
+							<Text style={styles.text1}>{props.number}</Text>
 						</View>
 						<View style={styles.walletIcon}>
 				  		<Icon name={"wallet"} size={30} color={"#007ee5"} />
 				  	</View>
 					</View>
-					<TouchableOpacity style={styles.button} 
-						onPress={() => {
-							props.closeModal();
-							props.makePayment()}}>
-						<Text style={styles.buttonText}>Confirm</Text>
-					</TouchableOpacity>
+					<ButtonView name={'Confirm'} handler={() => {
+						props.closeModal();
+						props.makePayment()}} />
 				</View>
 			</Modal>
 		</View>
@@ -77,21 +75,9 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		borderRadius: 25,
-		elevation: 1
+		elevation: 4,
+		backgroundColor: 'white'
 	},
-	button: {
-		height: 50,
-		width: '100%',
-		borderRadius: 8,
-		alignSelf: 'center',
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#007ee5'
-	},
-	buttonText: {
-		fontSize: 18,
-		color: 'white'
-	}
 });
 
 export default PaymentModal;

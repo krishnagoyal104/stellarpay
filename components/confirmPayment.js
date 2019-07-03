@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/Entypo';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import PaymentModal from './paymentModal';
+import ButtonView from './button';
 import ActivityIndicator from './activityIndicator';
 
 class ConfirmPaymentView extends React.Component{
@@ -102,12 +103,7 @@ class ConfirmPaymentView extends React.Component{
 						  	<Text style={{fontSize: 20, color: 'black'}}>{this.props.assets.length && this.props.assets[this.state.index].balance.slice(0, -8)}</Text>
 						  </View>
 							{this.props.loading ? <ActivityIndicator /> :
-								<TouchableOpacity style={styles.payContainer} onPress={props.handleSubmit} >
-					  			<View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
-										<Text style={styles.pay}>Pay</Text>
-										<Font name={'send'} size={20} color={'white'} style={{paddingTop: 4, paddingLeft: 6}} />
-									</View>
-								</TouchableOpacity>}
+							<ButtonView name={'Pay'} handler={props.handleSubmit} />}
 						</View>
 					)}	
 				</Formik>	
@@ -177,19 +173,6 @@ const styles = StyleSheet.create({
 		borderRadius: 25,
 		elevation: 1,
 		backgroundColor: '#99D3EC'
-	},
-	payContainer: {
-		height: '12%',
-		width: '85%',
-		marginTop: 6,
-		borderRadius: 8,
-		alignItems: 'center',
-		justifyContent: 'center',
-		backgroundColor: '#007ee5',
-	},
-	pay: {
-		color: 'white',
-		fontSize: 20
 	},
 	error: {
 		fontSize: 16,

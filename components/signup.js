@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import PhoneInput from 'react-native-phone-input';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import ButtonView from './button';
 
 class SignupView extends React.Component{
 
@@ -69,12 +70,9 @@ class SignupView extends React.Component{
 						 	{props.touched.name && (props.errors.name || props.errors.code || props.errors.number) && 
             		<Text style={styles.error}>{props.errors.name || props.errors.code || props.errors.number}</Text>
             	}
-					 		<TouchableOpacity style={styles.signupContainer} onPress={props.handleSubmit} >
-				  			<View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
-									<Text style={styles.bottomText}>Sign Up</Text>
-									{this.props.loading && <ActivityIndicator size="small" color="white" />}
-								</View>
-							</TouchableOpacity>
+					 		{this.props.loading ? <ActivityIndicator size="small" color="#007ee5" />:
+					 		<ButtonView name={'Sign up'} handler={props.handleSubmit} />
+					 		}
 					 	</View>
 					)} 	
 		 		</Formik>
@@ -126,19 +124,6 @@ const styles = StyleSheet.create({
 		paddingTop: 5,
 		marginLeft: 5,
 		borderBottomWidth: 2,
-		fontSize: 20
-	},
-	signupContainer: {
-		height: 50,
-		width: '90%',
-		alignSelf: 'center',
-		borderRadius: 12,
-		backgroundColor: '#007ee5',
-		justifyContent: 'center',
-		alignItems: 'center'
-	},
-	bottomText: {
-		color: 'white',
 		fontSize: 20
 	},
 	error: {

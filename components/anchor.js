@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/Octicons';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import AssetView from './asset';
+import ButtonView from './button';
 
 const AnchorView = (props) => {
   return( 
@@ -33,9 +34,7 @@ const AnchorView = (props) => {
               <Text style={styles.error}>{formikProps.errors.url}</Text>
             }
             {props.loading ? <ActivityIndicator size="small" color="#007ee5" /> :
-              <TouchableOpacity style={styles.button} onPress={formikProps.handleSubmit}>
-                <Text style={styles.buttonText}>Fetch assets</Text>
-              </TouchableOpacity>}
+            <ButtonView name={'Fetch Assets'} handler={formikProps.handleSubmit} />}
           </View>
         )}
       </Formik>
@@ -81,18 +80,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     borderBottomWidth: 2,
     borderBottomColor: '#007ee5'
-  },
-  button: {
-    height: 50,
-    width: '90%',
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#007ee5',
-  },
-  buttonText: {
-    fontSize: 22,
-    color: 'white'
   },
   error: {
     fontSize: 16,

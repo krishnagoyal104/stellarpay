@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import Font from 'react-native-vector-icons/FontAwesome';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import ButtonView from './button';
 import ScannerView from './scanner';
 
 class PaymentPage extends React.Component{
@@ -66,12 +67,7 @@ class PaymentPage extends React.Component{
             	<Text style={styles.error}>{props.errors.number}</Text>
             }
 				  	{this.props.loading ? <ActivityIndicator size="small" color="#007ee5" /> :
-			  		(<TouchableOpacity style={styles.loginContainer} onPress={props.handleSubmit} >
-				  			<View style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
-									<Text style={styles.login}>Proceed</Text>
-									<Icon name={'arrowright'} size={20} color={'white'} style={{paddingTop: 4, paddingLeft: 6}} />
-								</View>
-						 </TouchableOpacity>)
+			  		<ButtonView name={'Proceed'} handler={props.handleSubmit} />
 			  		}
 			  	</View>
 		  	)}
@@ -125,18 +121,6 @@ const styles = StyleSheet.create({
 	image: {
 		height: 35,
 		width: 35
-	},
-	loginContainer: {
-		height: 40,
-		width: '85%',
-		marginTop: 6,
-		backgroundColor: '#007ee5',
-		alignItems: 'center',
-		justifyContent: 'center'
-	},
-	login: {
-		color: 'white',
-		fontSize: 20
 	},
 	scannerContainer: {
 		flexDirection: 'row'
