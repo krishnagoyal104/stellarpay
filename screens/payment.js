@@ -4,7 +4,6 @@ import {View, StyleSheet} from 'react-native';
 import {Navigation} from 'react-native-navigation';  
 import PaymentView from '../components/payment';
 import {resolveReceiver} from '../actions/resolve';
-import {removeError} from '../actions/error';
 
 class PaymentScreen extends React.Component {
 
@@ -46,7 +45,6 @@ class PaymentScreen extends React.Component {
     return (
       <PaymentView loading={this.props.ui}
       navigate={(data) => this.props.dispatch(resolveReceiver(data, this.goToConfirmPaymentScreen))}
-      error={this.props.error}
       />
     );  
   }
@@ -55,8 +53,7 @@ class PaymentScreen extends React.Component {
 
 const mapStateToProps = (state) => {
   return{
-    ui: state.ui.resolve,
-    error: state.error
+    ui: state.ui.resolve
   }
 };
   

@@ -8,7 +8,7 @@ const WelcomeBackView = (props) => {
 	return(
 		 <View style={styles.mainContainer}>
 			 <View style={styles.containerTop}>
-				 <View style={styles.partition1}>
+				 <View style={styles.innerContainer}>
 			     <Text style={styles.text}>Welcome back</Text>
 			     <Text style={styles.name}>{props.user.name.toUpperCase()}</Text>
 				 </View>
@@ -16,9 +16,10 @@ const WelcomeBackView = (props) => {
 				   <Text style={styles.text}>Wallet linked to:</Text>
 				   <Text style={styles.number}>{props.user.number}</Text>
 			   </View>
+			 </View> 
+			 <View style={styles.containerBottom}>
 			   <ButtonView name={'Proceed'} handler={() => goToHome()} />
 			 </View> 
-			 <View style={styles.containerBottom}></View> 
 		 </View>
 	);
 }
@@ -29,15 +30,16 @@ const styles = StyleSheet.create({
 	},
 	containerTop: {
 		flex: 2,
-		justifyContent: 'space-evenly',
+		justifyContent: 'space-around',
 		alignItems: 'center'
 	},
 	containerBottom: {
 		flex: 1,
+		paddingBottom: 16,
 		justifyContent: 'flex-end',
 		alignItems: 'center',
 	},
-	partition1: {
+	innerContainer: {
 		alignItems: 'center'
 	},
 	text: {

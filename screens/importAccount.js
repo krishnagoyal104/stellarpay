@@ -41,6 +41,12 @@ class ImportAccountScreen extends React.Component {
           privateKey
         },
         options: {
+          topBar: {
+            title: {
+              text: 'Create Account',
+              alignment: 'center'
+            }
+          },
           bottomTabs: {
             visible: false,
             drawBehind: true

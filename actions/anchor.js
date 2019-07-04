@@ -8,7 +8,7 @@ export const fetchAssets = (url) => {
     try{
       const result = await stellarSdk.StellarTomlResolver.resolve(url);
       const currencies = result.CURRENCIES;
-      let assets;
+      let assets = [];
       if(Array.isArray(currencies)){
         assets = currencies;
       }
@@ -19,10 +19,10 @@ export const fetchAssets = (url) => {
       return Promise.resolve(assets);
     }
     catch(e){
-      if(!e.response){
-        alert();
-      }
       dispatch(uiStopLoading('anchor'));
+      if(e.message === 'Network Error'){
+        alert('Network Error', 'Please check the URL again or check your internet connection');
+      }
       return Promise.reject();
     }
   };

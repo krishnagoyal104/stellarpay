@@ -26,6 +26,7 @@ class ImportAccountView extends React.Component{
 		 			</View>
 		 		</View>
 		 		<View style={styles.containerBottom}>
+		 			<Text style={styles.text}>Import an existing StellarPay account or create new account with existing keys.</Text>
 		 			<Text style={styles.instruction}>Please enter your private key.</Text>
 		 			<TextInput style={styles.input} selectionColor={"black"} onChangeText={val => this.onKeyChange(val)} />
 		 			{this.props.loading ? <ActivityIndicator size="small" color="#007ee5" /> :
@@ -58,8 +59,13 @@ const styles = StyleSheet.create({
 		height: '100%',
 		width: '100%'
 	},
+	text: {
+		fontSize: 16,
+		color: 'black',
+		textAlign: 'center'
+	},
 	instruction: {
-		fontSize: 24,
+		fontSize: 20,
 		color: 'black'
 	},
 	input: {

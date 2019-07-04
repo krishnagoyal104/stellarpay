@@ -23,8 +23,8 @@ const TrustModalView = (props) => {
 		      	{formikProps => (
 				      <View style={styles.modal}>
 			      		<View style={styles.containerTop}>
-				        	<Text style={styles.text}>Please enter the amount for which to create trust:</Text>
-					        <TextInput placeholder={'Enter Limit'} value={formikProps.values.amount} style={styles.input}
+				        	<Text style={styles.text}>Please enter the amount to set the limit:</Text>
+					        <TextInput placeholder={'Enter Amount'} value={formikProps.values.amount} style={styles.input}
 					        onChangeText={formikProps.handleChange('amount')}
 					        keyboardType={'numeric'} />
 					        {

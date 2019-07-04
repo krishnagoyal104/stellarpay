@@ -75,11 +75,12 @@ const ReceiptView = (props) => {
 					<Text style={styles.font3}>{status ? 'Transaction Id:' : 'Response Code:'}</Text>
 					{status ? <Text style={styles.font4} selectable={true}>{props.id}</Text> :
 					<Text style={styles.font3}>{props.id}</Text>}
-					{type === 'trustline' && props.id === 'op_no_issuer' &&
-					<Text>
-						Cannot create trustline since this asset is on the mainnet while your account is on the testnet.
-					</Text>}
 				</View>
+				{type === 'trustline' && props.id === 'op_no_issuer' &&
+					<View>
+						<Text>Note:</Text>
+						<Text>Cannot create trustline since this asset is on the mainnet while your account is on the testnet.</Text>
+					</View>}
 				<TouchableOpacity style={styles.navigationButton} onPress={() => props.navigate()}>
 						<Icon name={'home'} size={20} color={'#007ee5'} style={{paddingTop: 4, paddingRight: 6}} />
 						<Text style={styles.home}>Home</Text>
