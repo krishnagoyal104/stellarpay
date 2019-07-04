@@ -1,20 +1,17 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const HomeView = (props) => {
   return(	
  	<View style={styles.mainContainer}>
  		<View style={styles.container1}>
 	 		<TouchableOpacity style={styles.innerContainers} onPress={() => props.navigateToPayment()}>
-		 		<View>
-	 				<Text style={styles.text}>Send</Text>
-		 		</View>
+ 				<Text style={styles.text}>Send</Text>
+ 				<Image source={require('../static/send.png')} style={styles.image} resizeMode={"contain"} />
 	 		</TouchableOpacity>
 	 		<TouchableOpacity style={styles.innerContainers} onPress={() => props.navigateToReceive()}>
-	 		<View> 		
 	 			<Text style={styles.text}>Receive</Text>
-	 		</View>	
+	 			<Image source={require('../static/receive.png')} style={styles.image} resizeMode={"contain"} />
 	 		</TouchableOpacity>	
  		</View>	
 	 	<View style={styles.container2}></View>
@@ -39,6 +36,7 @@ const styles = StyleSheet.create({
 	innerContainers: {
 		height: 50,
 		width: 120,
+		flexDirection: 'row',
 		justifyContent: 'center',
 		alignItems: 'center',
 		backgroundColor: 'white',
@@ -48,11 +46,11 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		color: '#007ee5'
 	},
-	icon: {
-		padding: 8,
-		borderRadius: 50,
-		backgroundColor: 'white',
-		justifyContent: 'flex-start'
+	image: {
+		height: 20,
+		width: 20,
+		marginLeft: 8,
+		tintColor: '#007ee5'
 	}
 });
 
