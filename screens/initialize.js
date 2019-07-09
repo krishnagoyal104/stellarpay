@@ -1,7 +1,11 @@
 import React from 'react';
-import {View, StyleSheet, AsyncStorage} from 'react-native';
-import * as Keychain from 'react-native-keychain';
+import {AsyncStorage} from 'react-native';
+import {connect} from 'react-redux';
+import SplashScreen from 'react-native-splash-screen'
 import InitializeView from '../components/initialize';
+import {fetchKeypair} from '../actions/account';
+import {getUser} from '../actions/user';
+import {getStreamForAccount} from '../actions/balance';
 import {goToIntroScreens, goToHome} from '../App';
 
 class InitializeScreen extends React.Component {
@@ -15,10 +19,14 @@ class InitializeScreen extends React.Component {
       const token = await AsyncStorage.getItem('token');
       if(token){
         goToHome();
+        await this.props.dispatch(fetchKeypair());
+        this.props.dispatch(getUser());
+        this.props.dispatch(getStreamForAccount());
       }
       else{
-        goToIntroScreens();
+       goToIntroScreens();
       }
+      SplashScreen.hide();
     }
     catch(e){
       console.log(e);
@@ -34,5 +42,5 @@ class InitializeScreen extends React.Component {
 
 }  
   
-export default InitializeScreen;
+export default connect()(InitializeScreen);
 

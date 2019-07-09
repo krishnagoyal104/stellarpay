@@ -28,6 +28,8 @@ import io.invertase.firebase.auth.RNFirebaseAuthPackage;
 import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
 import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
+
 public class MainApplication extends NavigationApplication {
     
     @Override
@@ -59,7 +61,8 @@ public class MainApplication extends NavigationApplication {
             new RNFirebaseNotificationsPackage(),
             new LottiePackage(),
             new RNCameraPackage(),
-            new FingerprintAuthPackage()
+            new FingerprintAuthPackage(),
+            new SplashScreenReactPackage()
         );
     }
   
