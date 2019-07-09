@@ -8,6 +8,7 @@ import transactionReducer from '../reducers/transaction';
 import ledgerReducer from '../reducers/ledger';
 import receiverReducer from '../reducers/resolve';
 import userReducer from '../reducers/signup';
+import recentsReducer from '../reducers/recents';
 
 let composeEnhancers = compose;
 
@@ -18,7 +19,7 @@ if(__DEV__){
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['balances', 'ledger']
+  whitelist: ['balances', 'ledger', 'recents']
 }
 
 const rootReducer = combineReducers({
@@ -27,7 +28,8 @@ const rootReducer = combineReducers({
 	ui: transactionReducer,
 	ledger: ledgerReducer,
 	recipient: receiverReducer,
-	user: userReducer
+	user: userReducer,
+	recents: recentsReducer
   })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

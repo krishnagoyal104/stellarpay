@@ -43,7 +43,7 @@ class PaymentScreen extends React.Component {
   render() {
 
     return (
-      <PaymentView loading={this.props.ui}
+      <PaymentView loading={this.props.ui} recents={this.props.recents}
       navigate={(data) => this.props.dispatch(resolveReceiver(data, this.goToConfirmPaymentScreen))}
       />
     );  
@@ -53,7 +53,8 @@ class PaymentScreen extends React.Component {
 
 const mapStateToProps = (state) => {
   return{
-    ui: state.ui.resolve
+    ui: state.ui.resolve,
+    recents: state.recents
   }
 };
   

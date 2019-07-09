@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {transact} from '../utils/transaction';
+import {setRecent} from './recents';
 import alert from '../utils/alert';
 import {config} from '../config/config';
 
@@ -21,10 +22,11 @@ export const createTransaction = (_receiverPublicKey, _amount, _function, _code,
   return async(dispatch, getState) => {
     try{
       dispatch(uiStartLoading('transaction'));
-      const publicKey = getState().account.publicKey;
-      const secretKey = getState().account.secretKey;
+      const {publicKey, secretKey} = getState().account;
+      const {name, number} = getState().recipient;
       const hash = await transact(publicKey, secretKey, _receiverPublicKey, _amount, _code, _issuer);
       dispatch(uiStopLoading('transaction'));
+      dispatch(setRecent({name, number}));
       _function(hash, 'successful');
       const result = await axios({
         method: 'post',
