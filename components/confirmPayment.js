@@ -50,7 +50,7 @@ class ConfirmPaymentView extends React.Component{
 		return(
 			<View style={styles.mainContainer}>
 				<View style={styles.containerTop}>
-					<Text style={styles.text1}>{this.props.name.toUpperCase()}</Text>
+					<Text style={styles.text1}>{this.props.name && this.props.name.toUpperCase()}</Text>
 					<Text style={styles.text2}>Wallet linked to {this.props.number}</Text>
 				</View>
 				<Formik
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
 	picker: {
 		width: '85%',
 		padding: 5,
-		//borderRadius: 16,
+		borderRadius: 12,
 		elevation: 4,
 		backgroundColor: 'white'
 	},

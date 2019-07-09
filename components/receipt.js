@@ -61,7 +61,7 @@ const ReceiptView = (props) => {
 						{animation}
 					</View>
 					<Text style={styles.font1}>
-						{props.amount} {props.code || type === 'deposit' || 'trustline' ? 'INR' : 'Lumens'}
+						{props.amount} {props.code || (type === 'deposit' || type === 'trustline') ? 'INR' : 'Lumens'}
 					</Text>
 				</View>
 				{type === 'payment' && 
