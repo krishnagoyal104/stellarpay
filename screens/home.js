@@ -12,8 +12,13 @@ class HomeScreen extends React.Component {
     Navigation.events().bindComponent(this);
   }
 
-  async componentDidMount(){
-    createNotificationListeners();
+  componentDidMount(){
+    const token = this.props.ledger.length ? this.props.ledger[0].pagingToken : null;
+    this.notificationListener = createNotificationListeners(this.props.dispatch, token);
+  }
+
+  componentWillUnmount(){
+    if(this.notificationListener) this.notificationListener();
   }
 
   toggleSideDrawer = () => {
@@ -67,7 +72,8 @@ class HomeScreen extends React.Component {
   
 const mapStateToProps = (state) => {
 	return{
-    account: state.account.publicKey
+    account: state.account.publicKey,
+    ledger: state.ledger
 	}
 };  
 
