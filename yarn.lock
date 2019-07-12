@@ -5699,6 +5699,11 @@ react-native-camera@^2.6.0:
   dependencies:
     prop-types "^15.6.2"
 
+react-native-contacts-wrapper@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/react-native-contacts-wrapper/-/react-native-contacts-wrapper-0.2.4.tgz#7513eac1e2093239348e44b71ac29d62f81f1da0"
+  integrity sha1-dRPqweIJMjk0jkS3GsKdYvgfHaA=
+
 react-native-country-code-list@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/react-native-country-code-list/-/react-native-country-code-list-1.1.2.tgz#f433cfb6d74cf72a9bc3b14963176e41aba16c04"

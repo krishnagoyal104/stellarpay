@@ -30,6 +30,8 @@ import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 
+import com.lynxit.contactswrapper.ContactsWrapperPackage;
+
 public class MainApplication extends NavigationApplication {
     
     @Override
@@ -62,7 +64,8 @@ public class MainApplication extends NavigationApplication {
             new LottiePackage(),
             new RNCameraPackage(),
             new FingerprintAuthPackage(),
-            new SplashScreenReactPackage()
+            new SplashScreenReactPackage(),
+            new ContactsWrapperPackage()
         );
     }
   

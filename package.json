@@ -22,6 +22,7 @@
     "react-native-app-intro": "https://github.com/merryjs/react-native-app-intro",
     "react-native-app-intro-slider": "^2.0.1",
     "react-native-camera": "^2.6.0",
+    "react-native-contacts-wrapper": "^0.2.4",
     "react-native-country-code-list": "^1.1.2",
     "react-native-firebase": "^5.5.4",
     "react-native-keychain": "^3.1.1",
