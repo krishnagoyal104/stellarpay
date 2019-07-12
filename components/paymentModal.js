@@ -22,10 +22,14 @@ const PaymentModal = (props) => {
 						</TouchableOpacity>
 					</View>
 					<View style={styles.bottomContainer}>
-						<View>
+						<View style={{width: '75%'}}>
 							<Text>To</Text>
-							<Text style={styles.text2}>{props.name.toUpperCase()}</Text>
-							<Text style={styles.text1}>{props.number}</Text>
+							{props.address ?
+								<Text style={styles.text3}>{props.address}</Text> :
+								<View>
+									<Text style={styles.text2}>{props.name.toUpperCase()}</Text>
+									<Text style={styles.text1}>{props.number}</Text>
+								</View>}
 						</View>
 						<View style={styles.walletIcon}>
 				  		<Icon name={"wallet"} size={30} color={"#007ee5"} />
@@ -67,6 +71,10 @@ const styles = StyleSheet.create({
 	},
 	text2: {
 		fontSize: 20,
+		color: 'black'
+	},
+	text3: {
+		fontSize: 14,
 		color: 'black'
 	},
 	walletIcon: {

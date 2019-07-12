@@ -26,7 +26,9 @@ export const createTransaction = (_receiverPublicKey, _amount, _function, _code,
       const {name, number} = getState().recipient;
       const hash = await transact(publicKey, secretKey, _receiverPublicKey, _amount, _code, _issuer);
       dispatch(uiStopLoading('transaction'));
-      dispatch(setRecent({name, number}));
+      if(name){
+        dispatch(setRecent({name, number}));
+      }
       _function(hash, 'successful');
       const result = await axios({
         method: 'post',

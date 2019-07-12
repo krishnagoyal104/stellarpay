@@ -1,8 +1,10 @@
 import React from 'react';
-import {View, Text, StyleSheet, TextInput, TouchableOpacity, Keyboard, ActivityIndicator} from 'react-native';
+import {View, Text, StyleSheet, TextInput, TouchableOpacity, Keyboard, ActivityIndicator, PermissionsAndroid} from 'react-native';
 import Ionicon from 'react-native-vector-icons/Ionicons';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Font from 'react-native-vector-icons/FontAwesome';
+import ContactsWrapper from 'react-native-contacts-wrapper';
+import Entypo from 'react-native-vector-icons/Entypo';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import ButtonView from './button';
@@ -40,6 +42,7 @@ class PaymentPage extends React.Component{
 			const {address, code, number} = value;
 			if(address){
 				contact = address;
+				return this.props.navigate(address);
 			}
 			else{
 				contact = code + number;
@@ -48,7 +51,33 @@ class PaymentPage extends React.Component{
 		else{
 			contact = value;
 		}
-		this.props.navigate(contact);
+		this.props.resolve(contact);
+	}
+
+	launchContactsApp = async(_function) => {
+		try{
+			Keyboard.dismiss();
+			const result = await PermissionsAndroid.request(
+		  PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
+			  {
+			    'title': 'Contacts',
+			    'message': 'StellarPay would like to view your contacts.'
+			  }
+			);
+			if (result === PermissionsAndroid.RESULTS.GRANTED) {
+	      const contact = await ContactsWrapper.getContact();
+	      const number = contact.phone;
+	      if(number.substr(0, 1) === '+'){
+	      	this.onSubmit(number);
+	      }
+	      else{
+	      	_function('number', number);
+	      }
+	    }
+		}
+		catch(e){
+			console.log(e);
+		}
 	}
 
 	renderRecents = () => {
@@ -88,19 +117,29 @@ class PaymentPage extends React.Component{
 			  >
 			  	{props => (
 					  <View style={[styles.containerTop, {flex: this.state.scanner ? 1 : 2}]}>
-						  <View style={styles.inputContainer}>
-						  	{!this.state.mode && <TextInput style={styles.codeInput}
-						  	value={props.values.code} selectionColor={'#007ee5'}
-					  		onChangeText={props.handleChange('code')}
-					  		maxLength={4}
-					  		/>}
-					  		<TextInput style={[styles.textInput, {width: this.state.mode ? '90%' : '75%'}]} value={this.state.mode ? props.values.address : props.values.number}
-					  		placeholder={this.state.mode ? 'Enter stellar address' : 'Enter mobile number'} selectionColor={'#007ee5'}
-					  		onChangeText={this.state.mode ? props.handleChange('address') : props.handleChange('number')}	
-					  		autoFocus={true}
-					  		keyboardType={this.state.mode ? "default" : "numeric"}
-					  		/>
-					  	</View>
+						  {this.state.mode ?
+						  	<View style={[styles.inputContainer, {alignItems : 'flex-start'}]}>
+						  		<Entypo name={'triangle-right'} size={20} color={'#007ee5'} style={{paddingTop: 16}} />
+							  	<TextInput style={[styles.textInput, {width: '85%'}]} value={props.values.address}
+						  		placeholder={'Enter stellar address'} selectionColor={'#007ee5'} autoFocus={true}
+						  		onChangeText={props.handleChange('address')}
+						  		/>
+						  	</View>	 :
+						  	<View style={styles.inputContainer}>
+							  	<TextInput style={styles.codeInput}
+							  	value={props.values.code} selectionColor={'#007ee5'}
+						  		onChangeText={props.handleChange('code')}
+						  		maxLength={4}
+						  		/>
+						  		<TextInput style={styles.textInput} value={props.values.number}
+						  		placeholder={'Enter mobile number'} selectionColor={'#007ee5'}
+						  		onChangeText={props.handleChange('number')}	
+						  		autoFocus={true} keyboardType={"numeric"}
+						  		/>
+						  		<TouchableOpacity onPress={() => this.launchContactsApp(props.setFieldValue)}>
+						  			<Icon name={"contacts"} size={25} color={"#007ee5"} style={styles.icon} />
+						  		</TouchableOpacity>
+					  		</View>}
 					  	{((props.touched.number && props.errors.number) || (props.touched.code && props.errors.code) || (props.touched.address && props.errors.address)) &&
 	            	<Text style={styles.error}>{props.errors.number || props.errors.code || props.errors.address}</Text>
 	            }
@@ -158,6 +197,12 @@ const styles = StyleSheet.create({
 		flex: 3,
 		alignItems: 'center'
 	},
+	inputContainer: {
+		width: '100%',
+		flexDirection: 'row',
+	  justifyContent: 'center',
+	  alignItems: 'flex-end'
+	},
 	codeInput: {
 		height: 50,
 		width: '15%',
@@ -168,15 +213,13 @@ const styles = StyleSheet.create({
 	},
 	textInput: {
 		height: 50,
-		width: '75%',
+		width: '70%',
 		borderBottomWidth: 2,
 		borderBottomColor: '#007ee5',
 		fontSize: 22
 	},
-	inputContainer: {
-		width: '100%',
-		flexDirection: 'row',
-	  justifyContent: 'center'
+	icon: {
+		marginBottom: 8
 	},
 	innerContainer: {
 		height: 100,

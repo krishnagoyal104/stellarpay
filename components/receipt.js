@@ -64,7 +64,11 @@ const ReceiptView = (props) => {
 						{props.amount} {props.code || (type === 'deposit' || type === 'trustline') ? 'INR' : 'Lumens'}
 					</Text>
 				</View>
-				{type === 'payment' && 
+				{type === 'payment' &&
+					props.address ?
+					<View>
+						<Text style={styles.font4} selectable={true}>{props.address}</Text>
+					</View> :
 					<View>
 						<Text style={styles.font2}>{props.recipient.name.toUpperCase()}'s wallet linked to</Text>
 						<Text style={styles.font1}>{props.recipient.number}</Text>
@@ -73,7 +77,7 @@ const ReceiptView = (props) => {
 				<Text style={styles.font3}>{moment().format('LLL')}</Text>
 				<View>
 					<Text style={styles.font3}>{status ? 'Transaction Id:' : 'Response Code:'}</Text>
-					{status ? <Text style={styles.font4} selectable={true}>{props.id}</Text> :
+					{status ? <Text selectable={true}>{props.id}</Text> :
 					<Text style={styles.font3}>{props.id}</Text>}
 				</View>
 				{type === 'trustline' && props.id === 'op_no_issuer' &&

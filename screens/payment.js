@@ -26,10 +26,13 @@ class PaymentScreen extends React.Component {
     super(props);
   }
 
-  goToConfirmPaymentScreen = () => {
+  goToConfirmPaymentScreen = (address) => {
     Navigation.push(this.props.componentId, {
       component: {
         name: 'stellarPay.ConfirmPaymentScreen',
+        passProps: {
+          address
+        },
         options: {
           bottomTabs: {
             visible: false,
@@ -44,7 +47,8 @@ class PaymentScreen extends React.Component {
 
     return (
       <PaymentView loading={this.props.ui} recents={this.props.recents}
-      navigate={(data) => this.props.dispatch(resolveReceiver(data, this.goToConfirmPaymentScreen))}
+      resolve={(data) => this.props.dispatch(resolveReceiver(data, this.goToConfirmPaymentScreen))}
+      navigate={this.goToConfirmPaymentScreen}
       />
     );  
   }

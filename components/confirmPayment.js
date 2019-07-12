@@ -49,10 +49,15 @@ class ConfirmPaymentView extends React.Component{
 		}	
 		return(
 			<View style={styles.mainContainer}>
-				<View style={styles.containerTop}>
-					<Text style={styles.text1}>{this.props.name && this.props.name.toUpperCase()}</Text>
-					<Text style={styles.text2}>Wallet linked to {this.props.number}</Text>
-				</View>
+				{this.props.address ?
+					<View style={styles.containerTop}>
+						<Text style={styles.text1}>Pay to address :</Text>
+						<Text style={styles.text2}>{this.props.address}</Text>
+					</View> :
+					<View style={styles.containerTop}>
+						<Text style={styles.text1}>{this.props.name && this.props.name.toUpperCase()}</Text>
+						<Text style={styles.text2}>Wallet linked to {this.props.number}</Text>
+					</View>}
 				<Formik
 			    initialValues={{amount: ''}}
 			    onSubmit={(values) => {
@@ -108,7 +113,7 @@ class ConfirmPaymentView extends React.Component{
 					)}	
 				</Formik>	
 				<View>
-					<PaymentModal isVisible={this.state.modal}
+					<PaymentModal isVisible={this.state.modal} address={this.props.address}
 					name={this.props.name} amount={this.state.amount} asset={this.state.asset}
 					number={this.props.number} loading={this.props.loading}
 					makePayment={this.makePayment}

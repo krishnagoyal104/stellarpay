@@ -31,6 +31,7 @@ class ConfirmPaymentScreen extends React.Component {
       component: {
         name: 'stellarPay.ReceiptScreen',
         passProps: {
+          address: this.props.address,
           recipient,
           amount,
           code,
@@ -56,10 +57,10 @@ class ConfirmPaymentScreen extends React.Component {
   render() {
 
     return (
-      <ConfirmPaymentView {...this.props.recipient} loading={this.props.loading}
+      <ConfirmPaymentView {...this.props.recipient} address={this.props.address} loading={this.props.loading}
       assets={this.props.assets}
       pay={(_amount, _code, _issuer) => this.props.dispatch(
-          createTransaction(this.props.recipient.publicKey, _amount,
+          createTransaction(this.props.recipient.publicKey || this.props.address, _amount,
           (_id, _status) => this.goToReceiptScreen(this.props.recipient, _amount, _code, _id, _status), _code, _issuer)
         )}
       />
